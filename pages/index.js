@@ -1,7 +1,7 @@
+import { heebo, cinzel } from "@/fonts";
+
 export default function HomePage() {
   return (
-    <div>
-      <h1>Hello from Next.js</h1>
-    </div>
+    <main className={heebo.className}>Check /admin/123/edit to test US1</main>
   );
 }
