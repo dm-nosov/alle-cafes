@@ -5,7 +5,7 @@ import {
   OPPENING_HOURS,
   SPECIAL,
   getTitleBySectionName,
-} from "@/pages/utils/content";
+} from "@/utils/content";
 export function SectionViewer() {
   const websiteContent = useWebsiteContentStore((state) => state.content);
   return (

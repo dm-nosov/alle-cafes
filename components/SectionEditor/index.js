@@ -3,7 +3,7 @@ import { cinzel } from "@/fonts";
 import "@blocknote/core/style.css";
 import { useWebsiteContentStore } from "@/store/WebsiteContent";
 import { useEffect } from "react";
-import { getTitleBySectionName } from "@/pages/utils/content";
+import { getTitleBySectionName } from "@/utils/content";
 
 const initContent = {
   about: {

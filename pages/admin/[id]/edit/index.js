@@ -3,7 +3,7 @@ import { SectionEditor } from "@/components/SectionEditor";
 import { SectionViewer } from "@/components/SectionViewer";
 import { TopAdminToolbar } from "@/components/TopAdminToolbar";
 import { inter } from "@/fonts";
-import { ABOUT, SPECIAL, OPPENING_HOURS } from "@/pages/utils/content.js";
+import { ABOUT, SPECIAL, OPPENING_HOURS } from "@/utils/content.js";
 import { useWebsiteContentStore } from "@/store/WebsiteContent";
 
 export default function Page() {
