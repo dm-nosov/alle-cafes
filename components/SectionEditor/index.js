@@ -211,25 +211,21 @@ export function SectionEditor({ sectionName }) {
     (state) => state.content[sectionName]
   );
 
-  console.log("sectionContent", sectionName, sectionContent);
-
-  useEffect(() => {
-    updateSection(
-      sectionName,
-      initContent[sectionName].json,
-      initContent[sectionName].html
-    );
-    console.log("updateSection useEffect");
-  }, []);
+  console.log("sectionContent.json", sectionName, sectionContent.json);
 
   const initialContent =
     sectionContent && sectionContent.json
-      ? sectionContent.json
-      : initContent[sectionName].json;
+      ? sectionContent
+      : initContent[sectionName];
 
-  console.log("initialContent", sectionName, initialContent);
+  useEffect(() => {
+    updateSection(sectionName, initialContent.json, initialContent.html);
+    console.log("updateSection useEffect");
+  }, []);
+
+  console.log("initialContent", sectionName, initialContent.json);
   const editor = useBlockNote({
-    initialContent: initialContent,
+    initialContent: initialContent.json,
     onEditorContentChange: async (editor) => {
       updateSection(
         sectionName,
@@ -242,7 +238,7 @@ export function SectionEditor({ sectionName }) {
   return (
     <>
       <h2 className={cinzel.className}>{getTitleBySectionName(sectionName)}</h2>
-      {initialContent && <BlockNoteView editor={editor} />}
+      {initialContent.json && <BlockNoteView editor={editor} />}
     </>
   );
 }

@@ -1,6 +1,6 @@
 {
   "name": "alle-cafes",
-  "version": "0.0.0-unreleased",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "next dev",

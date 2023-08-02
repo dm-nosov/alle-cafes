@@ -19,4 +19,12 @@ export default createGlobalStyle`
     line-height: 24px;
   }
 
+  :root {
+    --main-color: hotpink;
+    --editor-background: rgb(167, 167, 167);
+  }
+  .ProseMirror > div {
+    border: 1px dashed var(--editor-background);
+    padding: 5px;
+  }
 `;
