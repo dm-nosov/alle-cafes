@@ -9,12 +9,14 @@ export default createGlobalStyle`
 
   body {
     margin: 0;
-    font-family: system-ui;
+    color: #3f3f3f;
   }
-  html {
-    font-family: var(--font-heebo);
-  }
+
   h2 {
     text-align: center;
   }
+  p {
+    line-height: 24px;
+  }
+
 `;
