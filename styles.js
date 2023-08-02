@@ -9,12 +9,22 @@ export default createGlobalStyle`
 
   body {
     margin: 0;
-    font-family: system-ui;
+    color: #3f3f3f;
   }
-  html {
-    font-family: var(--font-heebo);
-  }
+
   h2 {
     text-align: center;
+  }
+  p {
+    line-height: 24px;
+  }
+
+  :root {
+    --main-color: hotpink;
+    --editor-background: rgb(167, 167, 167);
+  }
+  .ProseMirror > div {
+    border: 1px dashed var(--editor-background);
+    padding: 5px;
   }
 `;

@@ -1,4 +1,4 @@
-import { Cinzel, Heebo } from "next/font/google";
+import { Cinzel, Inter } from "next/font/google";
 
 export const cinzel = Cinzel({
   subsets: ["latin"],
@@ -6,7 +6,7 @@ export const cinzel = Cinzel({
   display: "swap",
 });
 
-export const heebo = Heebo({
+export const inter = Inter({
   subsets: ["latin"],
   variable: "--font-heebo",
   display: "swap",
