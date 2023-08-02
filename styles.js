@@ -11,4 +11,10 @@ export default createGlobalStyle`
     margin: 0;
     font-family: system-ui;
   }
+  html {
+    font-family: var(--font-heebo);
+  }
+  h2 {
+    text-align: center;
+  }
 `;
