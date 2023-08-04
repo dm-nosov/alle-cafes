@@ -25,7 +25,7 @@ export function Header() {
   return (
     <StyledHeroBlock className={cinzel.className}>
       <Image
-        src="/img/hero-image.jpg"
+        src="/img/hero-image.png"
         width={0}
         height={0}
         fill={true}
@@ -33,6 +33,7 @@ export function Header() {
         alt="Picture of the author"
         sizes="(max-width: 768px) 100vw"
         style={{ objectFit: "cover" }}
+        quality={90}
       />
       <HeroText>Kurze Pause</HeroText>
     </StyledHeroBlock>
