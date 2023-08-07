@@ -23,8 +23,4 @@ export default createGlobalStyle`
     --main-color: hotpink;
     --editor-background: rgb(167, 167, 167);
   }
-  .ProseMirror > div {
-    border: 1px dashed var(--editor-background);
-    padding: 5px;
-  }
 `;
