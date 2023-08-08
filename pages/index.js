@@ -24,35 +24,39 @@ const ImageWrapper = styled.div`
 `;
 
 export default function Page() {
-  const { data: session } = useSession();
+  const { data: session, status } = useSession();
   const router = useRouter();
-  if (session) {
+
+  if (status === "loading") {
+    return <></>;
+  } else if (status === "authenticated") {
     router.push("/admin");
-  }
-  return (
-    <>
-      <header>
-        <Navigation session={session} />
-      </header>
-      <main>
-        <HeroHeading className={cinzel.className}>
-          Cafe owner? Add your cafe
-        </HeroHeading>
-        <HeroText>
-          and enjoy the benefits of free online marketing, SEO and web presence.
-        </HeroText>
-        <ImageWrapper>
-          <Image
-            src="/img/alle-cafes-logo.svg"
-            width={0}
-            height={0}
-            fill={true}
-            priority={true}
-            alt="Add your cafe to our catalog"
-            style={{ objectFit: "contain" }}
-          />
-        </ImageWrapper>
-      </main>
-    </>
-  );
+  } else
+    return (
+      <>
+        <header>
+          <Navigation session={session} />
+        </header>
+        <main>
+          <HeroHeading className={cinzel.className}>
+            Cafe owner? Add your cafe
+          </HeroHeading>
+          <HeroText>
+            and enjoy the benefits of free online marketing, SEO and web
+            presence.
+          </HeroText>
+          <ImageWrapper>
+            <Image
+              src="/img/alle-cafes-logo.svg"
+              width={0}
+              height={0}
+              fill={true}
+              priority={true}
+              alt="Add your cafe to our catalog"
+              style={{ objectFit: "contain" }}
+            />
+          </ImageWrapper>
+        </main>
+      </>
+    );
 }
