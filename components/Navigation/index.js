@@ -11,8 +11,6 @@ const StyledNav = styled.nav`
 `;
 
 export function Navigation({ session }) {
-  const router = useRouter();
-
   return (
     <StyledNav>
       {session ? (

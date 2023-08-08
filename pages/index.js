@@ -28,7 +28,7 @@ export default function Page() {
   const router = useRouter();
 
   if (status === "loading") {
-    return <></>;
+    return null;
   } else if (status === "authenticated") {
     router.push("/admin");
   } else
