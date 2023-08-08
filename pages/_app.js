@@ -1,10 +1,24 @@
 import GlobalStyle from "../styles";
+import { SessionProvider } from "next-auth/react";
+import { Inter } from "next/font/google";
 
-export default function App({ Component, pageProps }) {
+const inter = Inter({ subsets: ["latin"] });
+
+export default function App({
+  Component,
+  pageProps: { session, ...pageProps },
+}) {
   return (
     <>
       <GlobalStyle />
-      <Component {...pageProps} />
+      <style jsx global>{`
+        html {
+          font-family: ${inter.style.fontFamily};
+        }
+      `}</style>
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
     </>
   );
 }

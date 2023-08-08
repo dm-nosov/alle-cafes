@@ -2,7 +2,6 @@ import { Header } from "@/components/Header";
 import { SectionEditor } from "@/components/SectionEditor";
 import { SectionViewer } from "@/components/SectionViewer";
 import { TopAdminToolbar } from "@/components/TopAdminToolbar";
-import { inter } from "@/fonts";
 import { ABOUT, SPECIAL, OPPENING_HOURS } from "@/utils/content.js";
 import { useWebsiteContentStore } from "@/store/WebsiteContent";
 
@@ -12,7 +11,7 @@ export default function Page() {
     <>
       <TopAdminToolbar />
       <Header />
-      <main className={inter.className}>
+      <main>
         {!preview && (
           <>
             <SectionEditor sectionName={ABOUT} />
