@@ -5,9 +5,7 @@ import { getTitleBySectionName } from "@/utils/content";
 import useSWR from "swr";
 import { WrappedBlocknote } from "../WrappedBlocknote";
 import { useEffect } from "react";
-
-const fetcher = (...args) => fetch(...args).then((res) => res.json());
-
+import { fetcher } from "@/utils/fetcher";
 export function SectionEditor({ sectionName }) {
   const websiteId = useWebsiteContentStore((state) => state.websiteId);
   const updateSection = useWebsiteContentStore((state) => state.updateSection);

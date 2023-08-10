@@ -1,7 +1,6 @@
 import EditorContent from "@/db/EditorContent";
 import Website from "@/db/Website";
 import dbConnect from "@/db/connect";
-import mongoose from "mongoose";
 
 export default async function handler(request, response) {
   await dbConnect();
