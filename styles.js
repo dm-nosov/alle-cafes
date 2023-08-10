@@ -20,7 +20,17 @@ export default createGlobalStyle`
   }
 
   :root {
-    --main-color: hotpink;
+    --primary: #3F2305;
+    --primary-color: white;
+    --secondary: #F5F5F5;
+    --secondary-outline: #DFD7BF;
     --editor-background: rgb(167, 167, 167);
+  }
+
+  nav {
+    background-color: var(--secondary);
+  }
+  hgroup {
+    padding: 0 1em;
   }
 `;

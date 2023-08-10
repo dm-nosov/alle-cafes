@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import { signIn, signOut } from "next-auth/react";
-import { useRouter } from "next/router";
 const StyledNav = styled.nav`
   display: flex;
   justify-content: end;

@@ -1,18 +1,35 @@
-import Link from "next/link";
-import styled from "styled-components";
+import { useState } from "react";
+import { WebsiteCardView } from "../WebsiteCardView";
+import { WebsiteCardEdit } from "../WebsiteCardEdit";
+import { ACTION_EDIT, ACTION_VIEW } from "@/utils/websiteCard";
 
-const StyledCard = styled.nav`
-  border: 1px solid black;
-  border-radius: 1em;
-  margin: 1em;
-  padding: 1em;
-`;
+export function WebsiteCard({ title, slug, action, websiteId, mutate }) {
+  const [cardAction, setCardAction] = useState(action);
 
-export function WebsiteCard({ name }) {
-  return (
-    <StyledCard>
-      <p>{name}</p>
-      <Link href="/admin/123/edit">edit</Link>
-    </StyledCard>
-  );
+  let cardView = null;
+
+  switch (cardAction) {
+    case ACTION_VIEW:
+      cardView = (
+        <WebsiteCardView
+          title={title}
+          slug={slug}
+          changeCardAction={setCardAction}
+        />
+      );
+      break;
+    case ACTION_EDIT:
+      cardView = (
+        <WebsiteCardEdit
+          title={title}
+          slug={slug}
+          changeCardAction={setCardAction}
+          websiteId={websiteId}
+          mutate={mutate}
+        />
+      );
+      break;
+  }
+
+  return <>{cardView}</>;
 }
