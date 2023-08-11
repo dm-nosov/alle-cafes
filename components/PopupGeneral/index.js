@@ -21,7 +21,7 @@ const ChildrenWrapper = styled.dialog`
   border: 0;
   background-color: white;
   margin: 0 0.25em 0 0.25em;
-  padding: 1em 2em 2em 1em;
+  padding: 1em 1em 4em 1em;
   border-radius: 1em 1em 0 0;
 
   p {

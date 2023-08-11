@@ -1,8 +1,7 @@
-import { Button } from "@/components/Button";
 import { Navigation } from "@/components/Navigation";
 import { WebsiteCard } from "@/components/WebsiteCard";
 import { fetcher } from "@/utils/fetcher";
-import { ACTION_VIEW } from "@/utils/websiteCard";
+import { ACTION_VIEW, ACTION_ADD } from "@/utils/websiteCard";
 import { useSession } from "next-auth/react";
 import useSWR from "swr";
 
@@ -38,6 +37,13 @@ export default function Page() {
             mutate={mutate}
           />
         ))}
+        <WebsiteCard
+          title="Your title"
+          slug="your-slug"
+          action={ACTION_ADD}
+          websiteId={null}
+          mutate={mutate}
+        />
       </main>
     </>
   );

@@ -25,6 +25,7 @@ export default createGlobalStyle`
     --secondary: #F5F5F5;
     --secondary-outline: #DFD7BF;
     --editor-background: rgb(167, 167, 167);
+    --danger: #C70039;
   }
 
   nav {

@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { WebsiteCardView } from "../WebsiteCardView";
 import { WebsiteCardEdit } from "../WebsiteCardEdit";
-import { ACTION_EDIT, ACTION_VIEW } from "@/utils/websiteCard";
+import { ACTION_EDIT, ACTION_VIEW, ACTION_ADD } from "@/utils/websiteCard";
+import { WebsiteCardNew } from "../WebsiteCardNew";
 
 export function WebsiteCard({ title, slug, action, websiteId, mutate }) {
   const [cardAction, setCardAction] = useState(action);
@@ -28,6 +29,9 @@ export function WebsiteCard({ title, slug, action, websiteId, mutate }) {
           mutate={mutate}
         />
       );
+      break;
+    case ACTION_ADD:
+      cardView = <WebsiteCardNew changeCardAction={setCardAction} />;
       break;
   }
 
