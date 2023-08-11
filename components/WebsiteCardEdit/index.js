@@ -6,6 +6,7 @@ import { BUTTON_PRIMARY } from "@/utils/button";
 import { updateWebsiteSettings, createWebsite } from "@/api-facade/website";
 import { ButtonGroup } from "../ButtonGroup";
 import { FormErrorText } from "../FormErrorText/index";
+import { Input } from "../Input";
 
 const StyledCardEdit = styled(StyledCard)`
   form {
@@ -18,24 +19,13 @@ const StyledCardEdit = styled(StyledCard)`
     gap: 2em;
     justify-content: end;
   }
-  input[type="text"] {
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
-    border-bottom: 1px solid var(--editor-background);
-    font-size: 1em;
-    margin-bottom: 0.5em;
-  }
-  input[type="text"]:focus-visible {
-    outline: none;
-  }
+
   label {
     font-size: x-small;
     margin-bottom: 0.5em;
     margin-left: 2px;
   }
   input[type="text"].error {
-    border-bottom: 1px solid var(--danger);
   }
 `;
 
@@ -101,25 +91,25 @@ export function WebsiteCardEdit({
       <StyledCardEdit>
         <form ref={formRef}>
           <label htmlFor="title">Title</label>
-          <input
+          <Input
             type="text"
             name="title"
             id="title"
             defaultValue={title}
             ref={firstInputRef}
-            className={errors?.title ? "error" : null}
+            $error={errors?.title ? true : false}
             required={true}
             minLength={3}
           />
           <FormErrorText>{errors?.title?.message}</FormErrorText>
 
           <label htmlFor="slug">Slug</label>
-          <input
+          <Input
             type="text"
             name="slug"
             id="slug"
             defaultValue={slug}
-            className={errors?.slug ? "error" : ""}
+            $error={errors?.slug ? true : false}
             required={true}
             minLength={3}
           />
