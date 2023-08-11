@@ -1,10 +1,11 @@
 import { useRef, useState, useEffect } from "react";
 import { StyledCard } from "../StyledCard/index";
 import styled from "styled-components";
-import { ACTION_VIEW } from "@/utils/websiteCard";
-import { Button } from "../Button";
-import { BUTTON_PRIMARY, BUTTON_SECONDARY } from "@/utils/button";
-import { updateWebsiteSettings } from "@/api-facade/website";
+import { ACTION_ADD, ACTION_VIEW } from "@/utils/websiteCard";
+import { BUTTON_PRIMARY } from "@/utils/button";
+import { updateWebsiteSettings, createWebsite } from "@/api-facade/website";
+import { ButtonGroup } from "../ButtonGroup";
+import { FormErrorText } from "../FormErrorText/index";
 
 const StyledCardEdit = styled(StyledCard)`
   form {
@@ -33,6 +34,9 @@ const StyledCardEdit = styled(StyledCard)`
     margin-bottom: 0.5em;
     margin-left: 2px;
   }
+  input[type="text"].error {
+    border-bottom: 1px solid var(--danger);
+  }
 `;
 
 export function WebsiteCardEdit({
@@ -45,16 +49,52 @@ export function WebsiteCardEdit({
   const firstInputRef = useRef(null);
   const formRef = useRef(null);
 
+  const [errors, setErrors] = useState(null);
+
   useEffect(() => {
     firstInputRef.current.focus();
   }, []);
 
   async function updateWebsiteData() {
-    const data = Object.fromEntries(new FormData(formRef.current));
-    await updateWebsiteSettings(websiteId, data);
-    changeCardAction(ACTION_VIEW);
-    mutate();
+    if (formRef.current.reportValidity()) {
+      const data = Object.fromEntries(new FormData(formRef.current));
+      let response;
+
+      if (websiteId) {
+        response = await updateWebsiteSettings(websiteId, data);
+      } else {
+        response = await createWebsite(data);
+      }
+      if ("errors" in response) {
+        setErrors(response.errors);
+      } else {
+        if (websiteId) {
+          changeCardAction(ACTION_VIEW);
+        } else {
+          changeCardAction(ACTION_ADD);
+        }
+        mutate();
+      }
+    }
   }
+
+  const buttons = [
+    {
+      text: "Cancel",
+      id: 1,
+      handleClick: () => {
+        websiteId
+          ? changeCardAction(ACTION_VIEW)
+          : changeCardAction(ACTION_ADD);
+      },
+    },
+    {
+      text: websiteId ? "Update" : "Create",
+      id: 2,
+      actionType: BUTTON_PRIMARY,
+      handleClick: () => updateWebsiteData(),
+    },
+  ];
 
   return (
     <>
@@ -67,25 +107,24 @@ export function WebsiteCardEdit({
             id="title"
             defaultValue={title}
             ref={firstInputRef}
+            className={errors?.title ? "error" : null}
+            required={true}
+            minLength={3}
           />
+          <FormErrorText>{errors?.title?.message}</FormErrorText>
+
           <label htmlFor="slug">Slug</label>
-          <input type="text" name="slug" id="slug" defaultValue={slug} />
-          <menu>
-            <li>
-              <Button
-                text="Cancel"
-                actionType={BUTTON_SECONDARY}
-                handleClick={() => changeCardAction(ACTION_VIEW)}
-              />
-            </li>
-            <li>
-              <Button
-                text="Update"
-                actionType={BUTTON_PRIMARY}
-                handleClick={() => updateWebsiteData()}
-              />
-            </li>
-          </menu>
+          <input
+            type="text"
+            name="slug"
+            id="slug"
+            defaultValue={slug}
+            className={errors?.slug ? "error" : ""}
+            required={true}
+            minLength={3}
+          />
+          <FormErrorText>{errors?.slug?.message}</FormErrorText>
+          <ButtonGroup buttons={buttons} />
         </form>
       </StyledCardEdit>
     </>

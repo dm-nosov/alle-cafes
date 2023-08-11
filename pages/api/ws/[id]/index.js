@@ -7,7 +7,23 @@ export default async function handler(request, response) {
   const { id } = request.query;
 
   if (request.method === "PUT") {
-    const website = await Website.findByIdAndUpdate(id, request.body);
-    return response.status(200).json(website);
+    try {
+      const website = await Website.findByIdAndUpdate(id, request.body, {
+        runValidators: true,
+      });
+      return response.status(200).json(website);
+    } catch (err) {
+      let errContainer;
+      errContainer = err;
+      //Unique constraint is invalid
+      if (err?.code === 11000) {
+        errContainer = { errors: {} };
+        errContainer.errors[Object.keys(err.keyValue)[0]] = {
+          message: "The field must be unique",
+        };
+      }
+
+      return response.status(400).json(errContainer);
+    }
   }
 }
