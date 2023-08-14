@@ -9,7 +9,7 @@ const StyledNav = styled.nav`
   justify-content: flex-end;
   align-items: center;
   & button {
-    margin: 0 1em;
+    margin: 0 1rem;
   }
 `;
 

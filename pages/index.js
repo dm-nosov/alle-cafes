@@ -16,7 +16,7 @@ const HeroText = styled.p`
   font-weight: 300;
   text-align: center;
   padding: 0;
-  margin: 0.25em 1em 1em 1em;
+  margin: 0.25rem 1rem 1rem 1rem;
 `;
 const ImageWrapper = styled.div`
   position: relative;

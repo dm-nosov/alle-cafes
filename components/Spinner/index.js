@@ -2,15 +2,15 @@ import styled from "styled-components";
 
 export const Spinner = styled.div`
   display: inline-block;
-  width: 0.9em;
-  height: 0.9em;
-  margin: 0 1em;
+  width: 0.9rem;
+  height: 0.9rem;
+  margin: 0 1rem;
 
   &::after {
     content: "";
     display: block;
-    width: 0.9em;
-    height: 0.9em;
+    width: 0.9rem;
+    height: 0.9rem;
     border-radius: 50%;
     border: 2px solid #fff;
     border-color: ${({ $dark }) =>

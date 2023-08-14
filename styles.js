@@ -22,7 +22,7 @@ export default createGlobalStyle`
 
   :root {
     --primary: #3F2305;
-    --primary-color: white;
+    --primary-text: white;
     --secondary: #F5F5F5;
     --secondary-outline: #DFD7BF;
     --editor-background: rgb(167, 167, 167);
@@ -33,6 +33,6 @@ export default createGlobalStyle`
     background-color: var(--secondary);
   }
   hgroup {
-    padding: 0 1em;
+    padding: 0 1rem;
   }
 `;

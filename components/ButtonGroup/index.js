@@ -6,7 +6,7 @@ import styled from "styled-components";
 const StyledMenu = styled.menu`
   list-style-type: none;
   display: flex;
-  gap: 2em;
+  gap: 2rem;
   justify-content: end;
 `;
 

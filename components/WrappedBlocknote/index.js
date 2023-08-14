@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 const BlockNoteWrapper = styled.div`
   border: 1px dashed var(--editor-background);
-  margin: 1em;
+  margin: 1rem;
 `;
 
 export function WrappedBlocknote({ sectionName, sectionData }) {

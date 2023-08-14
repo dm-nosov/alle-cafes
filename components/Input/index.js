@@ -7,8 +7,8 @@ export const Input = styled.input`
     border-right: 0;
     border-bottom: 1px solid
       ${({ $error }) => ($error ? "var(--danger)" : "var(--editor-background)")};
-    font-size: 1em;
-    margin-bottom: 0.5em;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
   }
 
   &[type="text"]:focus-visible {

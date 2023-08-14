@@ -16,13 +16,13 @@ const StyledCardEdit = styled(StyledCard)`
   menu {
     list-style-type: none;
     display: flex;
-    gap: 2em;
+    gap: 2rem;
     justify-content: end;
   }
 
   label {
     font-size: x-small;
-    margin-bottom: 0.5em;
+    margin-bottom: 0.5rem;
     margin-left: 2px;
   }
   input[type="text"].error {

@@ -4,16 +4,37 @@ import {
   BUTTON_DANGER,
 } from "@/utils/button";
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Spinner } from "../Spinner";
 
 const StyledButton = styled.button`
-  background-color: ${({ $backgroundColor }) => $backgroundColor};
-  color: ${({ $color }) => $color};
-  border: 1px solid ${({ $borderColor }) => $borderColor};
-  padding: 0.5em 1em;
-  min-width: 6em;
-  border-radius: 0.25em;
+  ${({ $variant }) => {
+    console.log("$variant", BUTTON_SECONDARY);
+    switch ($variant) {
+      case BUTTON_SECONDARY:
+        return css`
+          background-color: white;
+          color: var(--primary);
+          border: 1px solid var(--primary);
+        `;
+      case BUTTON_PRIMARY:
+        return css`
+          background-color: var(--primary);
+          color: var(--primary-text);
+          border: 1px solid var(--primary);
+        `;
+      case BUTTON_DANGER:
+        return css`
+          background-color: var(--danger);
+          color: var(--primary-text);
+          border: 1px solid var(--danger);
+        `;
+    }
+  }}
+
+  padding: 0.5rem 1rem;
+  min-width: 6rem;
+  border-radius: 0.25rem;
 
   &:active {
     box-shadow: 0 0 0 0.3rem var(--secondary-outline),
@@ -37,25 +58,6 @@ export function Button({
 }) {
   const [loading, setLoading] = useState(false);
 
-  let backgroundColor = "white";
-  let color = "var(--primary)";
-  let borderColor = "var(--primary)";
-
-  switch (actionType) {
-    case BUTTON_SECONDARY:
-      break;
-    case BUTTON_PRIMARY:
-      backgroundColor = "var(--primary)";
-      color = "var(--primary-color)";
-      borderColor = "var(--primary)";
-      break;
-    case BUTTON_DANGER:
-      backgroundColor = "var(--danger)";
-      color = "var(--primary-color)";
-      borderColor = "var(--danger)";
-      break;
-  }
-
   async function onClick(event) {
     if (!groupState) {
       setLoading(true);
@@ -76,11 +78,9 @@ export function Button({
     <>
       <StyledButton
         onClick={onClick}
-        $backgroundColor={backgroundColor}
-        $color={color}
-        $borderColor={borderColor}
         type={isSubmit ? "submit" : "button"}
         disabled={!groupState ? loading : groupLoading > 0}
+        $variant={actionType}
       >
         {(!groupState && loading) ||
         (groupState && groupLoading === groupId) ? (

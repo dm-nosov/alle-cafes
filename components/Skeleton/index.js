@@ -1,13 +1,13 @@
 import styled from "styled-components";
 export const Skeleton = styled.div`
   display: block;
-  height: ${({ $height }) => $height}em;
+  height: ${({ $height }) => $height}rem;
   position: relative;
   overflow: hidden;
   background-color: var(--secondary);
-  padding: 1em;
-  margin: 1em;
-  border-radius: 0.25em;
+  padding: 1rem;
+  margin: 1rem;
+  border-radius: 0.25rem;
 
   &::after {
     position: absolute;

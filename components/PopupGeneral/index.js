@@ -18,14 +18,14 @@ const ChildrenWrapper = styled.dialog`
   width: 100%;
   border: 0;
   background-color: white;
-  margin: 0 0.25em 0 0.25em;
-  padding: 1em 1em 4em 1em;
-  border-radius: 1em 1em 0 0;
+  margin: 0 0.25rem 0 0.25rem;
+  padding: 1rem 1rem 4rem 1rem;
+  border-radius: 1rem 1rem 0 0;
 
   menu {
     list-style-type: none;
     display: flex;
-    gap: 2em;
+    gap: 2rem;
     justify-content: end;
   }
 `;
