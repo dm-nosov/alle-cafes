@@ -9,9 +9,11 @@ const BlockNoteWrapper = styled.div`
 
 export function WrappedBlocknote({ sectionName, sectionData }) {
   const updateSection = useWebsiteContentStore((state) => state.updateSection);
+
   const stateSectionData = useWebsiteContentStore(
     (state) => state.content[sectionName].json
   );
+
   const editor = useBlockNote({
     initialContent: stateSectionData ? stateSectionData : sectionData,
     onEditorContentChange: async (editor) => {
@@ -22,6 +24,8 @@ export function WrappedBlocknote({ sectionName, sectionData }) {
       );
     },
   });
+
+  console.log(sectionName, sectionData);
   return (
     <BlockNoteWrapper>
       <BlockNoteView editor={editor} />

@@ -3,7 +3,7 @@ import { useWebsiteContentStore } from "@/store/WebsiteContent";
 import styled from "styled-components";
 
 const StyledNav = styled.nav`
-  background-color: var(--editor-background);
+  background-color: var(--secondary);
   height: 50px;
   display: flex;
   justify-content: flex-end;
@@ -13,11 +13,10 @@ const StyledNav = styled.nav`
   }
 `;
 
-export function TopAdminToolbar() {
+export function TopAdminToolbar({ websiteId }) {
   const preview = useWebsiteContentStore((state) => state.isPreview);
   const togglePreview = useWebsiteContentStore((state) => state.togglePreview);
   const content = useWebsiteContentStore((state) => state.content);
-  const websiteId = useWebsiteContentStore((state) => state.websiteId);
 
   return (
     <StyledNav>

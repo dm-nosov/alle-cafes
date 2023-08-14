@@ -19,3 +19,10 @@ export async function createWebsite(content) {
   });
   return await response.json();
 }
+
+export async function removeWebsite(websiteId) {
+  const response = await fetch(`/api/ws/${websiteId}/`, {
+    method: "DELETE",
+  });
+  return await response.json();
+}

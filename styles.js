@@ -14,6 +14,7 @@ export default createGlobalStyle`
 
   h2 {
     text-align: center;
+    font-size: xx-large;
   }
   p {
     line-height: 24px;

@@ -1,4 +1,8 @@
-import { BUTTON_PRIMARY, BUTTON_SECONDARY } from "@/utils/button";
+import {
+  BUTTON_PRIMARY,
+  BUTTON_SECONDARY,
+  BUTTON_DANGER,
+} from "@/utils/button";
 import { useState } from "react";
 import styled from "styled-components";
 import { Spinner } from "../Spinner";
@@ -6,14 +10,14 @@ import { Spinner } from "../Spinner";
 const StyledButton = styled.button`
   background-color: ${({ $backgroundColor }) => $backgroundColor};
   color: ${({ $color }) => $color};
-  border: 2px solid ${({ $borderColor }) => $borderColor};
+  border: 1px solid ${({ $borderColor }) => $borderColor};
   padding: 0.5em 1em;
   min-width: 6em;
+  border-radius: 0.25em;
 
   &:active {
-    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
-      0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-    opacity: 0.6;
+    box-shadow: 0 0 0 0.3rem var(--secondary-outline),
+      inset 0 0 0.2em 0.1rem rgba(255, 255, 255, 0.2);
   }
 
   &:disabled {
@@ -33,9 +37,9 @@ export function Button({
 }) {
   const [loading, setLoading] = useState(false);
 
-  let backgroundColor = "var(--secondary)";
-  let color = "black";
-  let borderColor = "var(--secondary-outline)";
+  let backgroundColor = "white";
+  let color = "var(--primary)";
+  let borderColor = "var(--primary)";
 
   switch (actionType) {
     case BUTTON_SECONDARY:
@@ -44,6 +48,11 @@ export function Button({
       backgroundColor = "var(--primary)";
       color = "var(--primary-color)";
       borderColor = "var(--primary)";
+      break;
+    case BUTTON_DANGER:
+      backgroundColor = "var(--danger)";
+      color = "var(--primary-color)";
+      borderColor = "var(--danger)";
       break;
   }
 

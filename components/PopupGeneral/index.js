@@ -10,8 +10,6 @@ const StyledPopup = styled.aside`
   display: flex;
   align-items: end;
   z-index: 1;
-  p {
-  }
 `;
 
 const ChildrenWrapper = styled.dialog`
@@ -24,13 +22,6 @@ const ChildrenWrapper = styled.dialog`
   padding: 1em 1em 4em 1em;
   border-radius: 1em 1em 0 0;
 
-  p {
-    padding-bottom: 0.5em;
-    border-bottom: 1px solid var(--editor-background);
-  }
-  p:last-of-type {
-    border-bottom: none;
-  }
   menu {
     list-style-type: none;
     display: flex;
