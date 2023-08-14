@@ -28,6 +28,8 @@ export default function Page({ staticWebsiteContent }) {
   );
 }
 
+/* 
+Uncomment this when SSG can be possible (outside Vercel)
 export async function getStaticPaths() {
   const res = await fetch(
     "https://alle-cafes-git-feature-view-website-dm-nosov.vercel.app/api/ws-public/"
@@ -47,6 +49,5 @@ export async function getStaticProps({ params }) {
   );
   const staticWebsiteContent = await res.json();
 
-  // Pass post data to the page via props
   return { props: { staticWebsiteContent } };
-}
+} */
