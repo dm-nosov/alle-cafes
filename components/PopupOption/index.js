@@ -11,9 +11,12 @@ export const PopupOption = styled.p`
     padding-left: 0.5em;
     display: inline-block;
   }
+  &:last-of-type {
+    border-bottom: none;
+  }
   color: ${({ $danger }) => ($danger ? "var(--danger)" : "black")};
 
   padding-bottom: 0.5em;
   cursor: pointer;
-  border-bottom: 1px solid var(--editor-background);
+  border-bottom: 2px solid var(--secondary);
 `;
