@@ -90,12 +90,12 @@ export function WebsiteCardView({
       </StyledCardView>
       {showActionsPopup && (
         <PopupGeneral handleClosePopup={closePopup}>
-          <PopupOption onClick={() => changeCardAction(ACTION_EDIT)}>
+          <PopupOption handleClick={() => changeCardAction(ACTION_EDIT)}>
             Edit
           </PopupOption>
           <PopupOption
             $danger
-            onClick={() => {
+            handleClick={() => {
               closePopup();
               setShowRemovePopup(true);
             }}
