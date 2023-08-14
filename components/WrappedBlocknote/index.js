@@ -4,14 +4,16 @@ import styled from "styled-components";
 
 const BlockNoteWrapper = styled.div`
   border: 1px dashed var(--editor-background);
-  margin: 1em;
+  margin: 1rem;
 `;
 
 export function WrappedBlocknote({ sectionName, sectionData }) {
   const updateSection = useWebsiteContentStore((state) => state.updateSection);
+
   const stateSectionData = useWebsiteContentStore(
     (state) => state.content[sectionName].json
   );
+
   const editor = useBlockNote({
     initialContent: stateSectionData ? stateSectionData : sectionData,
     onEditorContentChange: async (editor) => {
@@ -22,6 +24,7 @@ export function WrappedBlocknote({ sectionName, sectionData }) {
       );
     },
   });
+
   return (
     <BlockNoteWrapper>
       <BlockNoteView editor={editor} />

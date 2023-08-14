@@ -2,7 +2,7 @@ import { SectionPreview } from "@/components/SectionPreview";
 import { useWebsiteContentStore } from "@/store/WebsiteContent";
 import {
   ABOUT,
-  OPPENING_HOURS,
+  OPENING_HOURS,
   SPECIAL,
   getTitleBySectionName,
 } from "@/utils/content";
@@ -19,8 +19,8 @@ export function SectionViewer() {
         content={websiteContent[SPECIAL].html}
       />
       <SectionPreview
-        title={getTitleBySectionName(OPPENING_HOURS)}
-        content={websiteContent[OPPENING_HOURS].html}
+        title={getTitleBySectionName(OPENING_HOURS)}
+        content={websiteContent[OPENING_HOURS].html}
       />
     </>
   );

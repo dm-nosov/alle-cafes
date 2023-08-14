@@ -16,6 +16,8 @@ export function WebsiteCard({ title, slug, action, websiteId, mutate }) {
           title={title}
           slug={slug}
           changeCardAction={setCardAction}
+          websiteId={websiteId}
+          mutate={mutate}
         />
       );
       break;

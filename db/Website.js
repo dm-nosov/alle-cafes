@@ -8,6 +8,11 @@ const websiteSchema = new Schema({
     minLength: [3, "A title must exceed 3 symbols"],
     required: [true, "A website must have a non-empty title"],
   },
+  uid: {
+    type: String,
+    unique: true,
+    required: true,
+  },
   slug: {
     type: String,
     required: true,

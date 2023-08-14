@@ -1,19 +1,44 @@
-import { BUTTON_PRIMARY, BUTTON_SECONDARY } from "@/utils/button";
+import {
+  BUTTON_PRIMARY,
+  BUTTON_SECONDARY,
+  BUTTON_DANGER,
+} from "@/utils/button";
 import { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { Spinner } from "../Spinner";
 
 const StyledButton = styled.button`
-  background-color: ${({ $backgroundColor }) => $backgroundColor};
-  color: ${({ $color }) => $color};
-  border: 2px solid ${({ $borderColor }) => $borderColor};
-  padding: 0.5em 1em;
-  min-width: 6em;
+  ${({ $variant }) => {
+    console.log("$variant", BUTTON_SECONDARY);
+    switch ($variant) {
+      case BUTTON_SECONDARY:
+        return css`
+          background-color: white;
+          color: var(--primary);
+          border: 1px solid var(--primary);
+        `;
+      case BUTTON_PRIMARY:
+        return css`
+          background-color: var(--primary);
+          color: var(--primary-text);
+          border: 1px solid var(--primary);
+        `;
+      case BUTTON_DANGER:
+        return css`
+          background-color: var(--danger);
+          color: var(--primary-text);
+          border: 1px solid var(--danger);
+        `;
+    }
+  }}
+
+  padding: 0.5rem 1rem;
+  min-width: 6rem;
+  border-radius: 0.25rem;
 
   &:active {
-    box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
-      0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
-    opacity: 0.6;
+    box-shadow: 0 0 0 0.3rem var(--secondary-outline),
+      inset 0 0 0.2em 0.1rem rgba(255, 255, 255, 0.2);
   }
 
   &:disabled {
@@ -32,20 +57,6 @@ export function Button({
   groupId = 0,
 }) {
   const [loading, setLoading] = useState(false);
-
-  let backgroundColor = "var(--secondary)";
-  let color = "black";
-  let borderColor = "var(--secondary-outline)";
-
-  switch (actionType) {
-    case BUTTON_SECONDARY:
-      break;
-    case BUTTON_PRIMARY:
-      backgroundColor = "var(--primary)";
-      color = "var(--primary-color)";
-      borderColor = "var(--primary)";
-      break;
-  }
 
   async function onClick(event) {
     if (!groupState) {
@@ -67,11 +78,9 @@ export function Button({
     <>
       <StyledButton
         onClick={onClick}
-        $backgroundColor={backgroundColor}
-        $color={color}
-        $borderColor={borderColor}
         type={isSubmit ? "submit" : "button"}
         disabled={!groupState ? loading : groupLoading > 0}
+        $variant={actionType}
       >
         {(!groupState && loading) ||
         (groupState && groupLoading === groupId) ? (

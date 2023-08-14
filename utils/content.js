@@ -1,6 +1,6 @@
 export const ABOUT = "about";
 export const SPECIAL = "special";
-export const OPPENING_HOURS = "hours";
+export const OPENING_HOURS = "hours";
 
 export function getTitleBySectionName(sectionName) {
   switch (sectionName) {
@@ -8,7 +8,7 @@ export function getTitleBySectionName(sectionName) {
       return "About Us";
     case SPECIAL:
       return "Special Offers";
-    case OPPENING_HOURS:
+    case OPENING_HOURS:
       return "Opening Hours";
   }
 }

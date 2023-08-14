@@ -14,7 +14,7 @@ const HeroText = styled.h1`
   position: absolute;
   left: 50%;
   top: 50%;
-  padding: 0 1em;
+  padding: 0 1rem;
   text-align: center;
   transform: translate(-50%, -50%);
   text-shadow: 2px 1px 5px black;

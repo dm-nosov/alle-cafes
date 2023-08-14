@@ -5,6 +5,10 @@ import styled from "styled-components";
 import { StyledCard } from "../StyledCard/index";
 import { PopupGeneral } from "../PopupGeneral";
 import { ACTION_EDIT } from "@/utils/websiteCard";
+import { PopupOption } from "../PopupOption";
+import { ButtonGroup } from "../ButtonGroup";
+import { BUTTON_DANGER } from "@/utils/button";
+import { removeWebsite } from "@/api-facade/website";
 
 const StyledCardView = styled(StyledCard)`
   img:active {
@@ -19,7 +23,13 @@ const StyledCardView = styled(StyledCard)`
   }
 `;
 
-export function WebsiteCardView({ title, slug, changeCardAction }) {
+export function WebsiteCardView({
+  title,
+  slug,
+  changeCardAction,
+  websiteId,
+  mutate,
+}) {
   const [showActionsPopup, setShowActionsPopup] = useState(false);
   const [showRemovePopup, setShowRemovePopup] = useState(false);
 
@@ -27,6 +37,26 @@ export function WebsiteCardView({ title, slug, changeCardAction }) {
     setShowActionsPopup(false);
     setShowRemovePopup(false);
   }
+
+  const removePopupButtons = [
+    {
+      text: "Cancel",
+      id: 1,
+      handleClick: () => {
+        closePopup();
+      },
+    },
+    {
+      text: "Remove",
+      id: 2,
+      actionType: BUTTON_DANGER,
+      handleClick: async () => {
+        await removeWebsite(websiteId);
+        mutate();
+        closePopup();
+      },
+    },
+  ];
 
   return (
     <>
@@ -44,7 +74,7 @@ export function WebsiteCardView({ title, slug, changeCardAction }) {
         />
         <p>{title}</p>
         <small>/{slug}</small>
-        <Link href="/admin/123/edit">
+        <Link href={`/admin/${websiteId}/edit`}>
           <Image
             src="/img/icons/pencil-square.svg"
             alt=""
@@ -60,15 +90,18 @@ export function WebsiteCardView({ title, slug, changeCardAction }) {
       </StyledCardView>
       {showActionsPopup && (
         <PopupGeneral handleClosePopup={closePopup}>
-          <p onClick={() => changeCardAction(ACTION_EDIT)}>Edit</p>
-          <p
+          <PopupOption onClick={() => changeCardAction(ACTION_EDIT)}>
+            Edit
+          </PopupOption>
+          <PopupOption
+            $danger
             onClick={() => {
               closePopup();
               setShowRemovePopup(true);
             }}
           >
             Remove
-          </p>
+          </PopupOption>
         </PopupGeneral>
       )}
       {showRemovePopup && (
@@ -76,27 +109,7 @@ export function WebsiteCardView({ title, slug, changeCardAction }) {
           <p>
             Are you sure you want to remove <strong>{title}</strong> website?
           </p>
-          <menu>
-            <li>
-              <button
-                onClick={() => {
-                  closePopup();
-                }}
-              >
-                Cancel
-              </button>
-            </li>
-            <li>
-              <button
-                onClick={() => {
-                  console.log("Remove click");
-                  closePopup();
-                }}
-              >
-                Yes
-              </button>
-            </li>
-          </menu>
+          <ButtonGroup buttons={removePopupButtons} />
         </PopupGeneral>
       )}
     </>

@@ -3,9 +3,9 @@ import { signIn, signOut } from "next-auth/react";
 const StyledNav = styled.nav`
   display: flex;
   justify-content: end;
-  gap: 1em;
+  gap: 1rem;
   & button {
-    margin: 1em;
+    margin: 1rem;
   }
 `;
 
