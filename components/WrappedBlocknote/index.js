@@ -25,7 +25,6 @@ export function WrappedBlocknote({ sectionName, sectionData }) {
     },
   });
 
-  console.log(sectionName, sectionData);
   return (
     <BlockNoteWrapper>
       <BlockNoteView editor={editor} />
