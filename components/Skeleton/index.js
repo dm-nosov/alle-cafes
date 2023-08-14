@@ -1,6 +1,5 @@
 import styled from "styled-components";
 export const Skeleton = styled.div`
-  display: block;
   height: ${({ $height }) => $height}rem;
   position: relative;
   overflow: hidden;
