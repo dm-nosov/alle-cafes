@@ -27,3 +27,26 @@ export default function Page({ staticWebsiteContent }) {
     </>
   );
 }
+
+export async function getStaticPaths() {
+  const res = await fetch(
+    "https://alle-cafes-git-feature-view-website-dm-nosov.vercel.app/api/ws-public/"
+  );
+  const websites = await res.json();
+
+  const paths = websites.map((website) => ({
+    params: { slug: website.slug },
+  }));
+
+  return { paths, fallback: true };
+}
+
+export async function getStaticProps({ params }) {
+  const res = await fetch(
+    `https://alle-cafes-git-feature-view-website-dm-nosov.vercel.app/api/ws-public/${params.slug}`
+  );
+  const staticWebsiteContent = await res.json();
+
+  // Pass post data to the page via props
+  return { props: { staticWebsiteContent } };
+}
