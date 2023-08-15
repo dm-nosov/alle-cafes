@@ -4,13 +4,12 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import Head from "next/head";
 import { Header } from "@/components/Header";
+import { Skeleton } from "@/components/Skeleton";
 
 export default function Page() {
   const router = useRouter();
   const { slug: websiteSlug } = router.query;
   const { data, isLoading } = useSWR(`/api/ws-public/${websiteSlug}`, fetcher);
-
-  if (isLoading) return null;
 
   return (
     <>
@@ -20,6 +19,7 @@ export default function Page() {
       </Head>
       <Header />
       {data && <SectionViewerPublic websiteContent={data.editorContent} />}
+      {isLoading && <Skeleton $height={10} />}
     </>
   );
 }

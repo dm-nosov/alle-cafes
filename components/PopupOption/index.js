@@ -19,10 +19,10 @@ const OptionGrid = styled.div`
   }
 `;
 
-export function PopupOption({ children, $danger, handleClick }) {
+export function PopupOption({ children, danger, handleClick }) {
   return (
     <OptionGrid onClick={handleClick}>
-      <StyledP $danger={$danger}>{children}</StyledP>
+      <StyledP $danger={danger}>{children}</StyledP>
       <svg
         xmlns="http://www.w3.org/2000/svg"
         width="16"

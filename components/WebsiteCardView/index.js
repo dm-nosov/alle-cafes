@@ -17,12 +17,11 @@ const StyledCardView = styled(StyledCard)`
     transition: background-color 1.5s ease;
     transform: scale(1.2);
   }
+`;
 
-  small {
-    color: var(--editor-background);
-  }
-  a,
-  a:visited {
+const PublicLink = styled(Link)`
+  &,
+  &:visited {
     color: var(--editor-background);
   }
 `;
@@ -78,9 +77,9 @@ export function WebsiteCardView({
         />
         <p>{title}</p>
 
-        <Link href={`/public/${slug}`} target="_blank">
-          <small>/{slug}</small>
-        </Link>
+        <PublicLink href={`/public/${slug}`} target="_blank">
+          /{slug}
+        </PublicLink>
 
         <Link href={`/admin/${websiteId}/edit`}>
           <Image
@@ -102,7 +101,7 @@ export function WebsiteCardView({
             Edit settings
           </PopupOption>
           <PopupOption
-            $danger
+            danger
             handleClick={() => {
               closePopup();
               setShowRemovePopup(true);
