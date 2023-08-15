@@ -5,25 +5,21 @@ import useSWR from "swr";
 import Head from "next/head";
 import { Header } from "@/components/Header";
 
-export default function Page({ staticWebsiteContent }) {
+export default function Page() {
   const router = useRouter();
   const { slug: websiteSlug } = router.query;
   const { data, isLoading } = useSWR(`/api/ws-public/${websiteSlug}`, fetcher);
-
-  let siteContent = staticWebsiteContent ? staticWebsiteContent : data;
 
   if (isLoading) return null;
 
   return (
     <>
       <Head>
-        <title>{siteContent?.title}</title>
-        <meta name="description" content={siteContent?.title}></meta>
+        <title>{data?.title}</title>
+        <meta name="description" content={data?.title}></meta>
       </Head>
       <Header />
-      {data && (
-        <SectionViewerPublic websiteContent={siteContent.editorContent} />
-      )}
+      {data && <SectionViewerPublic websiteContent={data.editorContent} />}
     </>
   );
 }
