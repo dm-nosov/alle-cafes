@@ -20,3 +20,8 @@ export const BACKEND_NOT_FOUND = {
 
 export const BACKEND_SUCCESS_CODE = 200;
 export const BACKEND_INVALID_CODE = 400;
+
+export const BACKEND_NOT_ALLOWED_CODE = 405;
+export const BACKEND_NOT_ALLOWED = {
+  errors: { general: { message: "Method not allowed" } },
+};

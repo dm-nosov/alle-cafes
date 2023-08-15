@@ -5,6 +5,8 @@ import { getServerSession } from "next-auth/next";
 import { authOptions } from "../auth/[...nextauth]";
 import {
   BACKEND_INVALID_CODE,
+  BACKEND_NOT_ALLOWED,
+  BACKEND_NOT_ALLOWED_CODE,
   BACKEND_NOTAUTH,
   BACKEND_NOTAUTH_CODE,
   BACKEND_SUCCESS_CODE,
@@ -67,4 +69,5 @@ export default async function handler(request, response) {
       return response.status(BACKEND_INVALID_CODE).json(errContainer);
     }
   }
+  return response.status(BACKEND_NOT_ALLOWED_CODE).json(BACKEND_NOT_ALLOWED);
 }

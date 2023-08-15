@@ -5,6 +5,8 @@ import { authOptions } from "@/pages/api/auth/[...nextauth]";
 import {
   BACKEND_NOTAUTH,
   BACKEND_NOTAUTH_CODE,
+  BACKEND_NOT_ALLOWED,
+  BACKEND_NOT_ALLOWED_CODE,
   BACKEND_NOT_FOUND,
   BACKEND_NOT_FOUND_CODE,
   BACKEND_SUCCESS_CODE,
@@ -58,4 +60,5 @@ export default async function handler(request, response) {
       .status(BACKEND_SUCCESS_CODE)
       .json({ website: id, newContent: newContent });
   }
+  return response.status(BACKEND_NOT_ALLOWED_CODE).json(BACKEND_NOT_ALLOWED);
 }
