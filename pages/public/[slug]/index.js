@@ -27,27 +27,3 @@ export default function Page({ staticWebsiteContent }) {
     </>
   );
 }
-
-/* 
-Uncomment this when SSG can be possible (with App Router)
-export async function getStaticPaths() {
-  const res = await fetch(
-    "https://alle-cafes-git-feature-view-website-dm-nosov.vercel.app/api/ws-public/"
-  );
-  const websites = await res.json();
-
-  const paths = websites.map((website) => ({
-    params: { slug: website.slug },
-  }));
-
-  return { paths, fallback: true };
-}
-
-export async function getStaticProps({ params }) {
-  const res = await fetch(
-    `https://alle-cafes-git-feature-view-website-dm-nosov.vercel.app/api/ws-public/${params.slug}`
-  );
-  const staticWebsiteContent = await res.json();
-
-  return { props: { staticWebsiteContent } };
-} */

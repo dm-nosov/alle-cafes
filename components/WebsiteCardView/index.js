@@ -21,6 +21,10 @@ const StyledCardView = styled(StyledCard)`
   small {
     color: var(--editor-background);
   }
+  a,
+  a:visited {
+    color: var(--editor-background);
+  }
 `;
 
 export function WebsiteCardView({
@@ -73,7 +77,11 @@ export function WebsiteCardView({
           onClick={() => setShowActionsPopup(true)}
         />
         <p>{title}</p>
-        <small>/{slug}</small>
+
+        <Link href={`/public/${slug}`} target="_blank">
+          <small>/{slug}</small>
+        </Link>
+
         <Link href={`/admin/${websiteId}/edit`}>
           <Image
             src="/img/icons/pencil-square.svg"
@@ -91,7 +99,7 @@ export function WebsiteCardView({
       {showActionsPopup && (
         <PopupGeneral handleClosePopup={closePopup}>
           <PopupOption handleClick={() => changeCardAction(ACTION_EDIT)}>
-            Edit
+            Edit settings
           </PopupOption>
           <PopupOption
             $danger
