@@ -8,6 +8,10 @@ import { useRouter } from "next/router";
 import useSWR from "swr";
 import { fetcher } from "@/utils/fetcher";
 import { useEffect } from "react";
+import { ProductCategoryCard } from "@/components/ProductCategoryCard/index";
+import { categories, products } from "@/utils/productData";
+import { ACTION_VIEW } from "@/utils/websiteCard";
+import { cinzel } from "@/fonts";
 
 export default function Page() {
   const router = useRouter();
@@ -46,6 +50,15 @@ export default function Page() {
               data={data}
               isLoading={isLoading}
             />
+            <h2 className={cinzel.className}>Menu</h2>
+            {categories.map((category) => (
+              <ProductCategoryCard
+                categoryName={category.categoryName}
+                key={category.categoryId}
+                action={ACTION_VIEW}
+                products={products}
+              />
+            ))}
             <SectionEditor
               sectionName={SPECIAL}
               data={data}

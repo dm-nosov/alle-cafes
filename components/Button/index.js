@@ -9,7 +9,6 @@ import { Spinner } from "../Spinner";
 
 const StyledButton = styled.button`
   ${({ $variant }) => {
-    console.log("$variant", BUTTON_SECONDARY);
     switch ($variant) {
       case BUTTON_SECONDARY:
         return css`
