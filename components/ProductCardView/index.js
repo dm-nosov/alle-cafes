@@ -5,12 +5,17 @@ import { ACTION_EDIT } from "@/utils/websiteCard";
 import { PopupOption } from "../PopupOption";
 import { ButtonGroup } from "../ButtonGroup";
 import { BUTTON_DANGER } from "@/utils/button";
-import { SizeCup } from "../SizeCup";
+import { Cup } from "../Cup";
+import { formatPrice } from "@/utils/productData";
 
 const ProductGrid = styled.article`
   display: grid;
   grid-template-columns: 1fr repeat(3, 60px);
   margin-top: 1rem;
+  min-height: 4.5rem;
+  @media (max-width: 440px) {
+    min-height: 6rem;
+  }
 `;
 
 const ProductGroup = styled.div`
@@ -82,22 +87,35 @@ export function ProductCardView({ product }) {
         </ProductName>
         <ProductDescription>{product.description}</ProductDescription>
       </ProductGroup>
-      <PriceGroup>
-        <SizeCup cupSize="s" />
-        <Price>€3.50</Price>
-      </PriceGroup>
-      <PriceGroup>
-        <SizeCup cupSize="m" />
-        <PriceDiscountGroup>
-          <NewPrice>€4.20</NewPrice>
-          <OriginalPrice>€4.50</OriginalPrice>
-          <DiscountAmount>-20%</DiscountAmount>
-        </PriceDiscountGroup>
-      </PriceGroup>
-      <PriceGroup>
-        <SizeCup cupSize="l" />
-        <Price>€5.50</Price>
-      </PriceGroup>
+      {product.isMultiPrice &&
+        product.prices.map((price) => {
+          let priceGroupContent = null;
+          if (price.isDiscount) {
+            priceGroupContent = (
+              <>
+                <Cup size={price.portionType} />
+                <PriceDiscountGroup>
+                  <NewPrice>{formatPrice(price.discountPrice)}</NewPrice>
+                  <OriginalPrice>{formatPrice(price.price)}</OriginalPrice>
+                  <DiscountAmount>
+                    {Math.ceil(
+                      ((price.discountPrice - price.price) * 100) / price.price
+                    )}
+                    %
+                  </DiscountAmount>
+                </PriceDiscountGroup>
+              </>
+            );
+          } else {
+            priceGroupContent = (
+              <>
+                <Cup size={price.portionType} />
+                {price.price && <Price>{formatPrice(price.price)}</Price>}
+              </>
+            );
+          }
+          return <PriceGroup key={price.id}>{priceGroupContent}</PriceGroup>;
+        })}
     </ProductGrid>
   );
 }
