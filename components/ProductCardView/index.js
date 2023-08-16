@@ -24,7 +24,7 @@ const ProductGroup = styled.div`
   background-image: url(/img/icons/dot.svg);
   background-repeat-y: no-repeat;
   background-position-y: 0.4rem;
-  margin-top: 1.6rem;
+  margin-top: 1.4rem;
 `;
 
 const PriceGroup = styled.div`
