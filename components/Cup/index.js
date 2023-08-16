@@ -2,12 +2,13 @@ import { CUP_LARGE, CUP_MEDIUM, CUP_SMALL } from "@/utils/cupSize";
 import styled, { css } from "styled-components";
 
 const CupWrapper = styled.div`
-  height: 1.4rem;
-  width: 1.4rem;
+  height: 1.5rem;
+  width: 2rem;
   display: flex;
   align-items: end;
   align-self: center;
   margin-bottom: 0.2rem;
+  justify-content: center;
 `;
 
 const CupDiv = styled.div`
@@ -45,21 +46,21 @@ const CupDiv = styled.div`
           `;
         case CUP_MEDIUM:
           return css`
-            height: 0.9rem;
-            width: 1.2rem;
+            height: 1.2rem;
+            width: 1.5rem;
             svg {
-              height: 1.2rem;
-              width: 1.2rem;
+              height: 1.5rem;
+              width: 1.5rem;
               fill: var(--primary);
             }
           `;
         case CUP_LARGE:
           return css`
-            height: 1rem;
-            width: 1.4rem;
+            height: 1.5rem;
+            width: 2rem;
             svg {
-              height: 1.4rem;
-              width: 1.4rem;
+              height: 2rem;
+              width: 2rem;
               fill: var(--primary);
             }
           `;

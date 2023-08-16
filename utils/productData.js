@@ -12,14 +12,14 @@ export const products = [
     prices: [
       {
         portionType: "s",
-        price: 3,
+        price: null,
         isDiscount: false,
         discountPrice: 2.5,
         id: 1,
       },
       {
         portionType: "m",
-        price: 4,
+        price: null,
         isDiscount: false,
         discountPrice: 2.5,
         id: 2,

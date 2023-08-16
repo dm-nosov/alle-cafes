@@ -33,7 +33,7 @@ const PriceGroup = styled.div`
 
 const ProductName = styled.p`
   font-size: 1.2rem;
-  font-weight: 300;
+  font-weight: 500;
   padding: 0;
   margin: 0;
   span {
@@ -111,6 +111,7 @@ export function ProductCardView({ product }) {
               <>
                 <Cup size={price.portionType} />
                 {price.price && <Price>{formatPrice(price.price)}</Price>}
+                {!price.price && <Price> — </Price>}
               </>
             );
           }
