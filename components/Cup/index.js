@@ -1,9 +1,9 @@
-import { CUP_LARGE, CUP_MEDIUM, CUP_SMALL } from "@/utils/cupSize";
+import { CUP_EMPTY, CUP_LARGE, CUP_MEDIUM, CUP_SMALL } from "@/utils/cupSize";
 import styled, { css } from "styled-components";
 
 const CupWrapper = styled.div`
   height: 1.5rem;
-  width: 2rem;
+  width: 100%;
   display: flex;
   align-items: end;
   align-self: center;
@@ -34,6 +34,16 @@ const CupDiv = styled.div`
   }
     ${({ $size }) => {
       switch ($size) {
+        case CUP_EMPTY:
+          return css`
+            height: 0.8rem;
+            width: 1rem;
+            svg {
+              height: 1rem;
+              width: 1rem;
+              display: none;
+            }
+          `;
         case CUP_SMALL:
           return css`
             height: 0.8rem;
