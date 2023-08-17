@@ -8,6 +8,7 @@ export function PriceDiscountInput({
   initialDiscount,
   isDiscount,
   errors,
+  priceOption = null,
 }) {
   const [showDiscount, setShowDiscount] = useState(isDiscount);
 
@@ -15,19 +16,21 @@ export function PriceDiscountInput({
     setShowDiscount(isChecked);
   }
 
+  const errorSource = priceOption ? errors?.priceOption : errors;
+
   return (
     <>
-      <label htmlFor="price">Price</label>
+      <label htmlFor={`price${priceOption}`}>Price</label>
       <Input
         type="number"
-        name="price"
-        id="price"
+        name={`price__${priceOption}`}
+        id={`price__${priceOption}`}
         defaultValue={initialPrice}
-        $error={errors?.price ? true : false}
+        $error={errorSource?.price ? true : false}
       />
-      <FormErrorText>{errors?.price?.message}</FormErrorText>
+      <FormErrorText>{errorSource?.price?.message}</FormErrorText>
       <Checkbox
-        checkboxName="isDiscount"
+        checkboxName={`isDiscount__${priceOption}`}
         labelText="Discount"
         description="Check if you want to apply a discount"
         isInitChecked={isDiscount}
@@ -38,12 +41,12 @@ export function PriceDiscountInput({
           <label htmlFor="discountPrice">Discount</label>
           <Input
             type="number"
-            name="discountPrice"
-            id="discountPrice"
+            name={`discountPrice__${priceOption}`}
+            id={`discountPrice__${priceOption}`}
             defaultValue={initialDiscount}
-            $error={errors?.discountPrice ? true : false}
+            $error={errorSource?.discountPrice ? true : false}
           />
-          <FormErrorText>{errors?.price?.message}</FormErrorText>
+          <FormErrorText>{errorSource?.discountPrice?.message}</FormErrorText>
         </>
       )}
     </>

@@ -11,7 +11,9 @@ export function PriceOptionDiscountInput({ children, priceOption }) {
   return (
     <>
       <StyledFieldSet>
-        <legend>Price Option &quot;{priceOption}&quot;</legend>
+        <legend>
+          Price Option <strong>&quot;{priceOption.toUpperCase()}&quot;</strong>
+        </legend>
         {children}
       </StyledFieldSet>
     </>

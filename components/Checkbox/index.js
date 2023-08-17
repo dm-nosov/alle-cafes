@@ -38,7 +38,9 @@ const StyledCheckbox = styled.div`
        ? css`
            &:before {
              left: 36px;
-             content: "✔️";
+             content: url(/img/icons/check.svg);
+             padding-left: 4px;
+             padding-top: 4px;
            }
            input {
              left: 28px;
@@ -78,8 +80,8 @@ export function Checkbox({
           id={checkboxName}
           name={checkboxName}
           type="checkbox"
-          checked={isChecked}
-          onChange={() => {}}
+          checked
+          value={isChecked}
         />
       </StyledCheckbox>
     </StyledWrapper>

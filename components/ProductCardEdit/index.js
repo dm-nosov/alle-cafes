@@ -8,6 +8,7 @@ import { StyledCardEdit } from "../StyledCardEdit";
 import { Checkbox } from "../Checkbox";
 import { PriceDiscountInput } from "../PriceDiscountInput";
 import { PriceOptionDiscountInput } from "../PriceOptionDiscountInput";
+import { CUP_LARGE, CUP_MEDIUM } from "@/utils/cupSize";
 
 export function ProductCardEdit({ product, changeCardAction }) {
   const firstInputRef = useRef(null);
@@ -31,7 +32,12 @@ export function ProductCardEdit({ product, changeCardAction }) {
       text: "Update",
       id: 2,
       actionType: BUTTON_PRIMARY,
-      handleClick: () => {},
+      handleClick: () => {
+        console.log(
+          "Form data",
+          Object.fromEntries(new FormData(formRef.current))
+        );
+      },
     },
   ];
 
@@ -68,21 +74,23 @@ export function ProductCardEdit({ product, changeCardAction }) {
             labelText="Multi-price"
             description="Specify if you want to use S, M, L prices for this product"
           />
-          <PriceOptionDiscountInput priceOption="M">
+          <PriceOptionDiscountInput priceOption={CUP_MEDIUM}>
             <PriceDiscountInput
               initialPrice={product.price}
               initialDiscount={product.discountPrice}
               isDiscount={product.isDiscount}
+              priceOption={CUP_MEDIUM}
               errors={errors}
             />
           </PriceOptionDiscountInput>
 
-          <PriceOptionDiscountInput priceOption="L">
+          <PriceOptionDiscountInput priceOption={CUP_LARGE}>
             <PriceDiscountInput
               initialPrice={product.price}
               initialDiscount={product.discountPrice}
               isDiscount={product.isDiscount}
               errors={errors}
+              priceOption={CUP_LARGE}
             />
           </PriceOptionDiscountInput>
 
