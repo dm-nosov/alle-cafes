@@ -39,8 +39,10 @@ const StyledCheckbox = styled.div`
            &:before {
              left: 36px;
              content: url(/img/icons/check.svg);
-             padding-left: 4px;
-             padding-top: 4px;
+             border: 3px solid var(--primary);
+             box-shadow: none;
+             padding-left: 1px;
+             padding-top: 1px;
            }
            input {
              left: 28px;

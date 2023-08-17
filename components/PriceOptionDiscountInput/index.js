@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const StyledFieldSet = styled.fieldset`
-  border: 1px solid var(--editor-background);
+  border: 3px solid var(--secondary);
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;

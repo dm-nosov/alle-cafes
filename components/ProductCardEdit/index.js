@@ -72,7 +72,7 @@ export function ProductCardEdit({ product, changeCardAction }) {
           <Checkbox
             checkboxName="isMultiProduct"
             labelText="Multi-price"
-            description="Specify if you want to use S, M, L prices for this product"
+            description="Check if you want to use S, M, L prices for this product"
           />
           <PriceOptionDiscountInput priceOption={CUP_MEDIUM}>
             <PriceDiscountInput
