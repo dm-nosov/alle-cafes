@@ -18,11 +18,9 @@ export function ProductCategoryCardView({
   children,
 }) {
   return (
-    <>
-      <ProductCategory>
-        <h3 className={cinzel.className}>{categoryName}</h3>
-        {children}
-      </ProductCategory>
-    </>
+    <ProductCategory>
+      <h3 className={cinzel.className}>{categoryName}</h3>
+      {children}
+    </ProductCategory>
   );
 }

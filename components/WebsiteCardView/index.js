@@ -2,22 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import styled from "styled-components";
-import { StyledCard } from "../StyledCard/index";
 import { PopupGeneral } from "../PopupGeneral";
 import { ACTION_EDIT } from "@/utils/websiteCard";
 import { PopupOption } from "../PopupOption";
 import { ButtonGroup } from "../ButtonGroup";
 import { BUTTON_DANGER } from "@/utils/button";
 import { removeWebsite } from "@/api-facade/website";
-
-const StyledCardView = styled(StyledCard)`
-  img:active {
-    background-color: #d0d0d09f;
-    border-radius: 12px;
-    transition: background-color 1.5s ease;
-    transform: scale(1.2);
-  }
-`;
+import { StyledCardView } from "../StyledCardView";
 
 const PublicLink = styled(Link)`
   &,

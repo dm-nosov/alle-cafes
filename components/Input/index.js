@@ -1,7 +1,8 @@
 import styled from "styled-components";
 
 export const Input = styled.input`
-  &[type="text"] {
+  &[type="text"],
+  &[type="number"] {
     border-top: 0;
     border-left: 0;
     border-right: 0;
@@ -11,7 +12,8 @@ export const Input = styled.input`
     margin-bottom: 0.5rem;
   }
 
-  &[type="text"]:focus-visible {
+  &[type="text"]:focus-visible,
+  &[type="number"]:focus-visible {
     outline: none;
   }
 `;

@@ -122,7 +122,7 @@ export const products = [
     name: "French bread",
     description: "Serves with butter and wasps",
     isMultiPrice: false,
-    isDiscount: false,
+    isDiscount: true,
     price: 1.99,
     discountPrice: 0,
     prices: [],

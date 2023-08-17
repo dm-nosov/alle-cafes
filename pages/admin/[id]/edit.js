@@ -10,7 +10,7 @@ import { fetcher } from "@/utils/fetcher";
 import { useEffect } from "react";
 import { ProductCategoryCard } from "@/components/ProductCategoryCard/index";
 import { categories, products } from "@/utils/productData";
-import { ACTION_VIEW } from "@/utils/websiteCard";
+import { ACTION_EDIT, ACTION_VIEW } from "@/utils/websiteCard";
 import { cinzel } from "@/fonts";
 
 export default function Page() {
@@ -55,7 +55,7 @@ export default function Page() {
               <ProductCategoryCard
                 categoryName={category.categoryName}
                 key={category.categoryId}
-                action={ACTION_VIEW}
+                action={ACTION_EDIT}
                 products={products}
               />
             ))}

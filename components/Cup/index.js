@@ -12,8 +12,6 @@ const CupWrapper = styled.div`
 `;
 
 const CupDiv = styled.div`
-
-
   font-variant: small-caps;
   display: flex;
   align-items: end;

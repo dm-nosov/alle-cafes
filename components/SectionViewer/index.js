@@ -6,6 +6,10 @@ import {
   SPECIAL,
   getTitleBySectionName,
 } from "@/utils/content";
+import { ProductCategoryCard } from "../ProductCategoryCard";
+import { cinzel } from "@/fonts";
+import { categories, products } from "@/utils/productData";
+import { ACTION_VIEW } from "@/utils/websiteCard";
 export function SectionViewer() {
   const websiteContent = useWebsiteContentStore((state) => state.content);
   return (
@@ -14,6 +18,15 @@ export function SectionViewer() {
         title={getTitleBySectionName(ABOUT)}
         content={websiteContent[ABOUT].html}
       />
+      <h2 className={cinzel.className}>Menu</h2>
+      {categories.map((category) => (
+        <ProductCategoryCard
+          categoryName={category.categoryName}
+          key={category.categoryId}
+          action={ACTION_VIEW}
+          products={products}
+        />
+      ))}
       <SectionPreview
         title={getTitleBySectionName(SPECIAL)}
         content={websiteContent[SPECIAL].html}

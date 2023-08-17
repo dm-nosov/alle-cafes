@@ -1,72 +1,140 @@
 import styled from "styled-components";
 import { Cup } from "../Cup";
-import { ProductGroup } from "../ProductGroup";
 import { PriceGroup } from "../PriceGroup";
 import { ProductName } from "../ProductName";
 import { ProductDescription } from "../ProductDescription";
 import { PriceDiscountGroup } from "../PriceDiscountGroup";
 import { OptionalPrice } from "../OptionalPrice";
+import { StyledCardView } from "../StyledCardView";
+import Image from "next/image";
+import { useState } from "react";
+import { PopupGeneral } from "../PopupGeneral";
+import { PopupOption } from "../PopupOption";
+import { ButtonGroup } from "../ButtonGroup";
+import { BUTTON_DANGER } from "@/utils/button";
+import { ACTION_EDIT } from "@/utils/websiteCard";
 
-const ProductGrid = styled.article`
-  display: grid;
-  grid-template-columns: 1fr repeat(
-      ${({ $isMultiPrice }) => ($isMultiPrice ? "3" : "1")},
-      60px
-    );
-  margin-top: 1rem;
-  min-height: 4.5rem;
-  @media (max-width: 440px) {
-    min-height: 6rem;
-  }
+const HorizontalPriceRow = styled.div`
+  display: flex;
+  gap: 1rem;
 `;
 
-export function ProductCardView({ product }) {
+export function ProductCardView({ product, changeCardAction }) {
+  const [showActionsPopup, setShowActionsPopup] = useState(false);
+  const [showRemovePopup, setShowRemovePopup] = useState(false);
+
+  function closePopup() {
+    setShowActionsPopup(false);
+    setShowRemovePopup(false);
+  }
+
+  const removePopupButtons = [
+    {
+      text: "Cancel",
+      id: 1,
+      handleClick: () => {
+        closePopup();
+      },
+    },
+    {
+      text: "Remove",
+      id: 2,
+      actionType: BUTTON_DANGER,
+      handleClick: async () => {
+        await removeWebsite(websiteId);
+        mutate();
+        closePopup();
+      },
+    },
+  ];
+
   return (
-    <ProductGrid $isMultiPrice={product.isMultiPrice}>
-      <ProductGroup>
+    <>
+      <StyledCardView>
+        <Image
+          src="/img/icons/three-dots-vertical.svg"
+          alt=""
+          width={24}
+          height={24}
+          style={{
+            position: "absolute",
+            right: "12px",
+          }}
+          onClick={() => setShowActionsPopup(true)}
+        />
+
         <ProductName>
           <span>{product.name}</span>
         </ProductName>
         <ProductDescription>{product.description}</ProductDescription>
-      </ProductGroup>
-      {product.isMultiPrice &&
-        product.prices.map((price) => {
-          let priceGroupContent = null;
-          if (price.isDiscount) {
-            priceGroupContent = (
-              <>
-                <Cup size={price.portionType} />
-                <PriceDiscountGroup
-                  price={price.price}
-                  discountPrice={price.discountPrice}
-                />
-              </>
-            );
-          } else {
-            priceGroupContent = (
-              <>
-                <Cup size={price.portionType} />
-                <OptionalPrice price={price.price} />
-              </>
-            );
-          }
-          return <PriceGroup key={price.id}>{priceGroupContent}</PriceGroup>;
-        })}
-      {!product.isMultiPrice && product.isDiscount && (
-        <PriceGroup>
-          <Cup size={null} />
-          <PriceDiscountGroup
-            price={product.price}
-            discountPrice={product.discountPrice}
-          />
-        </PriceGroup>
+
+        <HorizontalPriceRow>
+          {product.isMultiPrice &&
+            product.prices.map((price) => {
+              let priceGroupContent = null;
+              if (price.isDiscount) {
+                priceGroupContent = (
+                  <>
+                    <Cup size={price.portionType} />
+                    <PriceDiscountGroup
+                      price={price.price}
+                      discountPrice={price.discountPrice}
+                    />
+                  </>
+                );
+              } else {
+                priceGroupContent = (
+                  <>
+                    <Cup size={price.portionType} />
+                    <OptionalPrice price={price.price} />
+                  </>
+                );
+              }
+              return (
+                <PriceGroup key={price.id}>{priceGroupContent}</PriceGroup>
+              );
+            })}
+          {!product.isMultiPrice && product.isDiscount && (
+            <PriceGroup>
+              <Cup size={null} />
+              <PriceDiscountGroup
+                price={product.price}
+                discountPrice={product.discountPrice}
+              />
+            </PriceGroup>
+          )}
+          {!product.isMultiPrice && !product.isDiscount && (
+            <PriceGroup>
+              <Cup size={null} />
+              <OptionalPrice price={product.price} />
+            </PriceGroup>
+          )}
+        </HorizontalPriceRow>
+      </StyledCardView>
+      {showActionsPopup && (
+        <PopupGeneral handleClosePopup={closePopup}>
+          <PopupOption handleClick={() => changeCardAction(ACTION_EDIT)}>
+            Edit
+          </PopupOption>
+          <PopupOption
+            danger
+            handleClick={() => {
+              closePopup();
+              setShowRemovePopup(true);
+            }}
+          >
+            Remove
+          </PopupOption>
+        </PopupGeneral>
       )}
-      {!product.isMultiPrice && !product.isDiscount && (
-        <PriceGroup>
-          <Cup size={null} />
-          <OptionalPrice price={product.price} />
-        </PriceGroup>
+      {showRemovePopup && (
+        <PopupGeneral handleClosePopup={closePopup}>
+          <p>
+            Are you sure you want to remove <strong>{product.name}</strong>?
+          </p>
+          <ButtonGroup buttons={removePopupButtons} />
+        </PopupGeneral>
       )}
-    </ProductGrid>
+    </>
   );
 }
