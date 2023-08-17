@@ -9,7 +9,10 @@ import { OptionalPrice } from "../OptionalPrice";
 
 const ProductGrid = styled.article`
   display: grid;
-  grid-template-columns: 1fr repeat(3, 60px);
+  grid-template-columns: 1fr repeat(
+      ${({ $isMultiPrice }) => ($isMultiPrice ? "3" : "1")},
+      60px
+    );
   margin-top: 1rem;
   min-height: 4.5rem;
   @media (max-width: 440px) {
@@ -19,7 +22,7 @@ const ProductGrid = styled.article`
 
 export function ProductCardView({ product }) {
   return (
-    <ProductGrid>
+    <ProductGrid $isMultiPrice={product.isMultiPrice}>
       <ProductGroup>
         <ProductName>
           <span>{product.name}</span>

@@ -12,7 +12,7 @@ export const products = [
     prices: [
       {
         portionType: "s",
-        price: null,
+        price: 1,
         isDiscount: false,
         discountPrice: 2.5,
         id: 1,
@@ -36,7 +36,7 @@ export const products = [
   {
     id: 1002,
     name: "Hommade lemonade",
-    description: "",
+    description: "A brief description follows",
     isMultiPrice: true,
     isDiscount: false,
     price: 0,
