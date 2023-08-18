@@ -1,5 +1,10 @@
 import { useState } from "react";
-import { ACTION_EDIT, ACTION_VIEW, ACTION_ADD } from "@/utils/websiteCard";
+import {
+  ACTION_EDIT,
+  ACTION_VIEW,
+  ACTION_ADD,
+  ACTION_PREVIEW,
+} from "@/utils/websiteCard";
 import { ProductCategoryCardView } from "../ProductCategoryCardView";
 import { ProductCard } from "../ProductCard";
 
@@ -15,6 +20,23 @@ export function ProductCategoryCard({
 
   switch (cardAction) {
     case ACTION_VIEW:
+      cardView = (
+        <ProductCategoryCardView
+          categoryName={categoryName}
+          categoryId={categoryId}
+          changeCardAction={setCardAction}
+        >
+          {products.map((product) => (
+            <ProductCard
+              product={product}
+              action={ACTION_PREVIEW}
+              key={product.id}
+            />
+          ))}
+        </ProductCategoryCardView>
+      );
+      break;
+    case ACTION_EDIT:
       cardView = (
         <ProductCategoryCardView
           categoryName={categoryName}

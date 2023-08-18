@@ -54,6 +54,7 @@ export function Button({
   groupLoading = 0,
   setGroupLoading = null,
   groupId = 0,
+  isDisabled = false,
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -78,7 +79,7 @@ export function Button({
       <StyledButton
         onClick={onClick}
         type={isSubmit ? "submit" : "button"}
-        disabled={!groupState ? loading : groupLoading > 0}
+        disabled={!groupState ? loading || isDisabled : groupLoading > 0}
         $variant={actionType}
       >
         {(!groupState && loading) ||

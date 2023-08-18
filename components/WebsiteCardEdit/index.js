@@ -1,33 +1,11 @@
 import { useRef, useState, useEffect } from "react";
-import { StyledCard } from "../StyledCard/index";
-import styled from "styled-components";
 import { ACTION_ADD, ACTION_VIEW } from "@/utils/websiteCard";
 import { BUTTON_PRIMARY } from "@/utils/button";
 import { updateWebsiteSettings, createWebsite } from "@/api-facade/website";
 import { ButtonGroup } from "../ButtonGroup";
 import { FormErrorText } from "../FormErrorText/index";
 import { Input } from "../Input";
-
-const StyledCardEdit = styled(StyledCard)`
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  menu {
-    list-style-type: none;
-    display: flex;
-    gap: 2rem;
-    justify-content: end;
-  }
-
-  label {
-    font-size: x-small;
-    margin-bottom: 0.5rem;
-    margin-left: 2px;
-  }
-  input[type="text"].error {
-  }
-`;
+import { StyledCardEdit } from "../StyledCardEdit";
 
 export function WebsiteCardEdit({
   title,

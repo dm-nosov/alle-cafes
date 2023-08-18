@@ -1,16 +1,23 @@
 import { saveContent } from "@/api-facade/editor-content";
 import { useWebsiteContentStore } from "@/store/WebsiteContent";
 import styled from "styled-components";
+import { Button } from "../Button";
+import { BUTTON_PRIMARY } from "@/utils/button";
 
 const StyledNav = styled.nav`
-  background-color: var(--secondary);
+  background-color: rgba(255, 255, 255, 0.3);
   height: 50px;
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  backdrop-filter: blur(10px);
   & button {
     margin: 0 1rem;
   }
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 3;
 `;
 
 export function TopAdminToolbar({ websiteId }) {
@@ -20,13 +27,13 @@ export function TopAdminToolbar({ websiteId }) {
 
   return (
     <StyledNav>
-      <button onClick={togglePreview} disabled={preview}>
-        Preview
-      </button>
-      <button onClick={togglePreview} disabled={!preview}>
-        Edit
-      </button>
-      <button onClick={() => saveContent(websiteId, content)}>Save</button>
+      <Button text="Preview" handleClick={togglePreview} isDisabled={preview} />
+      <Button text="Edit" handleClick={togglePreview} isDisabled={!preview} />
+      <Button
+        text="Save"
+        actionType={BUTTON_PRIMARY}
+        handleClick={() => saveContent(websiteId, content)}
+      />
     </StyledNav>
   );
 }

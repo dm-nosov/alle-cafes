@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/Navigation";
 import { Skeleton } from "@/components/Skeleton";
 import { WebsiteCard } from "@/components/WebsiteCard";
+import { useWebsiteContentStore } from "@/store/WebsiteContent";
 import { fetcher } from "@/utils/fetcher";
 import { ACTION_VIEW, ACTION_ADD } from "@/utils/websiteCard";
 import { useSession } from "next-auth/react";
@@ -12,6 +13,11 @@ export default function Page() {
   const { data: session } = useSession();
   const { data, isLoading, error, mutate } = useSWR(`/api/ws/`, fetcher);
   const router = useRouter();
+  const resetContent = useWebsiteContentStore((state) => state.resetContent);
+
+  useEffect(() => {
+    resetContent();
+  }, []);
 
   useEffect(() => {
     if (!session && typeof session != "undefined") {
