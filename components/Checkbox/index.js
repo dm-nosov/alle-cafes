@@ -83,6 +83,7 @@ export function Checkbox({
           name={checkboxName}
           type="checkbox"
           checked
+          onChange={() => {}}
           value={isChecked}
         />
       </StyledCheckbox>
