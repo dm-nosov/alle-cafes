@@ -17,20 +17,21 @@ export function PriceDiscountInput({
   }
 
   const errorSource = priceOption ? errors?.priceOption : errors;
+  const namePostfix = priceOption ? `__${priceOption}` : "";
 
   return (
     <>
       <label htmlFor={`price${priceOption}`}>Original price</label>
       <Input
         type="number"
-        name={`price__${priceOption}`}
-        id={`price__${priceOption}`}
+        name={`price${namePostfix}`}
+        id={`price${namePostfix}`}
         defaultValue={initialPrice}
         $error={errorSource?.price ? true : false}
       />
       <FormErrorText>{errorSource?.price?.message}</FormErrorText>
       <Checkbox
-        checkboxName={`isDiscount__${priceOption}`}
+        checkboxName={`isDiscounted${namePostfix}`}
         labelText="Discount"
         description="Check if you want to apply a discount"
         isInitChecked={isDiscounted}
@@ -41,8 +42,8 @@ export function PriceDiscountInput({
           <label htmlFor="discountPrice">New price</label>
           <Input
             type="number"
-            name={`discountPrice__${priceOption}`}
-            id={`discountPrice__${priceOption}`}
+            name={`discountPrice${namePostfix}`}
+            id={`discountPrice${namePostfix}`}
             defaultValue={initialDiscount}
             $error={errorSource?.discountPrice ? true : false}
           />

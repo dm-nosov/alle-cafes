@@ -10,12 +10,15 @@ import { PriceDiscountInput } from "../PriceDiscountInput";
 import { PriceOptionDiscountInput } from "../PriceOptionDiscountInput";
 import { CUP_EMPTY, CUP_LARGE, CUP_MEDIUM, CUP_SMALL } from "@/utils/cupSize";
 import { productTemplate } from "@/utils/productData";
+import { updateProduct } from "@/api-facade/product";
+import { useWebsiteContentStore } from "@/store/WebsiteContent";
 
 export function ProductCardEdit({ product, changeCardAction }) {
   const firstInputRef = useRef(null);
   const formRef = useRef(null);
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(null);
   const [multiPriceInput, setMultiPriceInput] = useState(product.isMultiPrice);
+  const websiteId = useWebsiteContentStore((state) => state.websiteId);
 
   useEffect(() => {
     firstInputRef.current.focus();
@@ -37,7 +40,9 @@ export function ProductCardEdit({ product, changeCardAction }) {
         const processedData = processFormDataToProduct(
           Object.fromEntries(new FormData(formRef.current))
         );
-        updateProduct("64df22ba868b23750714db67", processedData);
+        console.log(Object.fromEntries(new FormData(formRef.current)));
+        console.log(processedData);
+        updateProduct(websiteId, "64df22ba868b23750714db67", processedData);
       },
     },
   ];
@@ -59,8 +64,8 @@ export function ProductCardEdit({ product, changeCardAction }) {
       priceOptionObject["discountPrice"] = getNullableValue(
         formData[`discountPrice__${optionName}`]
       );
-      priceOptionObject["isDiscount"] = getBool(
-        formData[`isDiscount__${optionName}`]
+      priceOptionObject["isDiscounted"] = getBool(
+        formData[`isDiscounted__${optionName}`]
       );
       return priceOptionObject;
     }
@@ -69,9 +74,9 @@ export function ProductCardEdit({ product, changeCardAction }) {
     product.prices = productTemplate.prices.slice();
     product["name"] = formData["name"];
     product["description"] = formData["description"];
-    product["isMultiProduct"] = getBool(formData["isMultiProduct"]);
-    if (!product.isMultiProduct) {
-      product["isDiscount"] = getBool(formData["isDiscount"]);
+    product["isMultiPrice"] = getBool(formData["isMultiPrice"]);
+    if (!product.isMultiPrice) {
+      product["isDiscounted"] = getBool(formData["isDiscounted"]);
       product["price"] = getNullableValue(formData["price"]);
       product["discountPrice"] = getNullableValue(formData["discountPrice"]);
     } else {
@@ -91,7 +96,7 @@ export function ProductCardEdit({ product, changeCardAction }) {
         <PriceDiscountInput
           initialPrice={priceOptionGroup.price}
           initialDiscount={priceOptionGroup.discountPrice}
-          isDiscounted={priceOptionGroup.isDiscount}
+          isDiscounted={priceOptionGroup.isDiscounted}
           priceOption={priceOption}
           errors={errors}
         />
@@ -128,7 +133,7 @@ export function ProductCardEdit({ product, changeCardAction }) {
           />
           <FormErrorText>{errors?.description?.message}</FormErrorText>
           <Checkbox
-            checkboxName="isMultiProduct"
+            checkboxName="isMultiPrice"
             labelText="Multi-price"
             description="Check if you want to use S, M, L prices for this product"
             handleCheck={() => setMultiPriceInput(!multiPriceInput)}
@@ -144,7 +149,7 @@ export function ProductCardEdit({ product, changeCardAction }) {
             <PriceDiscountInput
               initialPrice={product.price}
               initialDiscount={product.discountPrice}
-              isDiscounted={product.isDiscount}
+              isDiscounted={product.isDiscounted}
               priceOption={CUP_EMPTY}
               errors={errors}
             />

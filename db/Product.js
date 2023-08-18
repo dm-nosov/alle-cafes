@@ -16,7 +16,7 @@ const priceOptionSchema = new Schema({
     type: Number,
     min: [0, "A discounted price must be a non-negative number"],
   },
-  isDiscount: {
+  isDiscounted: {
     type: Boolean,
     required: true,
   },
@@ -35,7 +35,7 @@ const productSchema = new Schema({
     type: Boolean,
     required: true,
   },
-  isDiscount: {
+  isDiscounted: {
     type: Boolean,
     required: true,
   },

@@ -32,7 +32,7 @@ export function ProductCardPreview({ product }) {
       {product.isMultiPrice &&
         product.prices.map((price) => {
           let priceGroupContent = null;
-          if (price.isDiscount) {
+          if (price.isDiscounted) {
             priceGroupContent = (
               <>
                 <Cup size={price.portionType} />
@@ -52,7 +52,7 @@ export function ProductCardPreview({ product }) {
           }
           return <PriceGroup key={price.id}>{priceGroupContent}</PriceGroup>;
         })}
-      {!product.isMultiPrice && product.isDiscount && (
+      {!product.isMultiPrice && product.isDiscounted && (
         <PriceGroup>
           <Cup size={null} />
           <PriceDiscountGroup
@@ -61,7 +61,7 @@ export function ProductCardPreview({ product }) {
           />
         </PriceGroup>
       )}
-      {!product.isMultiPrice && !product.isDiscount && (
+      {!product.isMultiPrice && !product.isDiscounted && (
         <PriceGroup>
           <Cup size={null} />
           <OptionalPrice price={product.price} />

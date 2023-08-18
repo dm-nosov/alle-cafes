@@ -5,7 +5,7 @@ import { devtools } from "zustand/middleware";
 export const useWebsiteContentStore = create(
   devtools((set) => ({
     isPreview: false,
-    websiteId: "64cb80bd20e44f875166aed3",
+    websiteId: "",
     content: {
       about: { json: null, html: "" },
       special: { json: null, html: "" },
@@ -27,6 +27,26 @@ export const useWebsiteContentStore = create(
         }),
         false,
         "websiteContent/togglePreview"
+      ),
+    setWebsiteId: (newWebsiteId) =>
+      set(
+        () => ({
+          websiteId: newWebsiteId,
+        }),
+        false,
+        "websiteContent/setWebsiteId"
+      ),
+    resetContent: () =>
+      set(
+        {
+          content: {
+            about: { json: null, html: "" },
+            special: { json: null, html: "" },
+            hours: { json: null, html: "" },
+          },
+        },
+        false,
+        "websiteContent/resetContent"
       ),
   }))
 );

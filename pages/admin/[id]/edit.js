@@ -19,6 +19,8 @@ export default function Page() {
   const preview = useWebsiteContentStore((state) => state.isPreview);
 
   const updateSection = useWebsiteContentStore((state) => state.updateSection);
+  const setWebsiteId = useWebsiteContentStore((state) => state.setWebsiteId);
+
   const { data, isLoading } = useSWR(
     `/api/ws/${websiteId}/editor-content`,
     fetcher
@@ -26,6 +28,7 @@ export default function Page() {
 
   useEffect(() => {
     if (data) {
+      setWebsiteId(websiteId);
       for (const sectionName of [ABOUT, SPECIAL, OPENING_HOURS]) {
         if (data[sectionName]) {
           updateSection(

@@ -72,7 +72,7 @@ export function ProductCardView({ product, changeCardAction }) {
           {product.isMultiPrice &&
             product.prices.map((price) => {
               let priceGroupContent = null;
-              if (price.isDiscount) {
+              if (price.isDiscounted) {
                 priceGroupContent = (
                   <>
                     <Cup size={price.portionType} />
@@ -94,7 +94,7 @@ export function ProductCardView({ product, changeCardAction }) {
                 <PriceGroup key={price.id}>{priceGroupContent}</PriceGroup>
               );
             })}
-          {!product.isMultiPrice && product.isDiscount && (
+          {!product.isMultiPrice && product.isDiscounted && (
             <PriceGroup>
               <Cup size={null} />
               <PriceDiscountGroup
@@ -103,7 +103,7 @@ export function ProductCardView({ product, changeCardAction }) {
               />
             </PriceGroup>
           )}
-          {!product.isMultiPrice && !product.isDiscount && (
+          {!product.isMultiPrice && !product.isDiscounted && (
             <PriceGroup>
               <Cup size={null} />
               <OptionalPrice price={product.price} />
