@@ -8,13 +8,13 @@ import { StyledCardEdit } from "../StyledCardEdit";
 import { Checkbox } from "../Checkbox";
 import { PriceDiscountInput } from "../PriceDiscountInput";
 import { PriceOptionDiscountInput } from "../PriceOptionDiscountInput";
-import { CUP_LARGE, CUP_MEDIUM } from "@/utils/cupSize";
+import { CUP_EMPTY, CUP_LARGE, CUP_MEDIUM, CUP_SMALL } from "@/utils/cupSize";
 
 export function ProductCardEdit({ product, changeCardAction }) {
   const firstInputRef = useRef(null);
   const formRef = useRef(null);
-
   const [errors, setErrors] = useState(null);
+  const [multiPriceInput, setMultiPriceInput] = useState(product.isMultiPrice);
 
   useEffect(() => {
     firstInputRef.current.focus();
@@ -40,6 +40,23 @@ export function ProductCardEdit({ product, changeCardAction }) {
       },
     },
   ];
+
+  function getDiscountInputByPriceOption(priceOption, product) {
+    const priceOptionGroup = product.prices.find(
+      (item) => item.portionType === priceOption
+    );
+    return (
+      <PriceOptionDiscountInput priceOption={priceOption} key={priceOption}>
+        <PriceDiscountInput
+          initialPrice={priceOptionGroup.price}
+          initialDiscount={priceOptionGroup.discountPrice}
+          isDiscount={priceOptionGroup.isDiscount}
+          priceOption={priceOption}
+          errors={errors}
+        />
+      </PriceOptionDiscountInput>
+    );
+  }
 
   return (
     <>
@@ -73,26 +90,24 @@ export function ProductCardEdit({ product, changeCardAction }) {
             checkboxName="isMultiProduct"
             labelText="Multi-price"
             description="Check if you want to use S, M, L prices for this product"
+            handleCheck={() => setMultiPriceInput(!multiPriceInput)}
+            isInitChecked={product.isMultiPrice}
           />
-          <PriceOptionDiscountInput priceOption={CUP_MEDIUM}>
-            <PriceDiscountInput
-              initialPrice={product.price}
-              initialDiscount={product.discountPrice}
-              isDiscount={product.isDiscount}
-              priceOption={CUP_MEDIUM}
-              errors={errors}
-            />
-          </PriceOptionDiscountInput>
 
-          <PriceOptionDiscountInput priceOption={CUP_LARGE}>
+          {multiPriceInput &&
+            [CUP_SMALL, CUP_MEDIUM, CUP_LARGE].map((item) =>
+              getDiscountInputByPriceOption(item, product)
+            )}
+
+          {!multiPriceInput && (
             <PriceDiscountInput
               initialPrice={product.price}
               initialDiscount={product.discountPrice}
               isDiscount={product.isDiscount}
+              priceOption={CUP_EMPTY}
               errors={errors}
-              priceOption={CUP_LARGE}
             />
-          </PriceOptionDiscountInput>
+          )}
 
           <ButtonGroup buttons={buttons} />
         </form>

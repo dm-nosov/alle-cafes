@@ -20,7 +20,7 @@ export function PriceDiscountInput({
 
   return (
     <>
-      <label htmlFor={`price${priceOption}`}>Price</label>
+      <label htmlFor={`price${priceOption}`}>Original price</label>
       <Input
         type="number"
         name={`price__${priceOption}`}
@@ -38,7 +38,7 @@ export function PriceDiscountInput({
       />
       {showDiscount && (
         <>
-          <label htmlFor="discountPrice">Discount</label>
+          <label htmlFor="discountPrice">New price</label>
           <Input
             type="number"
             name={`discountPrice__${priceOption}`}

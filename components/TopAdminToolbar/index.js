@@ -10,6 +10,7 @@ const StyledNav = styled.nav`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  backdrop-filter: blur(10px);
   & button {
     margin: 0 1rem;
   }
