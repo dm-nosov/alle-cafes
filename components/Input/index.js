@@ -3,9 +3,7 @@ import styled from "styled-components";
 export const Input = styled.input`
   &[type="text"],
   &[type="number"] {
-    border-top: 0;
-    border-left: 0;
-    border-right: 0;
+    border: none;
     border-bottom: 1px solid
       ${({ $error }) => ($error ? "var(--danger)" : "var(--editor-background)")};
     font-size: 1rem;

@@ -9,11 +9,12 @@ import { Checkbox } from "../Checkbox";
 import { PriceDiscountInput } from "../PriceDiscountInput";
 import { PriceOptionDiscountInput } from "../PriceOptionDiscountInput";
 import { CUP_EMPTY, CUP_LARGE, CUP_MEDIUM, CUP_SMALL } from "@/utils/cupSize";
+import { productTemplate } from "@/utils/productData";
 
 export function ProductCardEdit({ product, changeCardAction }) {
   const firstInputRef = useRef(null);
   const formRef = useRef(null);
-  const [errors, setErrors] = useState(null);
+  const [errors, setErrors] = useState([]);
   const [multiPriceInput, setMultiPriceInput] = useState(product.isMultiPrice);
 
   useEffect(() => {
@@ -33,13 +34,53 @@ export function ProductCardEdit({ product, changeCardAction }) {
       id: 2,
       actionType: BUTTON_PRIMARY,
       handleClick: () => {
-        console.log(
-          "Form data",
+        const processedData = processFormDataToProduct(
           Object.fromEntries(new FormData(formRef.current))
         );
+        updateProduct("64df22ba868b23750714db67", processedData);
       },
     },
   ];
+
+  function processFormDataToProduct(formData) {
+    function getNullableValue(fieldValue) {
+      return fieldValue ? parseFloat(fieldValue) : null;
+    }
+
+    function getBool(fieldValue) {
+      return fieldValue === "true";
+    }
+
+    function getPriceOptionObject(formData, optionName) {
+      let priceOptionObject = { portionType: optionName };
+      priceOptionObject["price"] = getNullableValue(
+        formData[`price__${optionName}`]
+      );
+      priceOptionObject["discountPrice"] = getNullableValue(
+        formData[`discountPrice__${optionName}`]
+      );
+      priceOptionObject["isDiscount"] = getBool(
+        formData[`isDiscount__${optionName}`]
+      );
+      return priceOptionObject;
+    }
+
+    let product = { ...productTemplate };
+    product.prices = productTemplate.prices.slice();
+    product["name"] = formData["name"];
+    product["description"] = formData["description"];
+    product["isMultiProduct"] = getBool(formData["isMultiProduct"]);
+    if (!product.isMultiProduct) {
+      product["isDiscount"] = getBool(formData["isDiscount"]);
+      product["price"] = getNullableValue(formData["price"]);
+      product["discountPrice"] = getNullableValue(formData["discountPrice"]);
+    } else {
+      product.prices = [CUP_SMALL, CUP_MEDIUM, CUP_LARGE].map((item) =>
+        getPriceOptionObject(formData, item)
+      );
+    }
+    return product;
+  }
 
   function getDiscountInputByPriceOption(priceOption, product) {
     const priceOptionGroup = product.prices.find(
@@ -50,7 +91,7 @@ export function ProductCardEdit({ product, changeCardAction }) {
         <PriceDiscountInput
           initialPrice={priceOptionGroup.price}
           initialDiscount={priceOptionGroup.discountPrice}
-          isDiscount={priceOptionGroup.isDiscount}
+          isDiscounted={priceOptionGroup.isDiscount}
           priceOption={priceOption}
           errors={errors}
         />
@@ -103,7 +144,7 @@ export function ProductCardEdit({ product, changeCardAction }) {
             <PriceDiscountInput
               initialPrice={product.price}
               initialDiscount={product.discountPrice}
-              isDiscount={product.isDiscount}
+              isDiscounted={product.isDiscount}
               priceOption={CUP_EMPTY}
               errors={errors}
             />

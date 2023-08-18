@@ -14,8 +14,7 @@ const StyledCheckbox = styled.div`
   border-radius: 16px;
   width: 58px;
   height: 12px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-block: 10px;
   position: relative;
   transition: background 0.25s;
   &:before,
@@ -66,12 +65,12 @@ export function Checkbox({
   isInitChecked,
   handleCheck,
 }) {
-  const [isChecked, setIsChacked] = useState(isInitChecked);
+  const [isChecked, setIsChecked] = useState(isInitChecked);
   return (
     <StyledWrapper
       onClick={async () => {
         const updatedCheckValue = !isChecked;
-        setIsChacked(updatedCheckValue);
+        setIsChecked(updatedCheckValue);
         handleCheck(updatedCheckValue);
       }}
     >

@@ -12,7 +12,7 @@ import { ProductCardEdit } from "../ProductCardEdit";
 export function ProductCard({ product, action }) {
   const [cardAction, setCardAction] = useState(action);
 
-  let cardView = null;
+  let cardView;
 
   switch (cardAction) {
     case ACTION_PREVIEW:

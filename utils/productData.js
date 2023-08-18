@@ -1,5 +1,34 @@
 export const categories = [{ categoryName: "Getränke", categoryId: 1 }];
 
+export const productTemplate = {
+  name: "",
+  description: "",
+  isMultiPrice: false,
+  isDiscount: false,
+  price: null,
+  discountPrice: null,
+  prices: [
+    {
+      portionType: "s",
+      price: null,
+      isDiscount: false,
+      discountPrice: null,
+    },
+    {
+      portionType: "m",
+      price: null,
+      isDiscount: false,
+      discountPrice: null,
+    },
+    {
+      portionType: "l",
+      price: null,
+      isDiscount: false,
+      discountPrice: null,
+    },
+  ],
+};
+
 export const products = [
   {
     id: 1001,

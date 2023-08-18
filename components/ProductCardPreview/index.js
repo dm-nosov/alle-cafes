@@ -14,9 +14,9 @@ const ProductGrid = styled.article`
       60px
     );
   margin-top: 1rem;
-  min-height: 4.5rem;
-  @media (max-width: 440px) {
-    min-height: 6rem;
+  min-height: 6rem;
+  @media (min-width: 440px) {
+    min-height: 4.5rem;
   }
 `;
 
