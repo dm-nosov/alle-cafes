@@ -6,11 +6,11 @@ import { Input } from "../Input";
 export function PriceDiscountInput({
   initialPrice,
   initialDiscount,
-  isDiscount,
+  isDiscounted,
   errors,
   priceOption = null,
 }) {
-  const [showDiscount, setShowDiscount] = useState(isDiscount);
+  const [showDiscount, setShowDiscount] = useState(isDiscounted);
 
   function showDiscountInput(isChecked) {
     setShowDiscount(isChecked);
@@ -33,7 +33,7 @@ export function PriceDiscountInput({
         checkboxName={`isDiscount__${priceOption}`}
         labelText="Discount"
         description="Check if you want to apply a discount"
-        isInitChecked={isDiscount}
+        isInitChecked={isDiscounted}
         handleCheck={showDiscountInput}
       />
       {showDiscount && (
