@@ -1,7 +1,7 @@
-import { BUTTON_PRIMARY } from "@/utils/button";
 import { Button } from "../Button";
 import { StyledCard } from "../StyledCard/index";
 import { ACTION_EDIT } from "@/utils/websiteCard";
+import { BUTTON_PRIMARY } from "@/utils/button";
 
 export function ProductCardNew({ changeCardAction }) {
   return (

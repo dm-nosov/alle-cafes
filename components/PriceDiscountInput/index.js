@@ -50,11 +50,7 @@ export function PriceDiscountInput({
         id={`price${namePostfix}`}
         defaultValue={initialPrice}
         placeholder="Example: 0.99"
-        $error={
-          getErrorContainerByPriceOption(errors, priceOption, "price")
-            ? true
-            : false
-        }
+        $error={!!getErrorContainerByPriceOption(errors, priceOption, "price")}
       />
       <FormErrorText>
         {getErrorContainerByPriceOption(errors, priceOption, "price")?.message}
@@ -76,13 +72,11 @@ export function PriceDiscountInput({
             defaultValue={initialDiscount}
             placeholder="Example: 0.85"
             $error={
-              getErrorContainerByPriceOption(
+              !!getErrorContainerByPriceOption(
                 errors,
                 priceOption,
                 "discountPrice"
               )
-                ? true
-                : false
             }
           />
           <FormErrorText>
