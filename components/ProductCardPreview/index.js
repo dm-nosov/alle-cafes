@@ -50,7 +50,7 @@ export function ProductCardPreview({ product }) {
               </>
             );
           }
-          return <PriceGroup key={price.id}>{priceGroupContent}</PriceGroup>;
+          return <PriceGroup key={price._id}>{priceGroupContent}</PriceGroup>;
         })}
       {!product.isMultiPrice && product.isDiscounted && (
         <PriceGroup>

@@ -14,4 +14,7 @@ export const Input = styled.input`
   &[type="number"]:focus-visible {
     outline: none;
   }
+  &::placeholder {
+    color: var(--editor-background);
+  }
 `;

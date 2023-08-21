@@ -2,7 +2,7 @@ import { cinzel } from "@/fonts";
 import { styled } from "styled-components";
 
 const StyledArticle = styled.article`
-  padding: 0 64px;
+  padding: 0 1rem;
 `;
 
 export function SectionPreview({ title, content }) {

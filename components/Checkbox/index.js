@@ -1,10 +1,16 @@
 import { useState } from "react";
 import styled, { css } from "styled-components";
+import { Label } from "../Label";
 
 const StyledWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
+`;
+
+const CheckboxDescription = styled.small`
+  font-size: small;
+  color: var(--editor-background);
 `;
 
 const StyledCheckbox = styled.div`
@@ -74,8 +80,8 @@ export function Checkbox({
         handleCheck(updatedCheckValue);
       }}
     >
-      <label htmlFor={checkboxName}>{labelText}</label>
-      <small>{description}</small>
+      <Label htmlFor={checkboxName}>{labelText}</Label>
+      <CheckboxDescription>{description}</CheckboxDescription>
       <StyledCheckbox $isChecked={isChecked}>
         <input
           id={checkboxName}

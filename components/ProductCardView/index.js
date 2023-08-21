@@ -91,7 +91,7 @@ export function ProductCardView({ product, changeCardAction }) {
                 );
               }
               return (
-                <PriceGroup key={price.id}>{priceGroupContent}</PriceGroup>
+                <PriceGroup key={price._id}>{priceGroupContent}</PriceGroup>
               );
             })}
           {!product.isMultiPrice && product.isDiscounted && (
