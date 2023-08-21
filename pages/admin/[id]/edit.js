@@ -9,9 +9,9 @@ import useSWR from "swr";
 import { fetcher } from "@/utils/fetcher";
 import { useEffect } from "react";
 import { ProductCategoryCard } from "@/components/ProductCategoryCard/index";
-import { categories, products } from "@/utils/productData";
-import { ACTION_EDIT, ACTION_VIEW } from "@/utils/websiteCard";
+import { ACTION_ADD, ACTION_EDIT, ACTION_VIEW } from "@/utils/websiteCard";
 import { cinzel } from "@/fonts";
+import { Skeleton } from "@/components/Skeleton";
 
 export default function Page() {
   const router = useRouter();
@@ -25,6 +25,12 @@ export default function Page() {
     `/api/ws/${websiteId}/editor-content`,
     fetcher
   );
+
+  const {
+    data: categoriesData,
+    isLoading: isLoadingCategories,
+    mutate: mutateCategories,
+  } = useSWR(`/api/ws/${websiteId}/categories`, fetcher);
 
   useEffect(() => {
     if (data) {
@@ -54,14 +60,20 @@ export default function Page() {
               isLoading={isLoading}
             />
             <h2 className={cinzel.className}>Menu</h2>
-            {categories.map((category) => (
-              <ProductCategoryCard
-                categoryName={category.categoryName}
-                key={category.categoryId}
-                action={ACTION_EDIT}
-                products={products}
-              />
-            ))}
+            {isLoadingCategories && <Skeleton $height={6} />}
+            {!isLoadingCategories &&
+              categoriesData.categories?.map((category) => (
+                <ProductCategoryCard
+                  categoryName={category.name}
+                  key={category.name}
+                  action={ACTION_EDIT}
+                  category={category}
+                  mutateCategories={mutateCategories}
+                />
+              ))}
+
+            <ProductCategoryCard action={ACTION_ADD} categoryId={0} />
+
             <SectionEditor
               sectionName={SPECIAL}
               data={data}
@@ -74,7 +86,12 @@ export default function Page() {
             />
           </>
         )}
-        {preview && <SectionViewer websiteId={websiteId} />}
+        {preview && (
+          <SectionViewer
+            websiteId={websiteId}
+            categories={categoriesData.categories}
+          />
+        )}
       </main>
     </>
   );

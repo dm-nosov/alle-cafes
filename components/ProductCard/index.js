@@ -9,7 +9,7 @@ import { ProductCardPreview } from "../ProductCardPreview";
 import { ProductCardView } from "../ProductCardView";
 import { ProductCardEdit } from "../ProductCardEdit";
 
-export function ProductCard({ product, action }) {
+export function ProductCard({ product, action, mutateCategories }) {
   const [cardAction, setCardAction] = useState(action);
 
   let cardView;
@@ -25,7 +25,11 @@ export function ProductCard({ product, action }) {
       break;
     case ACTION_EDIT:
       cardView = (
-        <ProductCardEdit product={product} changeCardAction={setCardAction} />
+        <ProductCardEdit
+          product={product}
+          changeCardAction={setCardAction}
+          mutateCategories={mutateCategories}
+        />
       );
       break;
   }

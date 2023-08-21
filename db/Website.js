@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import ProductCategory from "./ProductCategory";
 
 const { Schema } = mongoose;
 
@@ -29,6 +30,10 @@ const websiteSchema = new Schema({
   editorContent: {
     type: Schema.Types.ObjectId,
     ref: "EditorContent",
+  },
+  categories: {
+    type: [Schema.Types.ObjectId],
+    ref: "ProductCategory",
   },
 });
 

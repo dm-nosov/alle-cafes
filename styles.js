@@ -28,6 +28,8 @@ export default createGlobalStyle`
     --editor-background: rgb(167, 167, 167);
     --danger: #C70039;
     --fieldset-border: #f0f0f0;
+    --accent: #F2EAD3;
+    --success: green;
   }
 
   nav {

@@ -12,7 +12,7 @@ import {
 } from "@/utils/mongodb";
 import { getServerSession } from "next-auth/next";
 import Product from "@/db/Product";
-import { authOptions } from "../../../../auth/[...nextauth]";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 export default async function handler(request, response) {
   const session = await getServerSession(request, response, authOptions);

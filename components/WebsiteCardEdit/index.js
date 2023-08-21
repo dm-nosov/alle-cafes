@@ -5,7 +5,9 @@ import { updateWebsiteSettings, createWebsite } from "@/api-facade/website";
 import { ButtonGroup } from "../ButtonGroup";
 import { FormErrorText } from "../FormErrorText/index";
 import { Input } from "../Input";
-import { StyledCardEdit } from "../StyledCardEdit";
+import { Form } from "../Form";
+import { StyledCard } from "../StyledCard";
+import { Label } from "../Label";
 
 export function WebsiteCardEdit({
   title,
@@ -66,9 +68,9 @@ export function WebsiteCardEdit({
 
   return (
     <>
-      <StyledCardEdit>
-        <form ref={formRef}>
-          <label htmlFor="title">Title</label>
+      <StyledCard>
+        <Form ref={formRef}>
+          <Label htmlFor="title">Title</Label>
           <Input
             type="text"
             name="title"
@@ -81,7 +83,7 @@ export function WebsiteCardEdit({
           />
           <FormErrorText>{errors?.title?.message}</FormErrorText>
 
-          <label htmlFor="slug">Slug</label>
+          <Label htmlFor="slug">Slug</Label>
           <Input
             type="text"
             name="slug"
@@ -93,8 +95,8 @@ export function WebsiteCardEdit({
           />
           <FormErrorText>{errors?.slug?.message}</FormErrorText>
           <ButtonGroup buttons={buttons} />
-        </form>
-      </StyledCardEdit>
+        </Form>
+      </StyledCard>
     </>
   );
 }

@@ -4,7 +4,6 @@ import { BUTTON_PRIMARY } from "@/utils/button";
 import { ButtonGroup } from "../ButtonGroup";
 import { FormErrorText } from "../FormErrorText/index";
 import { Input } from "../Input";
-import { StyledCardEdit } from "../StyledCardEdit";
 import { Checkbox } from "../Checkbox";
 import { PriceDiscountInput } from "../PriceDiscountInput";
 import { PriceOptionDiscountInput } from "../PriceOptionDiscountInput";
@@ -12,8 +11,15 @@ import { CUP_EMPTY, CUP_LARGE, CUP_MEDIUM, CUP_SMALL } from "@/utils/cupSize";
 import { productTemplate } from "@/utils/productData";
 import { updateProduct } from "@/api-facade/product";
 import { useWebsiteContentStore } from "@/store/WebsiteContent";
+import { Form } from "../Form";
+import { StyledCard } from "../StyledCard";
+import { Label } from "../Label";
 
-export function ProductCardEdit({ product, changeCardAction }) {
+export function ProductCardEdit({
+  product,
+  changeCardAction,
+  mutateCategories,
+}) {
   const firstInputRef = useRef(null);
   const formRef = useRef(null);
   const [errors, setErrors] = useState(null);
@@ -36,13 +42,26 @@ export function ProductCardEdit({ product, changeCardAction }) {
       text: "Update",
       id: 2,
       actionType: BUTTON_PRIMARY,
-      handleClick: () => {
-        const processedData = processFormDataToProduct(
-          Object.fromEntries(new FormData(formRef.current))
-        );
-        console.log(Object.fromEntries(new FormData(formRef.current)));
-        console.log(processedData);
-        updateProduct(websiteId, "64df22ba868b23750714db67", processedData);
+      handleClick: async () => {
+        if (formRef.current.reportValidity()) {
+          const processedData = processFormDataToProduct(
+            Object.fromEntries(new FormData(formRef.current))
+          );
+          let response;
+          //TODO: Replace once I can create products
+          response = await updateProduct(
+            websiteId,
+            "64df22ba868b23750714db67",
+            processedData
+          );
+
+          if ("errors" in response) {
+            setErrors(response.errors);
+          } else {
+            changeCardAction(ACTION_VIEW);
+            mutateCategories();
+          }
+        }
       },
     },
   ];
@@ -106,9 +125,9 @@ export function ProductCardEdit({ product, changeCardAction }) {
 
   return (
     <>
-      <StyledCardEdit>
-        <form ref={formRef}>
-          <label htmlFor="name">Name</label>
+      <StyledCard>
+        <Form ref={formRef}>
+          <Label htmlFor="name">Name</Label>
           <Input
             type="text"
             name="name"
@@ -118,24 +137,23 @@ export function ProductCardEdit({ product, changeCardAction }) {
             $error={errors?.name ? true : false}
             required={true}
             minLength={3}
+            autoComplete="off"
           />
           <FormErrorText>{errors?.name?.message}</FormErrorText>
 
-          <label htmlFor="description">Description</label>
+          <Label htmlFor="description">Description</Label>
           <Input
             type="text"
             name="description"
             id="description"
             defaultValue={product.description}
             $error={errors?.description ? true : false}
-            required={true}
-            minLength={3}
           />
           <FormErrorText>{errors?.description?.message}</FormErrorText>
           <Checkbox
             checkboxName="isMultiPrice"
             labelText="Multi-price"
-            description="Check if you want to use S, M, L prices for this product"
+            description="Check to use S, M, L prices"
             handleCheck={() => setMultiPriceInput(!multiPriceInput)}
             isInitChecked={product.isMultiPrice}
           />
@@ -156,8 +174,8 @@ export function ProductCardEdit({ product, changeCardAction }) {
           )}
 
           <ButtonGroup buttons={buttons} />
-        </form>
-      </StyledCardEdit>
+        </Form>
+      </StyledCard>
     </>
   );
 }
