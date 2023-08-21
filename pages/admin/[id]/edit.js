@@ -72,7 +72,14 @@ export default function Page() {
                 />
               ))}
 
-            <ProductCategoryCard action={ACTION_ADD} categoryId={0} />
+            {data && (
+              <ProductCategoryCard
+                action={ACTION_ADD}
+                categoryId={0}
+                websiteId={websiteId}
+                mutateCategories={mutateCategories}
+              />
+            )}
 
             <SectionEditor
               sectionName={SPECIAL}

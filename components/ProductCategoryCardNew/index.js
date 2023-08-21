@@ -10,12 +10,13 @@ import { Form } from "../Form";
 import { ProductCategoryAdd } from "../ProductCategoryAdd";
 import { Button } from "../Button";
 import { Label } from "../Label";
+import { createProductCategory } from "@/api-facade/product-category";
 
 const ProductCategoryTitleAdd = styled(ProductCategoryTitle)`
   margin-bottom: 2rem;
 `;
 
-export function ProductCategoryCardNew({ categoryId }) {
+export function ProductCategoryCardNew({ websiteId, mutateCategories }) {
   const formRef = useRef(null);
   const firstInputRef = useRef(null);
   const [errors, setErrors] = useState(null);
@@ -29,18 +30,32 @@ export function ProductCategoryCardNew({ categoryId }) {
         <Label htmlFor="categoryName">Category name</Label>
         <Input
           type="text"
-          name="categoryName"
+          name="name"
           id="categoryName"
           ref={firstInputRef}
-          $error={errors?.categoryName ? true : false}
+          $error={errors?.name ? true : false}
           required={true}
           minLength={3}
+          autoComplete="off"
         />
-        <FormErrorText>{errors?.categoryName?.message}</FormErrorText>
+        <FormErrorText>{errors?.name?.message}</FormErrorText>
         <Button
           text="Add"
           actionType={BUTTON_PRIMARY}
-          handleClick={async () => {}}
+          handleClick={async () => {
+            if (formRef.current.reportValidity()) {
+              let response = await createProductCategory(
+                websiteId,
+                Object.fromEntries(new FormData(formRef.current))
+              );
+
+              if ("errors" in response) {
+                setErrors(response.errors);
+              } else {
+                mutateCategories();
+              }
+            }
+          }}
         />
       </Form>
     </ProductCategoryAdd>

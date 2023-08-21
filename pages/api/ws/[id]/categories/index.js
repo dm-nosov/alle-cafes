@@ -1,7 +1,7 @@
 import dbConnect from "@/db/connect";
 import Website from "@/db/Website";
 import ProductCategory from "@/db/ProductCategory";
-import Product from "@/db/Product";
+import mongoose from "mongoose";
 
 import { getServerSession } from "next-auth/next";
 import {
@@ -36,6 +36,22 @@ export default async function handler(request, response) {
       _id: websiteId,
     }).populate({ path: "categories", populate: "products" });
     return response.status(BACKEND_SUCCESS_CODE).json(productList);
+  }
+
+  if (request.method === "POST") {
+    const category = await ProductCategory.create({
+      uid: session.user.id,
+      ...request.body,
+    });
+
+    await Website.findOneAndUpdate(
+      {
+        uid: session.user.id,
+        _id: websiteId,
+      },
+      { $push: { categories: category } }
+    );
+    return response.status(BACKEND_SUCCESS_CODE).json(category);
   }
 
   return response.status(BACKEND_NOT_ALLOWED_CODE).json(BACKEND_NOT_ALLOWED);

@@ -11,7 +11,6 @@ const websiteSchema = new Schema({
   },
   uid: {
     type: String,
-    unique: true,
     required: true,
   },
   slug: {

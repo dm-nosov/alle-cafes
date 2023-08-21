@@ -1,5 +1,5 @@
 import { useRef, useState, useEffect } from "react";
-import { ACTION_VIEW } from "@/utils/websiteCard";
+import { ACTION_ADD, ACTION_VIEW } from "@/utils/websiteCard";
 import { BUTTON_PRIMARY } from "@/utils/button";
 import { ButtonGroup } from "../ButtonGroup";
 import { FormErrorText } from "../FormErrorText/index";
@@ -35,7 +35,9 @@ export function ProductCardEdit({
       text: "Cancel",
       id: 1,
       handleClick: () => {
-        changeCardAction(ACTION_VIEW);
+        product._id
+          ? changeCardAction(ACTION_VIEW)
+          : changeCardAction(ACTION_ADD);
       },
     },
     {
@@ -89,7 +91,7 @@ export function ProductCardEdit({
       return priceOptionObject;
     }
 
-    let product = { ...productTemplate };
+    let product = { _id: product._id, ...productTemplate };
     product.prices = productTemplate.prices.slice();
     product["name"] = formData["name"];
     product["description"] = formData["description"];

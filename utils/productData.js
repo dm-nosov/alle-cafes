@@ -1,6 +1,7 @@
 export const categories = [{ categoryName: "Getränke", categoryId: 1 }];
 
 export const productTemplate = {
+  _id: 0,
   name: "",
   description: "",
   isMultiPrice: false,

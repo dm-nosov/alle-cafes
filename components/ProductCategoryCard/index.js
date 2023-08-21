@@ -11,6 +11,7 @@ import { ProductCard } from "../ProductCard";
 import { ProductCategoryCardNew } from "../ProductCategoryCardNew";
 import { ProductCategoryCardEmpty } from "../ProductCategoryCardEmpty";
 import { Skeleton } from "../Skeleton";
+import { productTemplate } from "@/utils/productData";
 
 export function ProductCategoryCard({
   categoryName,
@@ -18,6 +19,7 @@ export function ProductCategoryCard({
   category,
   action,
   mutateCategories,
+  websiteId,
 }) {
   const [cardAction, setCardAction] = useState(action);
 
@@ -25,7 +27,12 @@ export function ProductCategoryCard({
 
   switch (cardAction) {
     case ACTION_ADD:
-      cardView = <ProductCategoryCardNew categoryId={categoryId} />;
+      cardView = (
+        <ProductCategoryCardNew
+          websiteId={websiteId}
+          mutateCategories={mutateCategories}
+        />
+      );
       break;
     case ACTION_SHOW_EMPTY:
       cardView = <ProductCategoryCardEmpty />;
@@ -62,6 +69,11 @@ export function ProductCategoryCard({
               key={product._id}
             />
           ))}
+          <ProductCard
+            product={productTemplate}
+            action={ACTION_ADD}
+            mutateCategories={mutateCategories}
+          />
         </ProductCategoryCardView>
       );
       break;
