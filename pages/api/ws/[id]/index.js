@@ -28,7 +28,7 @@ export default async function handler(request, response) {
     try {
       const website = await Website.findOneAndUpdate(
         { _id: id, uid: session.user.id },
-        request.body,
+        { ...request.body, _id: id, uid: session.user.id },
         {
           runValidators: true,
         }

@@ -27,7 +27,7 @@ export default async function handler(request, response) {
   const { id: websiteId, categoryId } = request.query;
 
   if (request.method === "POST") {
-    const mergedData = { uid: session.user.id, ...request.body };
+    const mergedData = { ...request.body, uid: session.user.id };
     delete mergedData._id;
     try {
       const product = await Product.create(mergedData);
