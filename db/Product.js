@@ -48,6 +48,10 @@ const productSchema = new Schema({
     min: [0, "A discounted price must be a non-negative number"],
   },
   prices: [priceOptionSchema],
+  uid: {
+    type: String,
+    required: true,
+  },
 });
 
 const Product =

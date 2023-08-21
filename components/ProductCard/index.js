@@ -10,7 +10,7 @@ import { ProductCardView } from "../ProductCardView";
 import { ProductCardEdit } from "../ProductCardEdit";
 import { ProductCardNew } from "../ProductCardNew";
 
-export function ProductCard({ product, action, mutateCategories }) {
+export function ProductCard({ product, action, mutateCategories, categoryId }) {
   const [cardAction, setCardAction] = useState(action);
 
   let cardView;
@@ -33,6 +33,7 @@ export function ProductCard({ product, action, mutateCategories }) {
           product={product}
           changeCardAction={setCardAction}
           mutateCategories={mutateCategories}
+          categoryId={categoryId}
         />
       );
       break;

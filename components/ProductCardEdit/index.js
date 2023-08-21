@@ -9,7 +9,7 @@ import { PriceDiscountInput } from "../PriceDiscountInput";
 import { PriceOptionDiscountInput } from "../PriceOptionDiscountInput";
 import { CUP_EMPTY, CUP_LARGE, CUP_MEDIUM, CUP_SMALL } from "@/utils/cupSize";
 import { productTemplate } from "@/utils/productData";
-import { updateProduct } from "@/api-facade/product";
+import { createProduct, updateProduct } from "@/api-facade/product";
 import { useWebsiteContentStore } from "@/store/WebsiteContent";
 import { Form } from "../Form";
 import { StyledCard } from "../StyledCard";
@@ -19,6 +19,7 @@ export function ProductCardEdit({
   product,
   changeCardAction,
   mutateCategories,
+  categoryId,
 }) {
   const firstInputRef = useRef(null);
   const formRef = useRef(null);
@@ -41,26 +42,37 @@ export function ProductCardEdit({
       },
     },
     {
-      text: "Update",
+      text: product._id ? "Update" : "Create",
       id: 2,
       actionType: BUTTON_PRIMARY,
       handleClick: async () => {
         if (formRef.current.reportValidity()) {
           const processedData = processFormDataToProduct(
+            product._id,
             Object.fromEntries(new FormData(formRef.current))
           );
           let response;
-          //TODO: Replace once I can create products
-          response = await updateProduct(
-            websiteId,
-            "64df22ba868b23750714db67",
-            processedData
-          );
+
+          if (product._id) {
+            response = await updateProduct(
+              websiteId,
+              product._id,
+              processedData
+            );
+          } else {
+            response = await createProduct(
+              websiteId,
+              categoryId,
+              processedData
+            );
+          }
 
           if ("errors" in response) {
             setErrors(response.errors);
           } else {
-            changeCardAction(ACTION_VIEW);
+            product._id
+              ? changeCardAction(ACTION_VIEW)
+              : changeCardAction(ACTION_ADD);
             mutateCategories();
           }
         }
@@ -68,7 +80,7 @@ export function ProductCardEdit({
     },
   ];
 
-  function processFormDataToProduct(formData) {
+  function processFormDataToProduct(productId, formData) {
     function getNullableValue(fieldValue) {
       return fieldValue ? parseFloat(fieldValue) : null;
     }
@@ -91,7 +103,7 @@ export function ProductCardEdit({
       return priceOptionObject;
     }
 
-    let product = { _id: product._id, ...productTemplate };
+    let product = { _id: productId, ...productTemplate };
     product.prices = productTemplate.prices.slice();
     product["name"] = formData["name"];
     product["description"] = formData["description"];

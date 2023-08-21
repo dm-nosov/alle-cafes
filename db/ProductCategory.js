@@ -13,6 +13,10 @@ const productCategorySchema = new Schema({
     type: [Schema.Types.ObjectId],
     ref: "Product",
   },
+  uid: {
+    type: String,
+    required: true,
+  },
 });
 
 const ProductCategory =
