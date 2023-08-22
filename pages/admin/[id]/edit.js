@@ -68,6 +68,7 @@ export default function Page() {
                   key={category.name}
                   action={ACTION_EDIT}
                   category={category}
+                  websiteId={websiteId}
                   mutateCategories={mutateCategories}
                 />
               ))}

@@ -4,7 +4,6 @@ export const Spinner = styled.div`
   display: inline-block;
   width: 0.9rem;
   height: 0.9rem;
-  margin: 0 1rem;
 
   &::after {
     content: "";

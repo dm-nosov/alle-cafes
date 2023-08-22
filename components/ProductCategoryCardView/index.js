@@ -1,31 +1,71 @@
 import { cinzel } from "@/fonts";
-import styled from "styled-components";
-const ProductCategory = styled.section`
-  margin: 1rem;
-  h3 {
-    text-align: center;
-    font-size: 22px;
-    font-weight: 300;
-    padding: 0;
-    margin: 3rem 0 0 0;
-  }
-  &:first-of-type {
-    h3 {
-      margin: 0;
-    }
-  }
-`;
+import { ProductCategory } from "../ProductCategory";
+import {
+  BUTTON_DANGER,
+  BUTTON_ICON_EDIT,
+  BUTTON_ICON_PREVIEW,
+  BUTTON_ICON_TRASH,
+} from "@/utils/button";
+import { ButtonIcon } from "../ButtonIcon/index";
+import { useState } from "react";
+import { PopupGeneral } from "../PopupGeneral";
+import { ButtonGroup } from "../ButtonGroup";
+import { removeProductCategory } from "@/api-facade/product-category";
 
 export function ProductCategoryCardView({
   categoryName,
-  categoryId,
-  changeCardAction,
   children,
+  websiteId,
+  categoryId,
+  mutateCategories,
 }) {
+  const [showRemovePopup, setShowRemovePopup] = useState(false);
+  function closePopup() {
+    setShowRemovePopup(false);
+  }
+
+  const removePopupButtons = [
+    {
+      text: "Cancel",
+      id: 1,
+      handleClick: () => {
+        closePopup();
+      },
+    },
+    {
+      text: "Remove",
+      id: 2,
+      actionType: BUTTON_DANGER,
+      handleClick: async () => {
+        await removeProductCategory(websiteId, categoryId);
+        mutateCategories();
+        closePopup();
+      },
+    },
+  ];
+
   return (
-    <ProductCategory>
-      <h3 className={cinzel.className}>{categoryName}</h3>
-      {children}
-    </ProductCategory>
+    <>
+      <ProductCategory>
+        <h3 className={cinzel.className}>
+          {categoryName}
+          <ButtonIcon
+            iconName={BUTTON_ICON_TRASH}
+            variant={BUTTON_DANGER}
+            handleClick={() => setShowRemovePopup(true)}
+          />
+        </h3>
+
+        {children}
+      </ProductCategory>
+      {showRemovePopup && (
+        <PopupGeneral handleClosePopup={closePopup}>
+          <p>
+            Are you sure you want to remove <strong>{categoryName}</strong>?
+          </p>
+          <ButtonGroup buttons={removePopupButtons} />
+        </PopupGeneral>
+      )}
+    </>
   );
 }

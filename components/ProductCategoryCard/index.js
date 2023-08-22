@@ -10,8 +10,8 @@ import { ProductCategoryCardView } from "../ProductCategoryCardView";
 import { ProductCard } from "../ProductCard";
 import { ProductCategoryCardNew } from "../ProductCategoryCardNew";
 import { ProductCategoryCardEmpty } from "../ProductCategoryCardEmpty";
-import { Skeleton } from "../Skeleton";
 import { productTemplate } from "@/utils/productData";
+import { ProductCategoryCardPreview } from "../ProductCategoryCardPreview";
 
 export function ProductCategoryCard({
   category,
@@ -37,11 +37,7 @@ export function ProductCategoryCard({
       break;
     case ACTION_PREVIEW:
       cardView = (
-        <ProductCategoryCardView
-          categoryName={category.name}
-          categoryId={category._id}
-          changeCardAction={setCardAction}
-        >
+        <ProductCategoryCardPreview categoryName={category.name}>
           {category.products.map((product) => (
             <ProductCard
               product={product}
@@ -51,15 +47,16 @@ export function ProductCategoryCard({
               key={product._id}
             />
           ))}
-        </ProductCategoryCardView>
+        </ProductCategoryCardPreview>
       );
       break;
     case ACTION_EDIT:
       cardView = (
         <ProductCategoryCardView
           categoryName={category.name}
+          mutateCategories={mutateCategories}
+          websiteId={websiteId}
           categoryId={category._id}
-          changeCardAction={setCardAction}
         >
           {category.products.map((product) => (
             <ProductCard

@@ -8,3 +8,13 @@ export async function createProductCategory(websiteId, categoryContent) {
   });
   return await response.json();
 }
+
+export async function removeProductCategory(websiteId, categoryId) {
+  const response = await fetch(
+    `/api/ws/${websiteId}/categories/${categoryId}/`,
+    {
+      method: "DELETE",
+    }
+  );
+  return await response.json();
+}
