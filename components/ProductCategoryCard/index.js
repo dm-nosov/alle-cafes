@@ -14,8 +14,6 @@ import { Skeleton } from "../Skeleton";
 import { productTemplate } from "@/utils/productData";
 
 export function ProductCategoryCard({
-  categoryName,
-  categoryId,
   category,
   action,
   mutateCategories,
@@ -40,14 +38,16 @@ export function ProductCategoryCard({
     case ACTION_PREVIEW:
       cardView = (
         <ProductCategoryCardView
-          categoryName={categoryName}
-          categoryId={categoryId}
+          categoryName={category.name}
+          categoryId={category._id}
           changeCardAction={setCardAction}
         >
           {category.products.map((product) => (
             <ProductCard
               product={product}
               action={ACTION_PREVIEW}
+              categoryId={category._id}
+              categoryName={category.name}
               key={product._id}
             />
           ))}
@@ -57,14 +57,15 @@ export function ProductCategoryCard({
     case ACTION_EDIT:
       cardView = (
         <ProductCategoryCardView
-          categoryName={categoryName}
-          categoryId={categoryId}
+          categoryName={category.name}
+          categoryId={category._id}
           changeCardAction={setCardAction}
         >
           {category.products.map((product) => (
             <ProductCard
               product={product}
               action={ACTION_VIEW}
+              categoryId={category._id}
               mutateCategories={mutateCategories}
               key={product._id}
             />
@@ -72,6 +73,8 @@ export function ProductCategoryCard({
           <ProductCard
             product={productTemplate}
             action={ACTION_ADD}
+            categoryId={category._id}
+            categoryName={category.name}
             mutateCategories={mutateCategories}
           />
         </ProductCategoryCardView>

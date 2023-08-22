@@ -13,15 +13,23 @@ import { PopupOption } from "../PopupOption";
 import { ButtonGroup } from "../ButtonGroup";
 import { BUTTON_DANGER } from "@/utils/button";
 import { ACTION_EDIT } from "@/utils/websiteCard";
+import { removeProduct } from "@/api-facade/product";
+import { useWebsiteContentStore } from "@/store/WebsiteContent";
 
 const HorizontalPriceRow = styled.div`
   display: flex;
   gap: 1rem;
 `;
 
-export function ProductCardView({ product, changeCardAction }) {
+export function ProductCardView({
+  product,
+  changeCardAction,
+  categoryId,
+  mutateCategories,
+}) {
   const [showActionsPopup, setShowActionsPopup] = useState(false);
   const [showRemovePopup, setShowRemovePopup] = useState(false);
+  const websiteId = useWebsiteContentStore((state) => state.websiteId);
 
   function closePopup() {
     setShowActionsPopup(false);
@@ -41,8 +49,8 @@ export function ProductCardView({ product, changeCardAction }) {
       id: 2,
       actionType: BUTTON_DANGER,
       handleClick: async () => {
-        await removeWebsite(websiteId);
-        mutate();
+        await removeProduct(websiteId, categoryId, product._id);
+        mutateCategories();
         closePopup();
       },
     },
@@ -118,7 +126,7 @@ export function ProductCardView({ product, changeCardAction }) {
           </PopupOption>
           <PopupOption
             danger
-            handleClick={() => {
+            handleClick={async () => {
               closePopup();
               setShowRemovePopup(true);
             }}

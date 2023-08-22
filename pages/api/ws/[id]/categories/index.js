@@ -40,8 +40,8 @@ export default async function handler(request, response) {
 
   if (request.method === "POST") {
     const category = await ProductCategory.create({
-      uid: session.user.id,
       ...request.body,
+      uid: session.user.id,
     });
 
     await Website.findOneAndUpdate(

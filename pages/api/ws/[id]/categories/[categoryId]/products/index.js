@@ -13,6 +13,7 @@ import {
 import { getServerSession } from "next-auth/next";
 import Product from "@/db/Product";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import ProductCategory from "@/db/ProductCategory";
 
 export default async function handler(request, response) {
   const session = await getServerSession(request, response, authOptions);
@@ -23,21 +24,17 @@ export default async function handler(request, response) {
 
   await dbConnect();
 
-  const { productId } = request.query;
+  const { id: websiteId, categoryId } = request.query;
 
-  if (request.method === "PUT") {
+  if (request.method === "POST") {
+    const mergedData = { ...request.body, uid: session.user.id };
+    delete mergedData._id;
     try {
-      const mergedData = {
-        ...request.body,
-        _id: productId,
-        uid: session.user.id,
-      };
-      const product = await Product.findOneAndUpdate(
-        { _id: productId, uid: session.user.id },
-        mergedData,
-        {
-          runValidators: true,
-        }
+      const product = await Product.create(mergedData);
+
+      await ProductCategory.findOneAndUpdate(
+        { uid: session.user.id, _id: categoryId },
+        { $push: { products: product } }
       );
       return response.status(BACKEND_SUCCESS_CODE).json(product);
     } catch (err) {

@@ -1,4 +1,6 @@
 import dbConnect from "@/db/connect";
+import Product from "@/db/Product";
+import ProductCategory from "@/db/ProductCategory";
 import {
   BACKEND_INVALID_CODE,
   BACKEND_NOTAUTH,
@@ -11,8 +13,8 @@ import {
   processUniqueError,
 } from "@/utils/mongodb";
 import { getServerSession } from "next-auth/next";
-import Product from "@/db/Product";
 import { authOptions } from "@/pages/api/auth/[...nextauth]";
+import mongoose from "mongoose";
 
 export default async function handler(request, response) {
   const session = await getServerSession(request, response, authOptions);
@@ -23,26 +25,27 @@ export default async function handler(request, response) {
 
   await dbConnect();
 
-  const { productId } = request.query;
+  const { productId, categoryId } = request.query;
 
-  if (request.method === "PUT") {
+  if (request.method === "DELETE") {
     try {
-      const mergedData = {
-        ...request.body,
+      const product = await Product.findOneAndDelete({
         _id: productId,
         uid: session.user.id,
-      };
-      const product = await Product.findOneAndUpdate(
-        { _id: productId, uid: session.user.id },
-        mergedData,
+      });
+
+      await ProductCategory.findOneAndUpdate(
+        { _id: categoryId, uid: session.user.id },
         {
-          runValidators: true,
+          $pull: {
+            products: new mongoose.Types.ObjectId(productId),
+          },
         }
       );
-      return response.status(BACKEND_SUCCESS_CODE).json(product);
+
+      return response.status(BACKEND_SUCCESS_CODE).json({});
     } catch (err) {
-      let errContainer = processUniqueError(err);
-      return response.status(BACKEND_INVALID_CODE).json(errContainer);
+      return response.status(BACKEND_INVALID_CODE).json(err);
     }
   }
 

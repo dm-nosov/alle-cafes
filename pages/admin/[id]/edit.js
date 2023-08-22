@@ -33,14 +33,14 @@ export default function Page() {
   } = useSWR(`/api/ws/${websiteId}/categories`, fetcher);
 
   useEffect(() => {
-    if (data) {
+    if (data && data.editorContent) {
       setWebsiteId(websiteId);
       for (const sectionName of [ABOUT, SPECIAL, OPENING_HOURS]) {
-        if (data[sectionName]) {
+        if (data.editorContent[sectionName]) {
           updateSection(
             sectionName,
-            JSON.parse(data[sectionName].json),
-            data[sectionName].html
+            JSON.parse(data.editorContent[sectionName].json),
+            data.editorContent[sectionName].html
           );
         }
       }
@@ -50,13 +50,13 @@ export default function Page() {
   return (
     <>
       <TopAdminToolbar websiteId={websiteId} />
-      <Header />
+      <Header title={data?.title} />
       <main>
         {!preview && (
           <>
             <SectionEditor
               sectionName={ABOUT}
-              data={data}
+              data={data?.editorContent}
               isLoading={isLoading}
             />
             <h2 className={cinzel.className}>Menu</h2>
@@ -72,7 +72,7 @@ export default function Page() {
                 />
               ))}
 
-            {data && (
+            {categoriesData && (
               <ProductCategoryCard
                 action={ACTION_ADD}
                 categoryId={0}
@@ -83,12 +83,12 @@ export default function Page() {
 
             <SectionEditor
               sectionName={SPECIAL}
-              data={data}
+              data={data?.editorContent}
               isLoading={isLoading}
             />
             <SectionEditor
               sectionName={OPENING_HOURS}
-              data={data}
+              data={data?.editorContent}
               isLoading={isLoading}
             />
           </>

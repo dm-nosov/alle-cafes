@@ -49,6 +49,7 @@ export function PriceDiscountInput({
         name={`price${namePostfix}`}
         id={`price${namePostfix}`}
         defaultValue={initialPrice}
+        step="0.01"
         placeholder="Example: 0.99"
         $error={!!getErrorContainerByPriceOption(errors, priceOption, "price")}
       />
@@ -71,6 +72,7 @@ export function PriceDiscountInput({
             id={`discountPrice${namePostfix}`}
             defaultValue={initialDiscount}
             placeholder="Example: 0.85"
+            step="0.01"
             $error={
               !!getErrorContainerByPriceOption(
                 errors,

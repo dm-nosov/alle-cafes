@@ -27,11 +27,14 @@ export default async function handler(request, response) {
     if (id === "undefined") {
       return response.status(BACKEND_NOT_FOUND_CODE).json(BACKEND_NOT_FOUND);
     }
-    const website = await Website.findOne({
-      _id: id,
-      uid: session.user.id,
-    }).populate("editorContent", "about special hours -_id");
-    return response.status(BACKEND_SUCCESS_CODE).json(website.editorContent);
+    const website = await Website.findOne(
+      {
+        _id: id,
+        uid: session.user.id,
+      },
+      "title slug -_id"
+    ).populate("editorContent", "about special hours -_id");
+    return response.status(BACKEND_SUCCESS_CODE).json(website);
   }
 
   if (request.method === "PUT") {
