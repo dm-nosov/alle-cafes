@@ -21,7 +21,7 @@ const HeroText = styled.h1`
   color: white;
 `;
 
-export function Header() {
+export function Header({ title }) {
   return (
     <StyledHeroBlock className={cinzel.className}>
       <Image
@@ -35,7 +35,7 @@ export function Header() {
         style={{ objectFit: "cover" }}
         quality={90}
       />
-      <HeroText>Kurze Pause</HeroText>
+      <HeroText>{title}</HeroText>
     </StyledHeroBlock>
   );
 }

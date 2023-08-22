@@ -47,6 +47,7 @@ export function ProductCategoryCard({
               product={product}
               action={ACTION_PREVIEW}
               categoryId={category._id}
+              categoryName={category.name}
               key={product._id}
             />
           ))}
@@ -73,6 +74,7 @@ export function ProductCategoryCard({
             product={productTemplate}
             action={ACTION_ADD}
             categoryId={category._id}
+            categoryName={category.name}
             mutateCategories={mutateCategories}
           />
         </ProductCategoryCardView>
