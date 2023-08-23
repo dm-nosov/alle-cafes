@@ -15,10 +15,10 @@ export function Navigation({ session }) {
   return (
     <StyledNav>
       {session ? (
-        <Button text="Sign out" handleClick={() => signOut()} />
+        <Button text="Sign Out" handleClick={() => signOut()} />
       ) : (
         <Button
-          text="Sign in"
+          text="Sign In"
           actionType={BUTTON_PRIMARY}
           handleClick={() => signIn()}
         />

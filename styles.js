@@ -30,6 +30,7 @@ export default createGlobalStyle`
     --fieldset-border: #f0f0f0;
     --accent: #F2EAD3;
     --success: #125B50;
+    --element-shadow: rgb(200 200 200) 1px 1px 2px 1px;
   }
 
   nav {

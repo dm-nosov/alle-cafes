@@ -16,10 +16,13 @@ import {
 const IconWrapper = styled.span`
   margin-left: 0.5rem;
   opacity: ${({ $isDisabled }) => ($isDisabled ? 0.4 : 1)};
-  border: 1px solid var(--editor-background);
+  border: none;
+  box-shadow: var(--element-shadow);
   border-radius: 0.25rem;
   padding: 0 0.5rem;
-  display: inline-block;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   height: 2rem;
   &:active {
     box-shadow: 0 0 0 0.3rem var(--secondary-outline),
@@ -27,8 +30,6 @@ const IconWrapper = styled.span`
   }
   background-color: white;
   svg {
-    margin-top: 5px;
-
     ${({ $variant }) => {
       switch ($variant) {
         case BUTTON_SECONDARY:
@@ -45,7 +46,6 @@ const IconWrapper = styled.span`
           `;
       }
     }}
-    padding-top: 1px;
     &:active {
       transform: scale(1.2);
     }

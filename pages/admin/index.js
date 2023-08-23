@@ -1,6 +1,8 @@
+import { HeroHeading } from "@/components/HeroHeading";
 import { Navigation } from "@/components/Navigation";
 import { Skeleton } from "@/components/Skeleton";
 import { WebsiteCard } from "@/components/WebsiteCard";
+import { cinzel } from "@/fonts";
 import { useWebsiteContentStore } from "@/store/WebsiteContent";
 import { fetcher } from "@/utils/fetcher";
 import { ACTION_VIEW, ACTION_ADD } from "@/utils/websiteCard";
@@ -35,7 +37,7 @@ export default function Page() {
       </header>
       <main>
         <hgroup>
-          <h1>Websites</h1>
+          <HeroHeading className={cinzel.className}>Websites</HeroHeading>
         </hgroup>
 
         {data &&

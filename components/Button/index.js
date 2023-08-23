@@ -9,31 +9,32 @@ import styled, { css } from "styled-components";
 import { Spinner } from "../Spinner";
 
 const StyledButton = styled.button`
+  box-shadow: var(--element-shadow);
   ${({ $variant }) => {
     switch ($variant) {
       case BUTTON_SECONDARY:
         return css`
           background-color: white;
           color: var(--primary);
-          border: 1px solid var(--primary);
+          border: none;
         `;
       case BUTTON_PRIMARY:
         return css`
           background-color: var(--primary);
           color: var(--primary-text);
-          border: 1px solid var(--primary);
+          border: none;
         `;
       case BUTTON_SUCCESS:
         return css`
           background-color: var(--success);
           color: var(--primary-text);
-          border: 1px solid var(--primary);
+          border: none;
         `;
       case BUTTON_DANGER:
         return css`
           background-color: var(--danger);
           color: var(--primary-text);
-          border: 1px solid var(--danger);
+          border: none;
         `;
     }
   }}
@@ -41,6 +42,7 @@ const StyledButton = styled.button`
   padding: 0.5rem 1rem;
   min-width: 6rem;
   border-radius: 0.25rem;
+  font-size: 1rem;
 
   &:active {
     box-shadow: 0 0 0 0.3rem var(--secondary-outline),

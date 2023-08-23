@@ -12,12 +12,11 @@ import { ButtonIcon } from "../ButtonIcon";
 import { useRouter } from "next/router";
 
 const StyledNav = styled.nav`
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: var(--secondary);
   height: 50px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  backdrop-filter: blur(10px);
   & button {
     margin: 0 1rem;
   }
