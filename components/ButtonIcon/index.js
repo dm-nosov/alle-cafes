@@ -19,13 +19,16 @@ const IconWrapper = styled.span`
   border: 1px solid var(--editor-background);
   border-radius: 0.25rem;
   padding: 0 0.5rem;
-  background-color: white;
+  display: inline-block;
+  height: 2rem;
   &:active {
     box-shadow: 0 0 0 0.3rem var(--secondary-outline),
       inset 0 0 0.2em 0.1rem rgba(255, 255, 255, 0.2);
   }
-
+  background-color: white;
   svg {
+    margin-top: 5px;
+
     ${({ $variant }) => {
       switch ($variant) {
         case BUTTON_SECONDARY:

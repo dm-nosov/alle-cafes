@@ -27,7 +27,7 @@ const StyledButton = styled.button`
         return css`
           background-color: var(--success);
           color: var(--primary-text);
-          border: 1px solid var(--success);
+          border: 1px solid var(--primary);
         `;
       case BUTTON_DANGER:
         return css`
