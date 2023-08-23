@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import { signIn, signOut } from "next-auth/react";
+import { Button } from "../Button";
+import { BUTTON_PRIMARY } from "@/utils/button";
 const StyledNav = styled.nav`
   display: flex;
   justify-content: end;
@@ -13,9 +15,13 @@ export function Navigation({ session }) {
   return (
     <StyledNav>
       {session ? (
-        <button onClick={() => signOut()}>Sign out</button>
+        <Button text="Sign out" handleClick={() => signOut()} />
       ) : (
-        <button onClick={() => signIn()}>Sign in</button>
+        <Button
+          text="Sign in"
+          actionType={BUTTON_PRIMARY}
+          handleClick={() => signIn()}
+        />
       )}
     </StyledNav>
   );

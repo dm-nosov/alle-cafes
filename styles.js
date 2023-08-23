@@ -29,11 +29,12 @@ export default createGlobalStyle`
     --danger: #C70039;
     --fieldset-border: #f0f0f0;
     --accent: #F2EAD3;
-    --success: green;
+    --success: #125B50;
   }
 
   nav {
-    background-color: var(--secondary);
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.3);
   }
   hgroup {
     padding: 0 1rem;

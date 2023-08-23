@@ -2,6 +2,7 @@ import {
   BUTTON_PRIMARY,
   BUTTON_SECONDARY,
   BUTTON_DANGER,
+  BUTTON_SUCCESS,
 } from "@/utils/button";
 import { useState } from "react";
 import styled, { css } from "styled-components";
@@ -21,6 +22,12 @@ const StyledButton = styled.button`
           background-color: var(--primary);
           color: var(--primary-text);
           border: 1px solid var(--primary);
+        `;
+      case BUTTON_SUCCESS:
+        return css`
+          background-color: var(--success);
+          color: var(--primary-text);
+          border: 1px solid var(--success);
         `;
       case BUTTON_DANGER:
         return css`
