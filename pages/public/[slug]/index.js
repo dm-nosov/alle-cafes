@@ -17,7 +17,7 @@ export default function Page() {
         <title>{data?.title}</title>
         <meta name="description" content={data?.title}></meta>
       </Head>
-      <Header />
+      <Header title={data?.title} />
       {data && (
         <SectionViewerPublic
           websiteContent={data.editorContent}
