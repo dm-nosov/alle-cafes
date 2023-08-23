@@ -126,7 +126,7 @@ export function ProductCardView({
           </PopupOption>
           <PopupOption
             danger
-            handleClick={async () => {
+            handleClick={() => {
               closePopup();
               setShowRemovePopup(true);
             }}

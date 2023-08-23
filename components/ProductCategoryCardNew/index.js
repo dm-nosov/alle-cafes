@@ -16,6 +16,10 @@ const ProductCategoryTitleAdd = styled(ProductCategoryTitle)`
   margin-bottom: 2rem;
 `;
 
+const StyledForm = styled(Form)`
+  margin-top: 2rem;
+`;
+
 export function ProductCategoryCardNew({ websiteId, mutateCategories }) {
   const formRef = useRef(null);
   const firstInputRef = useRef(null);
@@ -26,7 +30,7 @@ export function ProductCategoryCardNew({ websiteId, mutateCategories }) {
       <ProductCategoryTitleAdd className={cinzel.className}>
         Add a menu category
       </ProductCategoryTitleAdd>
-      <Form ref={formRef}>
+      <StyledForm ref={formRef}>
         <Label htmlFor="categoryName">Category name</Label>
         <Input
           type="text"
@@ -52,12 +56,13 @@ export function ProductCategoryCardNew({ websiteId, mutateCategories }) {
               if ("errors" in response) {
                 setErrors(response.errors);
               } else {
+                formRef.current.reset();
                 mutateCategories();
               }
             }
           }}
         />
-      </Form>
+      </StyledForm>
     </ProductCategoryAdd>
   );
 }

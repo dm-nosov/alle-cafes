@@ -12,6 +12,7 @@ import { ACTION_PREVIEW } from "@/utils/websiteCard";
 import { ACTION_SHOW_EMPTY } from "../../utils/websiteCard";
 export function SectionViewer({ categories }) {
   const websiteContent = useWebsiteContentStore((state) => state.content);
+
   return (
     <>
       <SectionPreview
@@ -27,7 +28,9 @@ export function SectionViewer({ categories }) {
           category={category}
         />
       ))}
-      {!categories && <ProductCategoryCard action={ACTION_SHOW_EMPTY} />}
+      {categories.length === 0 && (
+        <ProductCategoryCard action={ACTION_SHOW_EMPTY} />
+      )}
       <SectionPreview
         title={getTitleBySectionName(SPECIAL)}
         content={websiteContent[SPECIAL].html}

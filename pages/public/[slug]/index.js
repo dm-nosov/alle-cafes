@@ -18,7 +18,12 @@ export default function Page() {
         <meta name="description" content={data?.title}></meta>
       </Head>
       <Header />
-      {data && <SectionViewerPublic websiteContent={data.editorContent} />}
+      {data && (
+        <SectionViewerPublic
+          websiteContent={data.editorContent}
+          categories={data.categories}
+        />
+      )}
       {isLoading && <Skeleton $height={10} />}
     </>
   );

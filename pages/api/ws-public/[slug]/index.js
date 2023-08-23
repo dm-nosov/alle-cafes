@@ -12,6 +12,7 @@ export default async function handler(request, response) {
   const { slug } = request.query;
   if (request.method === "GET") {
     const website = await Website.findOne({ slug: slug })
+      .populate({ path: "categories", populate: "products" })
       .populate("editorContent", "-_id -__v")
       .select("-__v -uid -_id");
 
