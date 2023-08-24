@@ -3,7 +3,7 @@ import { Cup } from "../Cup";
 import { CUP_SMALL } from "../../utils/cupSize";
 import { CUP_MEDIUM } from "@/utils/cupSize";
 import { CUP_LARGE } from "@/utils/cupSize";
-import { cinzel } from "@/fonts";
+import { headingFont } from "@/fonts";
 
 const StyledCupRow = styled.aside`
   display: grid;
@@ -11,20 +11,20 @@ const StyledCupRow = styled.aside`
 `;
 
 const HeadingWrapper = styled.hgroup`
-  position: absolute;
-  top: ${({ $positionY }) => $positionY}px;
+  position: sticky;
+  top: ${({ $isPublicPreview }) => ($isPublicPreview ? "0" : "3.1rem")};
   right: 0;
   z-index: 1;
-  background-color: white;
   width: 100%;
-  padding: 2rem 0 0 0;
-  margin-top: -1.5rem;
+  background-color: white;
+  padding: 1rem 0 0 0;
 `;
 
-export function CupRow({ cupRowpositionY, categoryName }) {
+export function CupRow({ categoryName, isPublicPreview = false }) {
+  console.log("isPublicPreview", isPublicPreview);
   return (
-    <HeadingWrapper $positionY={cupRowpositionY}>
-      <h3 className={cinzel.className}>{categoryName}</h3>
+    <HeadingWrapper $isPublicPreview={isPublicPreview}>
+      <h3 className={headingFont.className}>{categoryName}</h3>
       <StyledCupRow>
         <div></div>
         {[CUP_SMALL, CUP_MEDIUM, CUP_LARGE].map((cupSize) => (

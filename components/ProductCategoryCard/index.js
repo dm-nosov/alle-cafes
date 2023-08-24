@@ -18,6 +18,7 @@ export function ProductCategoryCard({
   action,
   mutateCategories,
   websiteId,
+  isPublicPreview,
 }) {
   const [cardAction, setCardAction] = useState(action);
 
@@ -37,7 +38,10 @@ export function ProductCategoryCard({
       break;
     case ACTION_PREVIEW:
       cardView = (
-        <ProductCategoryCardPreview categoryName={category.name}>
+        <ProductCategoryCardPreview
+          categoryName={category.name}
+          isPublicPreview={isPublicPreview}
+        >
           {category.products.map((product) => (
             <ProductCard
               product={product}

@@ -1,4 +1,4 @@
-import { cinzel } from "@/fonts";
+import { headingFont } from "@/fonts";
 import styled from "styled-components";
 import { Input } from "../Input";
 import { FormErrorText } from "../FormErrorText";
@@ -27,7 +27,7 @@ export function ProductCategoryCardNew({ websiteId, mutateCategories }) {
 
   return (
     <ProductCategoryAdd>
-      <ProductCategoryTitleAdd className={cinzel.className}>
+      <ProductCategoryTitleAdd className={headingFont.className}>
         Add a menu category
       </ProductCategoryTitleAdd>
       <StyledForm ref={formRef}>

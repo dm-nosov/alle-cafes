@@ -3,7 +3,7 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import styled from "styled-components";
 import Image from "next/image";
-import { cinzel } from "@/fonts";
+import { headingFont } from "@/fonts";
 import { useEffect } from "react";
 import { HeroHeading } from "@/components/HeroHeading";
 
@@ -39,7 +39,7 @@ export default function Page() {
       </header>
       <main>
         <hgroup>
-          <HeroHeading className={cinzel.className}>
+          <HeroHeading className={headingFont.className}>
             Cafe owner? Add your cafe
           </HeroHeading>
           <HeroText>

@@ -10,10 +10,10 @@ import { fetcher } from "@/utils/fetcher";
 import { useEffect } from "react";
 import { ProductCategoryCard } from "@/components/ProductCategoryCard/index";
 import { ACTION_ADD, ACTION_EDIT, ACTION_VIEW } from "@/utils/websiteCard";
-import { cinzel } from "@/fonts";
+import { headingFont } from "@/fonts";
 import { Skeleton } from "@/components/Skeleton";
 
-export default function Page({ windowY }) {
+export default function Page() {
   const router = useRouter();
   const { id: websiteId } = router.query;
   const preview = useWebsiteContentStore((state) => state.isPreview);
@@ -59,7 +59,7 @@ export default function Page({ windowY }) {
               data={data?.editorContent}
               isLoading={isLoading}
             />
-            <h2 className={cinzel.className}>Menu</h2>
+            <h2 className={headingFont.className}>Menu</h2>
             {isLoadingCategories && <Skeleton $height={6} />}
             {!isLoadingCategories &&
               categoriesData.categories?.map((category) => (
@@ -98,7 +98,6 @@ export default function Page({ windowY }) {
           <SectionViewer
             websiteId={websiteId}
             categories={categoriesData.categories}
-            windowY={windowY}
           />
         )}
       </main>

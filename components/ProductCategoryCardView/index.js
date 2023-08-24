@@ -1,4 +1,4 @@
-import { cinzel } from "@/fonts";
+import { headingFont } from "@/fonts";
 import { ProductCategory } from "../ProductCategory";
 import {
   BUTTON_DANGER,
@@ -47,7 +47,7 @@ export function ProductCategoryCardView({
   return (
     <>
       <ProductCategory>
-        <h3 className={cinzel.className}>
+        <h3 className={headingFont.className}>
           {categoryName}
           <ButtonIcon
             iconName={BUTTON_ICON_TRASH}

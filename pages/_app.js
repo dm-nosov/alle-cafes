@@ -10,17 +10,6 @@ export default function App({
   Component,
   pageProps: { session, ...pageProps },
 }) {
-  const setWindowY = useWebsiteContentStore((state) => state.setWindowY);
-
-  useEffect(() => {
-    function handleScroll(event) {
-      setWindowY(window.scrollY);
-    }
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <>
       <GlobalStyle />
