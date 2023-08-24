@@ -5,13 +5,8 @@ import styled from "styled-components";
 import Image from "next/image";
 import { cinzel } from "@/fonts";
 import { useEffect } from "react";
+import { HeroHeading } from "@/components/HeroHeading";
 
-const HeroHeading = styled.h1`
-  font-size: 32px;
-  text-align: center;
-  padding: 0;
-  margin-bottom: 0;
-`;
 const HeroText = styled.p`
   font-size: 24px;
   font-weight: 300;
@@ -43,12 +38,16 @@ export default function Page() {
         <Navigation session={session} />
       </header>
       <main>
-        <HeroHeading className={cinzel.className}>
-          Cafe owner? Add your cafe
-        </HeroHeading>
-        <HeroText>
-          and enjoy the benefits of free online marketing, SEO and web presence.
-        </HeroText>
+        <hgroup>
+          <HeroHeading className={cinzel.className}>
+            Cafe owner? Add your cafe
+          </HeroHeading>
+          <HeroText>
+            and enjoy the benefits of free online marketing, SEO and web
+            presence.
+          </HeroText>
+        </hgroup>
+
         <ImageWrapper>
           <Image
             src="/img/alle-cafes-logo.svg"

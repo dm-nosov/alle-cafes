@@ -29,11 +29,13 @@ export default createGlobalStyle`
     --danger: #C70039;
     --fieldset-border: #f0f0f0;
     --accent: #F2EAD3;
-    --success: green;
+    --success: #125B50;
+    --element-shadow: rgb(200 200 200) 1px 1px 2px 1px;
   }
 
   nav {
-    background-color: var(--secondary);
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.3);
   }
   hgroup {
     padding: 0 1rem;

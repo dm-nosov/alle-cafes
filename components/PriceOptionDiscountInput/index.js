@@ -1,10 +1,14 @@
 import styled from "styled-components";
 
 const StyledFieldSet = styled.fieldset`
-  border: 3px solid var(--secondary);
+  border: none;
+  box-shadow: var(--element-shadow);
   display: flex;
   flex-direction: column;
   margin-bottom: 1rem;
+  legend {
+    background-color: white;
+  }
 `;
 
 export function PriceOptionDiscountInput({ children, priceOption }) {

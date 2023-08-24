@@ -16,31 +16,39 @@ import {
 const IconWrapper = styled.span`
   margin-left: 0.5rem;
   opacity: ${({ $isDisabled }) => ($isDisabled ? 0.4 : 1)};
-  border: 1px solid var(--editor-background);
+  border: none;
+  box-shadow: var(--element-shadow);
   border-radius: 0.25rem;
   padding: 0 0.5rem;
-
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  height: 2rem;
+  &:active {
+    box-shadow: 0 0 0 0.3rem var(--secondary-outline),
+      inset 0 0 0.2em 0.1rem rgba(255, 255, 255, 0.2);
+  }
+  background-color: white;
   svg {
-    ${({ $variant }) => {
-      switch ($variant) {
-        case BUTTON_SECONDARY:
-          return css`
-            fill: var(--editor-background);
-          `;
-        case BUTTON_PRIMARY:
-          return css`
-            fill: var(--primary);
-          `;
-        case BUTTON_DANGER:
-          return css`
-            fill: var(--danger);
-          `;
-      }
-    }}
-    padding-top: 1px;
-    &:active {
-      transform: scale(1.2);
-    }
+    ${({ $variant }) =>
+      $variant === BUTTON_SECONDARY &&
+      css`
+        fill: var(--editor-background);
+      `}
+    ${({ $variant }) =>
+      $variant === BUTTON_PRIMARY &&
+      css`
+        fill: var(--primary);
+      `}
+    ${({ $variant }) =>
+      $variant === BUTTON_DANGER &&
+      css`
+        fill: var(--danger);
+      `}
+  }
+  &:active {
+    transform: scale(1.2);
+  }
   }
 `;
 

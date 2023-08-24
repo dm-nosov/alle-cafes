@@ -15,6 +15,9 @@ export default function App({
         html {
           font-family: ${inter.style.fontFamily};
         }
+        input {
+          font-family: ${inter.style.fontFamily};
+        }
       `}</style>
       <SessionProvider session={session}>
         <Component {...pageProps} />
