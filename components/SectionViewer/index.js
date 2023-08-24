@@ -22,10 +22,10 @@ export function SectionViewer({ categories }) {
       <h2 className={headingFont.className}>Menu</h2>
       {categories.map((category) => (
         <ProductCategoryCard
-          categoryName={category.name}
           key={category.name}
           action={ACTION_PREVIEW}
           category={category}
+          isMultiPrice={category.isMultiPrice}
         />
       ))}
       {categories.length === 0 && (

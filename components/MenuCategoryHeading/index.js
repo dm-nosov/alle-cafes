@@ -8,7 +8,8 @@ import { ProductCategoryTitle } from "../ProductCategoryTitle";
 
 const StyledCupRow = styled.aside`
   display: grid;
-  grid-template-columns: 1fr repeat(3, 60px);
+  grid-template-columns: repeat(3, 60px);
+  justify-content: end;
 `;
 
 const HeadingWrapper = styled.hgroup`
@@ -21,19 +22,23 @@ const HeadingWrapper = styled.hgroup`
   padding: 1rem 0 0 0;
 `;
 
-export function MenuCategoryHeading({ categoryName, isPublicPreview = false }) {
-  console.log("isPublicPreview", isPublicPreview);
+export function MenuCategoryHeading({
+  categoryName,
+  isPublicPreview = false,
+  isMultiPrice = true,
+}) {
   return (
     <HeadingWrapper $isPublicPreview={isPublicPreview}>
       <ProductCategoryTitle className={headingFont.className}>
         {categoryName}
       </ProductCategoryTitle>
-      <StyledCupRow>
-        <div></div>
-        {[CUP_SMALL, CUP_MEDIUM, CUP_LARGE].map((cupSize) => (
-          <Cup size={cupSize} key={cupSize} />
-        ))}
-      </StyledCupRow>
+      {isMultiPrice && (
+        <StyledCupRow>
+          {[CUP_SMALL, CUP_MEDIUM, CUP_LARGE].map((cupSize) => (
+            <Cup size={cupSize} key={cupSize} />
+          ))}
+        </StyledCupRow>
+      )}
     </HeadingWrapper>
   );
 }

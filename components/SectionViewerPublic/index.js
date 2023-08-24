@@ -11,7 +11,7 @@ import { ACTION_PREVIEW, ACTION_SHOW_EMPTY } from "@/utils/websiteCard";
 import { headingFont } from "@/fonts";
 export function SectionViewerPublic({ websiteContent, categories }) {
   return (
-    <>
+    <main>
       <SectionPreview
         title={getTitleBySectionName(ABOUT)}
         content={websiteContent[ABOUT].html}
@@ -20,7 +20,6 @@ export function SectionViewerPublic({ websiteContent, categories }) {
       <h2 className={headingFont.className}>Menu</h2>
       {categories.map((category) => (
         <ProductCategoryCard
-          categoryName={category.name}
           key={category.name}
           action={ACTION_PREVIEW}
           category={category}
@@ -38,6 +37,6 @@ export function SectionViewerPublic({ websiteContent, categories }) {
         title={getTitleBySectionName(OPENING_HOURS)}
         content={websiteContent[OPENING_HOURS].html}
       />
-    </>
+    </main>
   );
 }

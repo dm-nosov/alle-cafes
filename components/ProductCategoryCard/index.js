@@ -41,6 +41,7 @@ export function ProductCategoryCard({
         <ProductCategoryCardPreview
           categoryName={category.name}
           isPublicPreview={isPublicPreview}
+          isMultiPrice={category.isMultiPrice}
         >
           {category.products.map((product) => (
             <ProductCard

@@ -28,7 +28,9 @@ export function ProductCardPreview({ product }) {
         <ProductName>
           <span>{product.name}</span>
         </ProductName>
-        <ProductDescription>{product.description}</ProductDescription>
+        {product.description && (
+          <ProductDescription>{product.description}</ProductDescription>
+        )}
       </ProductGroup>
       {product.isMultiPrice &&
         product.prices.map((price) => {
@@ -36,7 +38,6 @@ export function ProductCardPreview({ product }) {
           if (price.isDiscounted) {
             priceGroupContent = (
               <>
-                <Cup size={CUP_EMPTY} />
                 <PriceDiscountGroup
                   price={price.price}
                   discountPrice={price.discountPrice}
@@ -46,7 +47,6 @@ export function ProductCardPreview({ product }) {
           } else {
             priceGroupContent = (
               <>
-                <Cup size={CUP_EMPTY} />
                 <OptionalPrice price={price.price} />
               </>
             );
@@ -55,7 +55,6 @@ export function ProductCardPreview({ product }) {
         })}
       {!product.isMultiPrice && product.isDiscounted && (
         <PriceGroup>
-          <Cup size={null} />
           <PriceDiscountGroup
             price={product.price}
             discountPrice={product.discountPrice}
@@ -64,7 +63,6 @@ export function ProductCardPreview({ product }) {
       )}
       {!product.isMultiPrice && !product.isDiscounted && (
         <PriceGroup>
-          <Cup size={null} />
           <OptionalPrice price={product.price} />
         </PriceGroup>
       )}

@@ -77,7 +77,9 @@ export function Checkbox({
       onClick={async () => {
         const updatedCheckValue = !isChecked;
         setIsChecked(updatedCheckValue);
-        handleCheck(updatedCheckValue);
+        if (handleCheck) {
+          handleCheck(updatedCheckValue);
+        }
       }}
     >
       <Label htmlFor={checkboxName}>{labelText}</Label>

@@ -13,12 +13,14 @@ export function ProductCategoryCardPreview({
   categoryName,
   children,
   isPublicPreview,
+  isMultiPrice,
 }) {
   return (
     <ProductCategoryRelative>
       <MenuCategoryHeading
         categoryName={categoryName}
         isPublicPreview={isPublicPreview}
+        isMultiPrice={isMultiPrice}
       />
       {children}
     </ProductCategoryRelative>
