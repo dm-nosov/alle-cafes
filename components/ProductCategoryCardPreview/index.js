@@ -3,37 +3,33 @@ import { ProductCategory } from "../ProductCategory";
 import { CupRow } from "../CupRow";
 import styled from "styled-components";
 import { useEffect, useRef, useState } from "react";
+import { useWebsiteContentStore } from "@/store/WebsiteContent";
 
 const ProductCategoryRelative = styled(ProductCategory)`
   position: relative;
+  padding-top: 3rem;
 `;
 
-export function ProductCategoryCardPreview({
-  categoryName,
-  children,
-  windowY,
-}) {
+export function ProductCategoryCardPreview({ categoryName, children }) {
   const categoryRef = useRef(null);
+
+  const windowY = useWebsiteContentStore((state) => state.windowY);
+
   const [cupRowpositionY, setCupRowPositionY] = useState(0);
 
   useEffect(() => {
     let categoriesElement = categoryRef.current;
     const { top, height } = categoriesElement.getBoundingClientRect();
-    console.log("height", height);
-    console.log("top", top);
-    if (top > 16 * 2 || top < -height + 16 * 7) {
-      setCupRowPositionY(16 * 2);
+    if (top > 56 || top < -height + 16 * 7) {
+      setCupRowPositionY(0);
     } else {
-      setCupRowPositionY(16 * 4 - top);
+      setCupRowPositionY(46 - top);
     }
   }, [windowY]);
 
-  console.log("cupRowpositionY", cupRowpositionY);
-
   return (
     <ProductCategoryRelative ref={categoryRef}>
-      <h3 className={cinzel.className}>{categoryName}</h3>
-      <CupRow cupRowpositionY={cupRowpositionY} />
+      <CupRow cupRowpositionY={cupRowpositionY} categoryName={categoryName} />
       {children}
     </ProductCategoryRelative>
   );

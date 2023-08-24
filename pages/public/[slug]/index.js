@@ -6,7 +6,7 @@ import Head from "next/head";
 import { Header } from "@/components/Header";
 import { Skeleton } from "@/components/Skeleton";
 
-export default function Page({ windowY }) {
+export default function Page() {
   const router = useRouter();
   const { slug: websiteSlug } = router.query;
   const { data, isLoading } = useSWR(`/api/ws-public/${websiteSlug}`, fetcher);
@@ -22,7 +22,6 @@ export default function Page({ windowY }) {
         <SectionViewerPublic
           websiteContent={data.editorContent}
           categories={data.categories}
-          windowY={windowY}
         />
       )}
       {isLoading && <Skeleton $height={10} />}

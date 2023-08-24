@@ -6,6 +6,7 @@ export const useWebsiteContentStore = create(
   devtools((set) => ({
     isPreview: false,
     websiteId: "",
+    windowY: 0,
     content: {
       about: { json: null, html: "" },
       special: { json: null, html: "" },
@@ -47,6 +48,15 @@ export const useWebsiteContentStore = create(
         },
         false,
         "websiteContent/resetContent"
+      ),
+
+    setWindowY: (newWindowY) =>
+      set(
+        () => ({
+          windowY: newWindowY,
+        }),
+        false,
+        "websiteContent/setWindowY"
       ),
   }))
 );

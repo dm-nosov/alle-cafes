@@ -18,7 +18,6 @@ export function ProductCategoryCard({
   action,
   mutateCategories,
   websiteId,
-  windowY,
 }) {
   const [cardAction, setCardAction] = useState(action);
 
@@ -38,10 +37,7 @@ export function ProductCategoryCard({
       break;
     case ACTION_PREVIEW:
       cardView = (
-        <ProductCategoryCardPreview
-          categoryName={category.name}
-          windowY={windowY}
-        >
+        <ProductCategoryCardPreview categoryName={category.name}>
           {category.products.map((product) => (
             <ProductCard
               product={product}
