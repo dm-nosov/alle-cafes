@@ -1,3 +1,4 @@
+import { Footer } from "@/components/Footer";
 import { HeroHeading } from "@/components/HeroHeading";
 import { Navigation } from "@/components/Navigation";
 import { Skeleton } from "@/components/Skeleton";
@@ -60,6 +61,7 @@ export default function Page() {
           mutate={mutate}
         />
       </main>
+      <Footer />
     </>
   );
 }

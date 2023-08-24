@@ -5,6 +5,7 @@ import useSWR from "swr";
 import Head from "next/head";
 import { Header } from "@/components/Header";
 import { Skeleton } from "@/components/Skeleton";
+import { Footer } from "@/components/Footer";
 
 export default function Page() {
   const router = useRouter();
@@ -25,6 +26,7 @@ export default function Page() {
         />
       )}
       {isLoading && <Skeleton $height={10} />}
+      <Footer />
     </>
   );
 }

@@ -5,8 +5,8 @@ const StyledFooter = styled.footer`
   justify-content: center;
   align-items: center;
   height: 10rem;
-  background-color: var(--primary);
-  color: white;
+  background-color: var(--secondary);
+  color: black;
   width: 100%;
   bottom: 0;
 `;

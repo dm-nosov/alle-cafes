@@ -12,6 +12,7 @@ import { ProductCategoryCard } from "@/components/ProductCategoryCard/index";
 import { ACTION_ADD, ACTION_EDIT, ACTION_VIEW } from "@/utils/websiteCard";
 import { headingFont } from "@/fonts";
 import { Skeleton } from "@/components/Skeleton";
+import { Footer } from "@/components/Footer";
 
 export default function Page() {
   const router = useRouter();
@@ -101,6 +102,7 @@ export default function Page() {
           />
         )}
       </main>
+      <Footer />
     </>
   );
 }

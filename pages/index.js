@@ -6,6 +6,7 @@ import Image from "next/image";
 import { headingFont } from "@/fonts";
 import { useEffect } from "react";
 import { HeroHeading } from "@/components/HeroHeading";
+import { Footer } from "@/components/Footer";
 
 const HeroText = styled.p`
   font-size: 24px;
@@ -60,6 +61,7 @@ export default function Page() {
           />
         </ImageWrapper>
       </main>
+      <Footer />
     </>
   );
 }
