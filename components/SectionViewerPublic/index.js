@@ -9,7 +9,7 @@ import {
 import { ProductCategoryCard } from "../ProductCategoryCard";
 import { ACTION_PREVIEW, ACTION_SHOW_EMPTY } from "@/utils/websiteCard";
 import { cinzel } from "@/fonts";
-export function SectionViewerPublic({ websiteContent, categories }) {
+export function SectionViewerPublic({ websiteContent, categories, windowY }) {
   return (
     <>
       <SectionPreview
@@ -24,6 +24,7 @@ export function SectionViewerPublic({ websiteContent, categories }) {
           key={category.name}
           action={ACTION_PREVIEW}
           category={category}
+          windowY={windowY}
         />
       ))}
       {categories.length === 0 && (

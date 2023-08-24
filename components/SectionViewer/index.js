@@ -10,7 +10,7 @@ import { ProductCategoryCard } from "../ProductCategoryCard";
 import { cinzel } from "@/fonts";
 import { ACTION_PREVIEW } from "@/utils/websiteCard";
 import { ACTION_SHOW_EMPTY } from "../../utils/websiteCard";
-export function SectionViewer({ categories }) {
+export function SectionViewer({ categories, windowY }) {
   const websiteContent = useWebsiteContentStore((state) => state.content);
 
   return (
@@ -26,6 +26,7 @@ export function SectionViewer({ categories }) {
           key={category.name}
           action={ACTION_PREVIEW}
           category={category}
+          windowY={windowY}
         />
       ))}
       {categories.length === 0 && (

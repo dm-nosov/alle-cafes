@@ -13,7 +13,7 @@ import { ACTION_ADD, ACTION_EDIT, ACTION_VIEW } from "@/utils/websiteCard";
 import { cinzel } from "@/fonts";
 import { Skeleton } from "@/components/Skeleton";
 
-export default function Page() {
+export default function Page({ windowY }) {
   const router = useRouter();
   const { id: websiteId } = router.query;
   const preview = useWebsiteContentStore((state) => state.isPreview);
@@ -98,6 +98,7 @@ export default function Page() {
           <SectionViewer
             websiteId={websiteId}
             categories={categoriesData.categories}
+            windowY={windowY}
           />
         )}
       </main>

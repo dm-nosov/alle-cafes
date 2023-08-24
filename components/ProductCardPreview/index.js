@@ -6,6 +6,7 @@ import { ProductName } from "../ProductName";
 import { ProductDescription } from "../ProductDescription";
 import { PriceDiscountGroup } from "../PriceDiscountGroup";
 import { OptionalPrice } from "../OptionalPrice";
+import { CUP_EMPTY } from "@/utils/cupSize";
 
 const ProductGrid = styled.article`
   display: grid;
@@ -35,7 +36,7 @@ export function ProductCardPreview({ product }) {
           if (price.isDiscounted) {
             priceGroupContent = (
               <>
-                <Cup size={price.portionType} />
+                <Cup size={CUP_EMPTY} />
                 <PriceDiscountGroup
                   price={price.price}
                   discountPrice={price.discountPrice}
@@ -45,7 +46,7 @@ export function ProductCardPreview({ product }) {
           } else {
             priceGroupContent = (
               <>
-                <Cup size={price.portionType} />
+                <Cup size={CUP_EMPTY} />
                 <OptionalPrice price={price.price} />
               </>
             );
