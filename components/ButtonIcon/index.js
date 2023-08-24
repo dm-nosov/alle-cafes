@@ -30,25 +30,25 @@ const IconWrapper = styled.span`
   }
   background-color: white;
   svg {
-    ${({ $variant }) => {
-      switch ($variant) {
-        case BUTTON_SECONDARY:
-          return css`
-            fill: var(--editor-background);
-          `;
-        case BUTTON_PRIMARY:
-          return css`
-            fill: var(--primary);
-          `;
-        case BUTTON_DANGER:
-          return css`
-            fill: var(--danger);
-          `;
-      }
-    }}
-    &:active {
-      transform: scale(1.2);
-    }
+    ${({ $variant }) =>
+      $variant === BUTTON_SECONDARY &&
+      css`
+        fill: var(--editor-background);
+      `}
+    ${({ $variant }) =>
+      $variant === BUTTON_PRIMARY &&
+      css`
+        fill: var(--primary);
+      `}
+    ${({ $variant }) =>
+      $variant === BUTTON_DANGER &&
+      css`
+        fill: var(--danger);
+      `}
+  }
+  &:active {
+    transform: scale(1.2);
+  }
   }
 `;
 

@@ -9,36 +9,37 @@ import styled, { css } from "styled-components";
 import { Spinner } from "../Spinner";
 
 const StyledButton = styled.button`
-  box-shadow: var(--element-shadow);
-  ${({ $variant }) => {
-    switch ($variant) {
-      case BUTTON_SECONDARY:
-        return css`
-          background-color: white;
-          color: var(--primary);
-          border: none;
-        `;
-      case BUTTON_PRIMARY:
-        return css`
-          background-color: var(--primary);
-          color: var(--primary-text);
-          border: none;
-        `;
-      case BUTTON_SUCCESS:
-        return css`
-          background-color: var(--success);
-          color: var(--primary-text);
-          border: none;
-        `;
-      case BUTTON_DANGER:
-        return css`
-          background-color: var(--danger);
-          color: var(--primary-text);
-          border: none;
-        `;
-    }
-  }}
+  ${({ $variant }) =>
+    $variant === BUTTON_SECONDARY &&
+    css`
+      background-color: white;
+      color: var(--primary);
+      border: none;
+    `}
 
+  ${({ $variant }) =>
+    $variant === BUTTON_PRIMARY &&
+    css`
+      background-color: var(--primary);
+      color: var(--primary-text);
+      border: none;
+    `} 
+      ${({ $variant }) =>
+    $variant === BUTTON_SUCCESS &&
+    css`
+      background-color: var(--success);
+      color: var(--primary-text);
+      border: none;
+    `} 
+    ${({ $variant }) =>
+    $variant === BUTTON_DANGER &&
+    css`
+      background-color: var(--danger);
+      color: var(--primary-text);
+      border: none;
+    `} 
+
+  box-shadow: var(--element-shadow);
   padding: 0.5rem 1rem;
   min-width: 6rem;
   border-radius: 0.25rem;
