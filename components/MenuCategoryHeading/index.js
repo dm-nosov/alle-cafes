@@ -4,6 +4,7 @@ import { CUP_SMALL } from "../../utils/cupSize";
 import { CUP_MEDIUM } from "@/utils/cupSize";
 import { CUP_LARGE } from "@/utils/cupSize";
 import { headingFont } from "@/fonts";
+import { ProductCategoryTitle } from "../ProductCategoryTitle";
 
 const StyledCupRow = styled.aside`
   display: grid;
@@ -20,11 +21,13 @@ const HeadingWrapper = styled.hgroup`
   padding: 1rem 0 0 0;
 `;
 
-export function CupRow({ categoryName, isPublicPreview = false }) {
+export function MenuCategoryHeading({ categoryName, isPublicPreview = false }) {
   console.log("isPublicPreview", isPublicPreview);
   return (
     <HeadingWrapper $isPublicPreview={isPublicPreview}>
-      <h3 className={headingFont.className}>{categoryName}</h3>
+      <ProductCategoryTitle className={headingFont.className}>
+        {categoryName}
+      </ProductCategoryTitle>
       <StyledCupRow>
         <div></div>
         {[CUP_SMALL, CUP_MEDIUM, CUP_LARGE].map((cupSize) => (
