@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { Checkbox } from "../Checkbox";
 import { FormErrorText } from "../FormErrorText";
-import { Input } from "../Input";
 import { CUP_EMPTY, CUP_LARGE, CUP_MEDIUM, CUP_SMALL } from "@/utils/cupSize";
 import { PriceInput } from "../PriceInput";
 import { Label } from "../Label";
