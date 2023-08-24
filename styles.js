@@ -10,7 +10,6 @@ export default createGlobalStyle`
   body {
     margin: 0;
     color: #3f3f3f;
-    min-height: 100vh;
   }
 
   h2 {
@@ -42,6 +41,6 @@ export default createGlobalStyle`
     padding: 0 1rem;
   }
   main {
-    margin-bottom: 10rem;
+    min-height: calc(100vh - 66px - 10rem);
   }
 `;
