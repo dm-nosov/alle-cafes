@@ -61,7 +61,6 @@ export default function Page() {
           />
         </ImageWrapper>
       </main>
-      <Footer />
     </>
   );
 }

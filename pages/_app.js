@@ -24,6 +24,7 @@ export default function App({
       `}</style>
       <SessionProvider session={session}>
         <Component {...pageProps} />
+        <Footer />
       </SessionProvider>
     </>
   );

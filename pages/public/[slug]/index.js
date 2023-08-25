@@ -26,7 +26,6 @@ export default function Page() {
         />
       )}
       {isLoading && <Skeleton $height={10} />}
-      <Footer />
     </>
   );
 }

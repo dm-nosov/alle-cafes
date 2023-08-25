@@ -1,3 +1,4 @@
+import { useSession } from "next-auth/react";
 import styled from "styled-components";
 
 const StyledFooter = styled.footer`
@@ -12,5 +13,15 @@ const StyledFooter = styled.footer`
 `;
 
 export function Footer() {
-  return <StyledFooter>Copyright, 2023</StyledFooter>;
+  const { data: session, status } = useSession();
+  console.log("status", status);
+  console.log("session", session);
+
+  if (session === undefined) {
+    return null;
+  }
+
+  return (
+    <>{status !== "loading" && <StyledFooter>Copyright, 2023</StyledFooter>}</>
+  );
 }
