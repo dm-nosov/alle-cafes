@@ -6,6 +6,7 @@ import { ProductName } from "../ProductName";
 import { ProductDescription } from "../ProductDescription";
 import { PriceDiscountGroup } from "../PriceDiscountGroup";
 import { OptionalPrice } from "../OptionalPrice";
+import { CUP_EMPTY } from "@/utils/cupSize";
 
 const ProductGrid = styled.article`
   display: grid;
@@ -27,7 +28,9 @@ export function ProductCardPreview({ product }) {
         <ProductName>
           <span>{product.name}</span>
         </ProductName>
-        <ProductDescription>{product.description}</ProductDescription>
+        {product.description && (
+          <ProductDescription>{product.description}</ProductDescription>
+        )}
       </ProductGroup>
       {product.isMultiPrice &&
         product.prices.map((price) => {
@@ -35,7 +38,6 @@ export function ProductCardPreview({ product }) {
           if (price.isDiscounted) {
             priceGroupContent = (
               <>
-                <Cup size={price.portionType} />
                 <PriceDiscountGroup
                   price={price.price}
                   discountPrice={price.discountPrice}
@@ -45,7 +47,6 @@ export function ProductCardPreview({ product }) {
           } else {
             priceGroupContent = (
               <>
-                <Cup size={price.portionType} />
                 <OptionalPrice price={price.price} />
               </>
             );
@@ -54,7 +55,6 @@ export function ProductCardPreview({ product }) {
         })}
       {!product.isMultiPrice && product.isDiscounted && (
         <PriceGroup>
-          <Cup size={null} />
           <PriceDiscountGroup
             price={product.price}
             discountPrice={product.discountPrice}
@@ -63,7 +63,6 @@ export function ProductCardPreview({ product }) {
       )}
       {!product.isMultiPrice && !product.isDiscounted && (
         <PriceGroup>
-          <Cup size={null} />
           <OptionalPrice price={product.price} />
         </PriceGroup>
       )}

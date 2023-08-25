@@ -1,4 +1,4 @@
-import { cinzel } from "@/fonts";
+import { headingFont } from "@/fonts";
 import styled from "styled-components";
 import { Input } from "../Input";
 import { FormErrorText } from "../FormErrorText";
@@ -11,6 +11,7 @@ import { ProductCategoryAdd } from "../ProductCategoryAdd";
 import { Button } from "../Button";
 import { Label } from "../Label";
 import { createProductCategory } from "@/api-facade/product-category";
+import { Checkbox } from "../Checkbox";
 
 const ProductCategoryTitleAdd = styled(ProductCategoryTitle)`
   margin-bottom: 2rem;
@@ -27,7 +28,7 @@ export function ProductCategoryCardNew({ websiteId, mutateCategories }) {
 
   return (
     <ProductCategoryAdd>
-      <ProductCategoryTitleAdd className={cinzel.className}>
+      <ProductCategoryTitleAdd className={headingFont.className}>
         Add a menu category
       </ProductCategoryTitleAdd>
       <StyledForm ref={formRef}>
@@ -43,6 +44,12 @@ export function ProductCategoryCardNew({ websiteId, mutateCategories }) {
           autoComplete="off"
         />
         <FormErrorText>{errors?.name?.message}</FormErrorText>
+        <Checkbox
+          checkboxName="isMultiPrice"
+          labelText="Multi-price"
+          description="Check to show S, M, L cups in the heading"
+          isInitChecked={true}
+        />
         <Button
           text="Add"
           actionType={BUTTON_PRIMARY}

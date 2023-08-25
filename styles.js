@@ -40,4 +40,8 @@ export default createGlobalStyle`
   hgroup {
     padding: 0 1rem;
   }
+  main {
+    min-height: calc(100dvh - 89px - 10rem);
+    
+  }
 `;

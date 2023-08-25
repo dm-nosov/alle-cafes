@@ -17,6 +17,10 @@ const productCategorySchema = new Schema({
     type: String,
     required: true,
   },
+  isMultiPrice: {
+    type: Boolean,
+    required: true,
+  },
 });
 
 const ProductCategory =

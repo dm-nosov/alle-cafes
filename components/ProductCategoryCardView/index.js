@@ -1,4 +1,4 @@
-import { cinzel } from "@/fonts";
+import { headingFont } from "@/fonts";
 import { ProductCategory } from "../ProductCategory";
 import {
   BUTTON_DANGER,
@@ -11,6 +11,7 @@ import { useState } from "react";
 import { PopupGeneral } from "../PopupGeneral";
 import { ButtonGroup } from "../ButtonGroup";
 import { removeProductCategory } from "@/api-facade/product-category";
+import { ProductCategoryTitle } from "../ProductCategoryTitle";
 
 export function ProductCategoryCardView({
   categoryName,
@@ -47,14 +48,14 @@ export function ProductCategoryCardView({
   return (
     <>
       <ProductCategory>
-        <h3 className={cinzel.className}>
+        <ProductCategoryTitle className={headingFont.className}>
           {categoryName}
           <ButtonIcon
             iconName={BUTTON_ICON_TRASH}
             variant={BUTTON_DANGER}
             handleClick={() => setShowRemovePopup(true)}
           />
-        </h3>
+        </ProductCategoryTitle>
 
         {children}
       </ProductCategory>

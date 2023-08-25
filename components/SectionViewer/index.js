@@ -7,7 +7,7 @@ import {
   getTitleBySectionName,
 } from "@/utils/content";
 import { ProductCategoryCard } from "../ProductCategoryCard";
-import { cinzel } from "@/fonts";
+import { headingFont } from "@/fonts";
 import { ACTION_PREVIEW } from "@/utils/websiteCard";
 import { ACTION_SHOW_EMPTY } from "../../utils/websiteCard";
 export function SectionViewer({ categories }) {
@@ -19,13 +19,13 @@ export function SectionViewer({ categories }) {
         title={getTitleBySectionName(ABOUT)}
         content={websiteContent[ABOUT].html}
       />
-      <h2 className={cinzel.className}>Menu</h2>
+      <h2 className={headingFont.className}>Menu</h2>
       {categories.map((category) => (
         <ProductCategoryCard
-          categoryName={category.name}
           key={category.name}
           action={ACTION_PREVIEW}
           category={category}
+          isMultiPrice={category.isMultiPrice}
         />
       ))}
       {categories.length === 0 && (

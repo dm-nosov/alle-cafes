@@ -10,8 +10,9 @@ import { fetcher } from "@/utils/fetcher";
 import { useEffect } from "react";
 import { ProductCategoryCard } from "@/components/ProductCategoryCard/index";
 import { ACTION_ADD, ACTION_EDIT, ACTION_VIEW } from "@/utils/websiteCard";
-import { cinzel } from "@/fonts";
+import { headingFont } from "@/fonts";
 import { Skeleton } from "@/components/Skeleton";
+import { Footer } from "@/components/Footer";
 
 export default function Page() {
   const router = useRouter();
@@ -59,7 +60,7 @@ export default function Page() {
               data={data?.editorContent}
               isLoading={isLoading}
             />
-            <h2 className={cinzel.className}>Menu</h2>
+            <h2 className={headingFont.className}>Menu</h2>
             {isLoadingCategories && <Skeleton $height={6} />}
             {!isLoadingCategories &&
               categoriesData.categories?.map((category) => (

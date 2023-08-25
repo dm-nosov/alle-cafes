@@ -1,6 +1,9 @@
+import { useWebsiteContentStore } from "@/store/WebsiteContent";
 import GlobalStyle from "../styles";
 import { SessionProvider } from "next-auth/react";
 import { Inter } from "next/font/google";
+import { useEffect, useState } from "react";
+import { Footer } from "@/components/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -21,6 +24,7 @@ export default function App({
       `}</style>
       <SessionProvider session={session}>
         <Component {...pageProps} />
+        <Footer />
       </SessionProvider>
     </>
   );

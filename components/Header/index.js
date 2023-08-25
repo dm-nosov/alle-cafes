@@ -1,6 +1,6 @@
 import Image from "next/image";
 import styled from "styled-components";
-import { cinzel } from "@/fonts";
+import { headingFont } from "@/fonts";
 
 const StyledHeroBlock = styled.header`
   position: relative;
@@ -23,7 +23,7 @@ const HeroText = styled.h1`
 
 export function Header({ title }) {
   return (
-    <StyledHeroBlock className={cinzel.className}>
+    <StyledHeroBlock className={headingFont.className}>
       <Image
         src="/img/hero-image.png"
         width={0}

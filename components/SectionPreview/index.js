@@ -1,4 +1,4 @@
-import { cinzel } from "@/fonts";
+import { headingFont } from "@/fonts";
 import { styled } from "styled-components";
 
 const StyledArticle = styled.article`
@@ -8,7 +8,7 @@ const StyledArticle = styled.article`
 export function SectionPreview({ title, content }) {
   return (
     <>
-      <h2 className={cinzel.className}>{title}</h2>
+      <h2 className={headingFont.className}>{title}</h2>
       <StyledArticle
         dangerouslySetInnerHTML={{ __html: content }}
       ></StyledArticle>

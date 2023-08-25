@@ -1,7 +1,7 @@
-import { Cinzel, Inter } from "next/font/google";
+import { Merriweather } from "next/font/google";
 
-export const cinzel = Cinzel({
+export const headingFont = Merriweather({
   subsets: ["latin"],
-  variable: "--font-cinzel",
+  weight: ["400", "700"],
   display: "swap",
 });

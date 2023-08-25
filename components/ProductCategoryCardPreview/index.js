@@ -1,12 +1,25 @@
-import { cinzel } from "@/fonts";
-import styled from "styled-components";
 import { ProductCategory } from "../ProductCategory";
+import { MenuCategoryHeading } from "../MenuCategoryHeading";
+import styled from "styled-components";
 
-export function ProductCategoryCardPreview({ categoryName, children }) {
+const ProductCategoryRelative = styled(ProductCategory)`
+  position: relative;
+`;
+
+export function ProductCategoryCardPreview({
+  categoryName,
+  children,
+  isPublicPreview,
+  isMultiPrice,
+}) {
   return (
-    <ProductCategory>
-      <h3 className={cinzel.className}>{categoryName}</h3>
+    <ProductCategoryRelative>
+      <MenuCategoryHeading
+        categoryName={categoryName}
+        isPublicPreview={isPublicPreview}
+        isMultiPrice={isMultiPrice}
+      />
       {children}
-    </ProductCategory>
+    </ProductCategoryRelative>
   );
 }
