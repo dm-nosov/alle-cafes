@@ -14,8 +14,6 @@ const StyledFooter = styled.footer`
 
 export function Footer() {
   const { data: session, status } = useSession();
-  console.log("status", status);
-  console.log("session", session);
 
   if (session === undefined) {
     return null;
