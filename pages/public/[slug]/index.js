@@ -25,7 +25,7 @@ export default function Page() {
           categories={data.categories}
         />
       )}
-      {isLoading && <Skeleton $height={10} />}
+      {isLoading && <Skeleton $height={50} />}
     </>
   );
 }
