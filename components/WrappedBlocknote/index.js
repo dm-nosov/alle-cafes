@@ -17,10 +17,20 @@ export function WrappedBlocknote({ sectionName, sectionData }) {
   const editor = useBlockNote({
     initialContent: stateSectionData ? stateSectionData : sectionData,
     onEditorContentChange: async (editor) => {
+      let jsonContent = [...editor.topLevelBlocks];
+
+      if (jsonContent && jsonContent.length > 0) {
+        jsonContent = jsonContent.filter(
+          (contentBlock) =>
+            contentBlock.content?.length > 0 ||
+            contentBlock.children?.length > 0
+        );
+      }
+
       updateSection(
         sectionName,
-        editor.topLevelBlocks,
-        await editor.blocksToHTML(editor.topLevelBlocks)
+        jsonContent,
+        await editor.blocksToHTML(jsonContent)
       );
     },
   });
