@@ -53,8 +53,8 @@ export function TopAdminToolbar({ websiteId, mutateEditor }) {
       <Button
         text="Save"
         actionType={BUTTON_SUCCESS}
-        handleClick={() => {
-          saveContent(websiteId, content);
+        handleClick={async () => {
+          await saveContent(websiteId, content);
           mutateEditor();
         }}
       />
