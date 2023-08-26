@@ -60,6 +60,9 @@ export function ButtonIcon({
 }) {
   const [loading, setLoading] = useState(false);
   async function onClick(event) {
+    if (isDisabled) {
+      return;
+    }
     setLoading(true);
     if (handleClick) {
       await handleClick(event);
