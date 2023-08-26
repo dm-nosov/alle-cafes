@@ -45,7 +45,7 @@ export default function Page() {
       }
     }
   }, [data]);
-  console.log("categoriesData", categoriesData);
+
   return (
     <>
       <TopAdminToolbar websiteId={websiteId} mutateEditor={mutateEditor} />
