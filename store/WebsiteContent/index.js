@@ -4,7 +4,6 @@ import { devtools } from "zustand/middleware";
 
 export const useWebsiteContentStore = create(
   devtools((set) => ({
-    isPreview: false,
     websiteId: "",
     content: {
       about: { json: null, html: "" },
@@ -20,14 +19,6 @@ export const useWebsiteContentStore = create(
         false,
         "websiteContent/updateSection"
       ),
-    togglePreview: () =>
-      set(
-        (state) => ({
-          isPreview: !state.isPreview,
-        }),
-        false,
-        "websiteContent/togglePreview"
-      ),
     setWebsiteId: (newWebsiteId) =>
       set(
         () => ({
@@ -35,26 +26,6 @@ export const useWebsiteContentStore = create(
         }),
         false,
         "websiteContent/setWebsiteId"
-      ),
-    resetContent: () =>
-      set(
-        {
-          content: {
-            about: { json: null, html: "" },
-            special: { json: null, html: "" },
-            hours: { json: null, html: "" },
-          },
-        },
-        false,
-        "websiteContent/resetContent"
-      ),
-    resetPreview: () =>
-      set(
-        () => ({
-          isPreview: false,
-        }),
-        false,
-        "websiteContent/resetPreview"
       ),
   }))
 );
