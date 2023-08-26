@@ -12,7 +12,6 @@ import { ProductCategoryCard } from "@/components/ProductCategoryCard/index";
 import { ACTION_ADD, ACTION_EDIT, ACTION_VIEW } from "@/utils/websiteCard";
 import { headingFont } from "@/fonts";
 import { Skeleton } from "@/components/Skeleton";
-import { Footer } from "@/components/Footer";
 
 export default function Page() {
   const router = useRouter();
@@ -22,10 +21,11 @@ export default function Page() {
   const updateSection = useWebsiteContentStore((state) => state.updateSection);
   const setWebsiteId = useWebsiteContentStore((state) => state.setWebsiteId);
 
-  const { data, isLoading } = useSWR(
-    `/api/ws/${websiteId}/editor-content`,
-    fetcher
-  );
+  const {
+    data,
+    mutate: mutateEditor,
+    isLoading,
+  } = useSWR(`/api/ws/${websiteId}/editor-content`, fetcher);
 
   const {
     data: categoriesData,
@@ -34,23 +34,21 @@ export default function Page() {
   } = useSWR(`/api/ws/${websiteId}/categories`, fetcher);
 
   useEffect(() => {
-    if (data && data.editorContent) {
+    if (data?.editorContent) {
       setWebsiteId(websiteId);
       for (const sectionName of [ABOUT, SPECIAL, OPENING_HOURS]) {
-        if (data.editorContent[sectionName]) {
-          updateSection(
-            sectionName,
-            JSON.parse(data.editorContent[sectionName].json),
-            data.editorContent[sectionName].html
-          );
-        }
+        updateSection(
+          sectionName,
+          JSON.parse(data.editorContent[sectionName].json),
+          data.editorContent[sectionName].html
+        );
       }
     }
   }, [data]);
-
+  console.log("categoriesData", categoriesData);
   return (
     <>
-      <TopAdminToolbar websiteId={websiteId} />
+      <TopAdminToolbar websiteId={websiteId} mutateEditor={mutateEditor} />
       <Header title={data?.title} />
       <main>
         {!preview && (

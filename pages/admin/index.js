@@ -17,9 +17,11 @@ export default function Page() {
   const { data, isLoading, error, mutate } = useSWR(`/api/ws/`, fetcher);
   const router = useRouter();
   const resetContent = useWebsiteContentStore((state) => state.resetContent);
+  const resetPreview = useWebsiteContentStore((state) => state.resetPreview);
 
   useEffect(() => {
     resetContent();
+    resetPreview();
   }, []);
 
   useEffect(() => {

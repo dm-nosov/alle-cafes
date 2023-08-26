@@ -48,5 +48,13 @@ export const useWebsiteContentStore = create(
         false,
         "websiteContent/resetContent"
       ),
+    resetPreview: () =>
+      set(
+        () => ({
+          isPreview: false,
+        }),
+        false,
+        "websiteContent/resetPreview"
+      ),
   }))
 );

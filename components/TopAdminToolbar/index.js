@@ -26,7 +26,7 @@ const StyledNav = styled.nav`
   z-index: 3;
 `;
 
-export function TopAdminToolbar({ websiteId }) {
+export function TopAdminToolbar({ websiteId, mutateEditor }) {
   const preview = useWebsiteContentStore((state) => state.isPreview);
   const togglePreview = useWebsiteContentStore((state) => state.togglePreview);
   const content = useWebsiteContentStore((state) => state.content);
@@ -53,7 +53,10 @@ export function TopAdminToolbar({ websiteId }) {
       <Button
         text="Save"
         actionType={BUTTON_SUCCESS}
-        handleClick={() => saveContent(websiteId, content)}
+        handleClick={() => {
+          saveContent(websiteId, content);
+          mutateEditor();
+        }}
       />
     </StyledNav>
   );
