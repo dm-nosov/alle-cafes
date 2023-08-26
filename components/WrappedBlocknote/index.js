@@ -10,12 +10,8 @@ const BlockNoteWrapper = styled.div`
 export function WrappedBlocknote({ sectionName, sectionData }) {
   const updateSection = useWebsiteContentStore((state) => state.updateSection);
 
-  const stateSectionData = useWebsiteContentStore(
-    (state) => state.content[sectionName].json
-  );
-
   const editor = useBlockNote({
-    initialContent: stateSectionData ? stateSectionData : sectionData,
+    initialContent: sectionData,
     onEditorContentChange: async (editor) => {
       let jsonContent = [...editor.topLevelBlocks];
 

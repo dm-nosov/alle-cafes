@@ -3,10 +3,12 @@ import "@blocknote/core/style.css";
 import { getTitleBySectionName } from "@/utils/content";
 import { WrappedBlocknote } from "../WrappedBlocknote";
 import { Skeleton } from "../Skeleton";
+import { useWebsiteContentStore } from "@/store/WebsiteContent";
 
-export function SectionEditor({ sectionName, data, isLoading }) {
-  const sectionData =
-    data && sectionName in data ? JSON.parse(data[sectionName].json) : null;
+export function SectionEditor({ sectionName, isLoading }) {
+  const sectionData = useWebsiteContentStore(
+    (state) => state.content[sectionName].json
+  );
   return (
     <>
       <h2 className={headingFont.className}>

@@ -6,4 +6,6 @@ export async function saveContent(websiteId, content) {
     },
     body: JSON.stringify(content),
   });
+  // A special delay to make the save operation noticeable
+  await new Promise((resolve) => setTimeout(resolve, 500));
 }
