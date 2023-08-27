@@ -16,7 +16,7 @@ export function SectionEditor({ sectionName, isLoading }) {
   useEffect(() => {
     async function rerenderBlockNote() {
       setShowBlocknote(false);
-      await new Promise((resolve) => setTimeout(resolve, 200));
+      await new Promise((resolve) => setTimeout(resolve, 500));
       setShowBlocknote(true);
     }
     // A dirty hack to re-render the third-party component BlockNoteView which caches
