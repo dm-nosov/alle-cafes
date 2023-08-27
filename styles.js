@@ -31,6 +31,7 @@ export default createGlobalStyle`
     --accent: #F2EAD3;
     --success: #125B50;
     --element-shadow: rgb(200 200 200) 1px 1px 2px 1px;
+    --element-shadow--active: var(--success) 0px 0px 0px 1px;
   }
 
   nav {

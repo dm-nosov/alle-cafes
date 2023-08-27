@@ -46,12 +46,12 @@ export function TopAdminToolbar({
       <ButtonIcon
         iconName={BUTTON_ICON_PREVIEW}
         handleClick={() => handlePreview(!preview)}
-        isDisabled={preview}
+        isActive={preview}
       />
       <ButtonIcon
         iconName={BUTTON_ICON_EDIT}
         handleClick={() => handlePreview(!preview)}
-        isDisabled={!preview}
+        isActive={!preview}
       />
       <Button
         text="Save"

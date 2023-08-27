@@ -46,6 +46,16 @@ const IconWrapper = styled.span`
         fill: var(--danger);
       `}
   }
+
+  ${({ $isActive }) =>
+    $isActive &&
+    css`
+      svg {
+        fill: var(--success);
+      }
+      box-shadow: var(--element-shadow--active);
+    `}
+
   &:active {
     transform: scale(1.2);
   }
@@ -56,6 +66,7 @@ export function ButtonIcon({
   handleClick,
   iconName,
   isDisabled = false,
+  isActive = false,
   variant = BUTTON_PRIMARY,
 }) {
   const [loading, setLoading] = useState(false);
@@ -88,6 +99,7 @@ export function ButtonIcon({
       onClick={onClick}
       $isDisabled={isDisabled}
       $variant={variant}
+      $isActive={isActive}
     >
       {!loading && icon}
       {loading && <Spinner $dark={true} />}
