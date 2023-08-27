@@ -10,25 +10,13 @@ export function SectionEditor({ sectionName, isLoading }) {
   const sectionData = useWebsiteContentStore(
     (state) => state.content[sectionName].json
   );
-
-  const [showBlocknote, setShowBlocknote] = useState(true);
-
-  useEffect(() => {
-    async function rerenderBlockNote() {
-      setShowBlocknote(false);
-      await new Promise((resolve) => setTimeout(resolve, 500));
-      setShowBlocknote(true);
-    }
-    // A dirty hack to re-render the third-party component BlockNoteView which caches
-    rerenderBlockNote();
-  }, []);
   return (
     <>
       <h2 className={headingFont.className}>
         {getTitleBySectionName(sectionName)}
       </h2>
       {isLoading && <Skeleton $height={10} />}
-      {sectionData && showBlocknote && (
+      {sectionData && (
         <WrappedBlocknote sectionName={sectionName} sectionData={sectionData} />
       )}
     </>

@@ -22,6 +22,8 @@ export default function Page() {
 
   const [preview, setPreview] = useState(false);
 
+  const [isContentStoreReady, setIsContentStoreReady] = useState(false);
+
   const {
     data,
     mutate: mutateEditor,
@@ -35,6 +37,7 @@ export default function Page() {
   } = useSWR(`/api/ws/${websiteId}/categories`, fetcher);
 
   useEffect(() => {
+    setIsContentStoreReady(false);
     if (data?.editorContent) {
       setWebsiteId(websiteId);
       for (const sectionName of [ABOUT, SPECIAL, OPENING_HOURS]) {
@@ -44,8 +47,9 @@ export default function Page() {
           data.editorContent[sectionName].html
         );
       }
+      setIsContentStoreReady(true);
     }
-  }, [data]);
+  }, [data, websiteId]);
 
   return (
     <>
@@ -59,11 +63,9 @@ export default function Page() {
       <main>
         {!preview && (
           <>
-            <SectionEditor
-              sectionName={ABOUT}
-              data={data?.editorContent}
-              isLoading={isLoading}
-            />
+            {isContentStoreReady && (
+              <SectionEditor sectionName={ABOUT} isLoading={isLoading} />
+            )}
             <h2 className={headingFont.className}>Menu</h2>
             {isLoadingCategories && <Skeleton $height={6} />}
             {!isLoadingCategories &&
@@ -87,16 +89,15 @@ export default function Page() {
               />
             )}
 
-            <SectionEditor
-              sectionName={SPECIAL}
-              data={data?.editorContent}
-              isLoading={isLoading}
-            />
-            <SectionEditor
-              sectionName={OPENING_HOURS}
-              data={data?.editorContent}
-              isLoading={isLoading}
-            />
+            {isContentStoreReady && (
+              <SectionEditor sectionName={SPECIAL} isLoading={isLoading} />
+            )}
+            {isContentStoreReady && (
+              <SectionEditor
+                sectionName={OPENING_HOURS}
+                isLoading={isLoading}
+              />
+            )}
           </>
         )}
         {preview && (

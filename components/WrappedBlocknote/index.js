@@ -30,10 +30,9 @@ export function WrappedBlocknote({ sectionName, sectionData }) {
       );
     },
   });
-
   return (
     <BlockNoteWrapper>
-      <BlockNoteView editor={editor} />
+      {editor?.topLevelBlocks && <BlockNoteView editor={editor} />}
     </BlockNoteWrapper>
   );
 }
