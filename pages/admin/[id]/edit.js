@@ -7,25 +7,26 @@ import { useWebsiteContentStore } from "@/store/WebsiteContent";
 import { useRouter } from "next/router";
 import useSWR from "swr";
 import { fetcher } from "@/utils/fetcher";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { ProductCategoryCard } from "@/components/ProductCategoryCard/index";
 import { ACTION_ADD, ACTION_EDIT, ACTION_VIEW } from "@/utils/websiteCard";
 import { headingFont } from "@/fonts";
 import { Skeleton } from "@/components/Skeleton";
-import { Footer } from "@/components/Footer";
 
 export default function Page() {
   const router = useRouter();
   const { id: websiteId } = router.query;
-  const preview = useWebsiteContentStore((state) => state.isPreview);
 
   const updateSection = useWebsiteContentStore((state) => state.updateSection);
   const setWebsiteId = useWebsiteContentStore((state) => state.setWebsiteId);
 
-  const { data, isLoading } = useSWR(
-    `/api/ws/${websiteId}/editor-content`,
-    fetcher
-  );
+  const [preview, setPreview] = useState(false);
+
+  const {
+    data,
+    mutate: mutateEditor,
+    isLoading,
+  } = useSWR(`/api/ws/${websiteId}/editor-content`, fetcher);
 
   const {
     data: categoriesData,
@@ -34,23 +35,26 @@ export default function Page() {
   } = useSWR(`/api/ws/${websiteId}/categories`, fetcher);
 
   useEffect(() => {
-    if (data && data.editorContent) {
+    if (data?.editorContent) {
       setWebsiteId(websiteId);
       for (const sectionName of [ABOUT, SPECIAL, OPENING_HOURS]) {
-        if (data.editorContent[sectionName]) {
-          updateSection(
-            sectionName,
-            JSON.parse(data.editorContent[sectionName].json),
-            data.editorContent[sectionName].html
-          );
-        }
+        updateSection(
+          sectionName,
+          JSON.parse(data.editorContent[sectionName].json),
+          data.editorContent[sectionName].html
+        );
       }
     }
   }, [data]);
 
   return (
     <>
-      <TopAdminToolbar websiteId={websiteId} />
+      <TopAdminToolbar
+        websiteId={websiteId}
+        mutateEditor={mutateEditor}
+        handlePreview={setPreview}
+        preview={preview}
+      />
       <Header title={data?.title} />
       <main>
         {!preview && (

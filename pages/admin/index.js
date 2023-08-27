@@ -16,11 +16,6 @@ export default function Page() {
   const { data: session } = useSession();
   const { data, isLoading, error, mutate } = useSWR(`/api/ws/`, fetcher);
   const router = useRouter();
-  const resetContent = useWebsiteContentStore((state) => state.resetContent);
-
-  useEffect(() => {
-    resetContent();
-  }, []);
 
   useEffect(() => {
     if (!session && typeof session != "undefined") {

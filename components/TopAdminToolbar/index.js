@@ -26,9 +26,12 @@ const StyledNav = styled.nav`
   z-index: 3;
 `;
 
-export function TopAdminToolbar({ websiteId }) {
-  const preview = useWebsiteContentStore((state) => state.isPreview);
-  const togglePreview = useWebsiteContentStore((state) => state.togglePreview);
+export function TopAdminToolbar({
+  websiteId,
+  mutateEditor,
+  preview,
+  handlePreview,
+}) {
   const content = useWebsiteContentStore((state) => state.content);
   const router = useRouter();
 
@@ -42,18 +45,21 @@ export function TopAdminToolbar({ websiteId }) {
       />
       <ButtonIcon
         iconName={BUTTON_ICON_PREVIEW}
-        handleClick={togglePreview}
-        isDisabled={preview}
+        handleClick={() => handlePreview(!preview)}
+        isActive={preview}
       />
       <ButtonIcon
         iconName={BUTTON_ICON_EDIT}
-        handleClick={togglePreview}
-        isDisabled={!preview}
+        handleClick={() => handlePreview(!preview)}
+        isActive={!preview}
       />
       <Button
         text="Save"
         actionType={BUTTON_SUCCESS}
-        handleClick={() => saveContent(websiteId, content)}
+        handleClick={async () => {
+          await saveContent(websiteId, content);
+          mutateEditor();
+        }}
       />
     </StyledNav>
   );
